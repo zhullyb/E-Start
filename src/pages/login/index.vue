@@ -44,7 +44,15 @@ const login = () => {
         open-type=""
         hover-class="button-hover"
         @click="login"
-        style="width: 70%; margin-top: 20vh; border-radius: 16px; border: 1px solid rgb(63, 114, 175); padding: 8px; color: rgb(17, 45, 78);"
+        style="
+            width: 70%;
+            margin-top: 20vh;
+            border-radius: 16px;
+            border: 1px solid rgb(63, 114, 175);
+            padding: 8px;
+            color: rgb(17, 45, 78);
+            font-weight: bold;
+        "
     >
         一键授权登陆
     </button>
