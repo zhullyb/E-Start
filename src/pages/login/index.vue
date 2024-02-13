@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const login = () => {
+    // #ifdef MP-WEIXIN
     uni.login({
         provider: 'weixin',
         success: (loginRes) => {
@@ -16,6 +17,10 @@ const login = () => {
             uni.navigateTo({ url: '/pages/validate/index' })
         }
     })
+    // #endif
+    // #ifndef MP-WEIXIN
+    uni.navigateTo({ url: '/pages/validate/index' })
+    // #endif
 }
 </script>
 
