@@ -11,6 +11,9 @@
 	},
 	{
 		"path": "pages/validate/index"
+	},
+	{
+		"path": "pages/validate/success"
 	}
 ],
 	"globalStyle": {
