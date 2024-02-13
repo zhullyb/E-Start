@@ -14,6 +14,11 @@ const login = () => {
 
             const result = await reqLogin(loginRes.code)
             console.log(result)
+
+            if (result.data.code !== 200) {
+                return
+            }
+
             uni.setStorageSync('access_token', result.data.data.accessToken)
             uni.setStorageSync('refresh_token', result.data.data.refreshToken)
 
