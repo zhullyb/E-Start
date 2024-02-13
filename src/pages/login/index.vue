@@ -13,7 +13,7 @@ const login = () => {
             // TODO:
             // make a request to backend, 
             // if DataTransfer.user.studentInfoId=0, redirect to validate page
-            uni.navigateTo({ url: '/pages/index/index' })
+            uni.navigateTo({ url: '/pages/validate/index' })
         }
     })
 }

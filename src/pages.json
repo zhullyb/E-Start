@@ -8,6 +8,9 @@
 	},
 	{
 		"path": "pages/login/index"
+	},
+	{
+		"path": "pages/validate/index"
 	}
 ],
 	"globalStyle": {
