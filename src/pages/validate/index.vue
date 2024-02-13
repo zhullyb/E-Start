@@ -1,5 +1,28 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+const uploaded = ref(false)
+const doChooseMedia = () => {
+    uni.chooseMedia({
+        count: 1,
+        mediaType: ['image'],
+        sourceType: ['album', 'camera'],
+        camera: 'front',
+        success: (res) => {
+            // TODO: upload tempFile[0].tempFilePath
+            console.log(res)
+            uploaded.value = true
+        }
+    })
+}
+
 const doValidate = () => {
+    if (!uploaded.value) {
+        uni.showToast({
+            title: '请先上传人脸照片',
+            icon: 'none'
+        })
+        return
+    }
     // TODO:
     // make a request to backend, if success
     uni.navigateTo({ url: '/pages/validate/success' })
@@ -55,6 +78,27 @@ const doValidate = () => {
             </view>
     
         </view>
+        <button
+            hover-class="button-hover"
+            @click="doChooseMedia"
+            style="
+                    width: 88vw;
+                    color: #3F72AF;
+                    background-color: white;
+                    font-size: small;
+                    padding: 16px;
+                    border-radius: 16px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    line-height: 24px;
+                    border: 1px solid rgb(63, 114, 175);
+                    border-radius: 16px;
+                    margin-bottom: 20px;
+                "
+        >
+            上传人脸照片
+        </button>
+
         <button
             hover-class="button-hover"
             @click="doValidate"
