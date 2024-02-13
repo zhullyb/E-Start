@@ -15,6 +15,7 @@ request.interceptors.response.use((response) => {
         doRefreshToken()
         return request(response.config)
     }
+    return response
 })
 
 const doRefreshToken = () => {
