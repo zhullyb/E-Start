@@ -1,4 +1,10 @@
 <script setup lang="ts">
+const doValidate = () => {
+    // TODO:
+    // make a request to backend, if success
+    uni.navigateTo({ url: '/pages/validate/success' })
+    // else, pop up an error message
+}
 </script>
 <template>
     <view class="center">
@@ -50,10 +56,8 @@
     
         </view>
         <button
-            :disabled="false"
-            :loading="false"
             hover-class="button-hover"
-            @click=""
+            @click="doValidate"
             style="
                 width: 88vw;
                 color: white;

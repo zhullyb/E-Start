@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import UniIcons from '../../components/uni-icons/uni-icons.vue'
+
+const toIndex = () => {
+    uni.navigateTo({ url: '/pages/index/index' })
+}
 </script>
 
 <template>
@@ -35,7 +39,7 @@ import UniIcons from '../../components/uni-icons/uni-icons.vue'
                     width: 60px;
                     background: rgb(63, 114, 175);
                 "
-            @click=""
+            @click="toIndex"
         >
             <uni-icons type="arrow-right" size="24" color="white"></uni-icons>
         </button>
