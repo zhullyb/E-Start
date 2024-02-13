@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { reqLogin } from '@/api/login';
 const login = () => {
     // #ifdef MP-WEIXIN
     uni.login({
         provider: 'weixin',
-        success: (loginRes) => {
+        success: async (loginRes) => {
             console.log(loginRes)
             // we get a json like this here:
             // {
@@ -11,9 +12,17 @@ const login = () => {
             //     errMsg: "login:ok"
             // }
 
-            // TODO:
-            // make a request to backend, 
-            // if DataTransfer.user.studentInfoId=0, redirect to validate page
+            const result = await reqLogin(loginRes.code)
+            console.log(result)
+            uni.setStorageSync('access_token', result.data.data.accessToken)
+            uni.setStorageSync('refresh_token', result.data.data.refreshToken)
+
+            // if (result.data.data.studentInfoId !== 0) {
+            //     uni.navigateTo({ url: '/pages/index/index' })
+            // } else {
+            //     uni.navigateTo({ url: '/pages/validate/index' })
+            // }
+
             uni.navigateTo({ url: '/pages/validate/index' })
         }
     })
