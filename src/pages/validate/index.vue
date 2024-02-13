@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 const uploaded = ref(false)
 const doChooseMedia = () => {
+    // #ifdef MP-WEIXIN
     uni.chooseMedia({
         count: 1,
         mediaType: ['image'],
@@ -13,6 +14,18 @@ const doChooseMedia = () => {
             uploaded.value = true
         }
     })
+    // #endif
+    // #ifndef MP-WEIXIN
+    uni.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: (res) => {
+            console.log(res)
+            uploaded.value = true
+        }
+    })
+    // #endif
 }
 
 const doValidate = () => {
