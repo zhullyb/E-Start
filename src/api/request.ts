@@ -15,6 +15,12 @@ request.interceptors.response.use((response) => {
         doRefreshToken()
         return request(response.config)
     }
+
+    if (response.data.code !== 200) {
+        console.log("===== Axios Received a Non-200 Response (Start) =====")
+        console.log(response)
+        console.log("===== Axios Received a Non-200 Response (End) =====")
+    }
     return response
 })
 
