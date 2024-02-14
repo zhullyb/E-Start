@@ -8,7 +8,6 @@ const request = axios.create({
 
 request.interceptors.request.use((config: any) => {
     config.headers["Authorization"] = "Bearer " + uni.getStorageSync("access_token");
-    console.log(config)
     return config;
 })
 
