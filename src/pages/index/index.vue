@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <image class="logo" src="/static/logo.png" />
+    <image class="logo" src="/static/logo.png" @click="toNews" />
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
@@ -13,6 +13,11 @@ import { onMounted } from 'vue';
 import { ref } from 'vue'
 const title = ref('Hello')
 const newLoginStatus = useLoginStatus()
+
+const toNews = () => {
+  console.log('to news')
+  uni.navigateTo({url: '/pages/news/index'})
+}
 
 onMounted(() => {
   if (!newLoginStatus.loginStatus) {
