@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const uploaded = ref(false)
+import { reactive } from 'vue';
+import { reqVerify } from '@/api/user';
+const validateInfo = reactive({
+    name: '',
+    idCard: '',
+    admissionLetterId: '',
+    facePic: ''
+})
 const doChooseMedia = () => {
     // #ifdef MP-WEIXIN
     uni.chooseMedia({
@@ -16,10 +22,17 @@ const doChooseMedia = () => {
                 header: {
                     'Authorization': 'Bearer ' + uni.getStorageSync('access_token')
                 },
-                success: () => {
-                    uploaded.value = true
+                success: (res) => {
+                    validateInfo.facePic = JSON.parse(res.data).data
+                    uni.showToast({
+                        title: '上传成功'
+                    })
                 },
                 fail: (res) => {
+                    uni.showToast({
+                        title: '上传失败',
+                        icon: 'none'
+                    })
                     console.log(res)
                 }
             })
@@ -33,24 +46,38 @@ const doChooseMedia = () => {
         sourceType: ['album', 'camera'],
         success: (res) => {
             console.log(res)
-            uploaded.value = true
+            validateInfo.facePic = 'not_null'
         }
     })
     // #endif
 }
 
-const doValidate = () => {
-    if (!uploaded.value) {
+const doValidate = async () => {
+    if (validateInfo.name === '' || validateInfo.idCard === '' || validateInfo.admissionLetterId === '') {
+        uni.showToast({
+            title: '请填写完整信息',
+            icon: 'none'
+        })
+        return
+    }
+
+    if (validateInfo.facePic === '') {
         uni.showToast({
             title: '请先上传人脸照片',
             icon: 'none'
         })
         return
     }
-    // TODO:
-    // make a request to backend, if success
+
+    const result = await reqVerify(validateInfo);
+    if (result.data.code !== 0) {
+        uni.showToast({
+            title: result.data.msg,
+            icon: 'none'
+        })
+        return
+    }
     uni.navigateTo({ url: '/pages/validate/success' })
-    // else, pop up an error message
 }
 </script>
 <template>
@@ -95,9 +122,9 @@ const doValidate = () => {
                     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
                     "
                 >
-                    <input placeholder="姓名" />
-                    <input placeholder="身份证号" />
-                    <input placeholder="录取通知书编号" />
+                    <input placeholder="姓名" v-model="validateInfo.name" />
+                    <input placeholder="身份证号" v-model="validateInfo.idCard" />
+                    <input placeholder="录取通知书编号" v-model="validateInfo.admissionLetterId" />
                 </view>
             </view>
     
