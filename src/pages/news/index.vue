@@ -3,6 +3,12 @@ import { ref } from 'vue';
 
 const selectedItem = ref(1);
 
+const buttons = [
+    { text: '最新通知' },
+    { text: '新闻动态' },
+    { text: '系统公告' }
+];
+
 </script>
 
 <template>
@@ -10,26 +16,12 @@ const selectedItem = ref(1);
     :gutter="12"
     style="margin: 12px;"
 >
-    <uni-col :span="8">
+    <uni-col :span="8" v-for="(button, index) in buttons" :key="index">
         <button
             class="es-button"
-            :class="{ selected: selectedItem === 0 }"
-            @click="selectedItem = 0"
-        >最新通知</button>
-    </uni-col>
-    <uni-col :span="8">
-        <button
-            class="es-button"
-            :class="{ selected: selectedItem === 1 }"
-            @click="selectedItem = 1"
-        >新闻动态</button>
-    </uni-col>
-    <uni-col :span="8">
-        <button
-            class="es-button"
-            :class="{ selected: selectedItem === 2 }"
-            @click="selectedItem = 2"
-        >系统公告</button>
+            :class="{ selected: selectedItem === index }"
+            @click="selectedItem = index"
+        >{{ button.text }}</button>
     </uni-col>
 </uni-row>
 </template>
