@@ -132,18 +132,9 @@ const doValidate = async () => {
         <button
             hover-class="button-hover"
             @click="doChooseMedia"
+            class="es-button"
             style="
                     width: 88vw;
-                    color: #3F72AF;
-                    background-color: white;
-                    font-size: small;
-                    padding: 16px;
-                    border-radius: 16px;
-                    font-size: 16px;
-                    font-weight: 600;
-                    line-height: 24px;
-                    border: 1px solid rgb(63, 114, 175);
-                    border-radius: 16px;
                     margin-bottom: 20px;
                 "
         >
@@ -153,16 +144,9 @@ const doValidate = async () => {
         <button
             hover-class="button-hover"
             @click="doValidate"
+            class="es-button selected"
             style="
                 width: 88vw;
-                color: white;
-                background-color: #3F72AF;
-                font-size: small;
-                padding: 16px;
-                border-radius: 16px;
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 24px;
                 margin-bottom: 15vh;
             "
         >

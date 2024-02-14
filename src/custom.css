@@ -1,0 +1,17 @@
+.es-button {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    border-radius: 16px;
+    color: rgb(63, 114, 175);
+    background: rgb(249, 250, 251);
+    border: 1px solid rgb(63, 114, 175);
+    padding: 16px;
+}
+
+.es-button.selected {
+    color: rgb(249, 250, 251);
+    background: rgb(63, 114, 175);
+}
