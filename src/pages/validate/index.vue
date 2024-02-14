@@ -9,9 +9,20 @@ const doChooseMedia = () => {
         sourceType: ['album', 'camera'],
         camera: 'front',
         success: (res) => {
-            // TODO: upload tempFile[0].tempFilePath
-            console.log(res)
-            uploaded.value = true
+            uni.uploadFile({
+                url: 'https://api.lonesome.cn/api/wx/upload',
+                filePath: res.tempFiles[0].tempFilePath,
+                name: 'file',
+                header: {
+                    'Authorization': 'Bearer ' + uni.getStorageSync('access_token')
+                },
+                success: () => {
+                    uploaded.value = true
+                },
+                fail: (res) => {
+                    console.log(res)
+                }
+            })
         }
     })
     // #endif
