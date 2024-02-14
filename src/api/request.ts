@@ -6,12 +6,14 @@ const request = axios.create({
     adapter: UniAdapter
 })
 
-request.defaults.headers.common['Authorization'] = "Bearer " + uni.getStorageSync("access_token");
+request.interceptors.request.use((config: any) => {
+    config.headers["Authorization"] = "Bearer " + uni.getStorageSync("access_token");
+    console.log(config)
+    return config;
+})
 
 request.interceptors.response.use((response) => {
-    if (response.status === 401) {
-        // try to refresh accessToken and
-        // retry the request
+    if (response.data.code === 200113) {
         doRefreshToken()
         return request(response.config)
     }
@@ -26,16 +28,16 @@ request.interceptors.response.use((response) => {
 
 const doRefreshToken = () => {
     uni.request({
-        url: "https://api.lonesome.cn/api/wx/refresh_token",
+        url: "https://api.lonesome.cn/api/wx/refresh-token",
         method: "POST",
         header: {
             "Authorization": "Bearer " + uni.getStorageSync("refresh_token")
         },
         success: (res: any) => {
-            if (res.data.code === 200) {
-                uni.setStorageSync("access_token", res.data.data.access_token);
-                uni.setStorageSync("refresh_token", res.data.data.refresh_token);
-                request.defaults.headers["Authorization"] = "Bearer " + res.data.data.access_token;
+            const data = JSON.parse(res.data)
+            if (data.code === 200) {
+                uni.setStorageSync("access_token", data.data.access_token);
+                uni.setStorageSync("refresh_token", data.data.refresh_token);
             }
         },
         fail: () => {
