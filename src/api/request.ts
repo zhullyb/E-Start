@@ -9,17 +9,17 @@ const request = axios.create({
 request.defaults.headers.common['Authorization'] = "Bearer " + uni.getStorageSync("access_token");
 
 request.interceptors.response.use((response) => {
-    if (response.data.code === 401) {
+    if (response.status === 401) {
         // try to refresh accessToken and
         // retry the request
         doRefreshToken()
         return request(response.config)
     }
 
-    if (response.data.code !== 200) {
-        console.log("===== Axios Received a Non-200 Response (Start) =====")
+    if ( response.status !== 200 && response.data.code !== 0) {
+        console.log("===== Axios Received an Exception Response (Start) =====")
         console.log(response)
-        console.log("===== Axios Received a Non-200 Response (End) =====")
+        console.log("===== Axios Received an Exception Response (End) =====")
     }
     return response
 })

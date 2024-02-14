@@ -15,7 +15,7 @@ const login = () => {
             const result = await reqLogin(loginRes.code)
             console.log(result)
 
-            if (result.data.code !== 200) {
+            if (result.data.code !== 0) {
                 return
             }
 
