@@ -45,8 +45,8 @@ dependencies:
     specifier: 3.0.0-3081220230817001
     version: 3.0.0-3081220230817001(postcss@8.4.35)(vue@3.4.18)
   axios:
-    specifier: ^1.6.7
-    version: 1.6.7
+    specifier: ^0.27.2
+    version: 0.27.2
   pinia:
     specifier: 2.0.33
     version: 2.0.33(typescript@4.9.5)(vue@3.4.18)
@@ -55,7 +55,7 @@ dependencies:
     version: 1.70.0
   uniapp-axios-adapter:
     specifier: ^0.3.2
-    version: 0.3.2(axios@1.6.7)
+    version: 0.3.2(axios@0.27.2)
   vue:
     specifier: ^3.2.45
     version: 3.4.18(typescript@4.9.5)
@@ -3413,12 +3413,11 @@ packages:
       postcss: 8.4.35
       postcss-value-parser: 4.2.0
 
-  /axios@1.6.7:
-    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
+  /axios@0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
       follow-redirects: 1.15.5
       form-data: 4.0.0
-      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -5777,10 +5776,6 @@ packages:
       ipaddr.js: 1.9.1
     dev: true
 
-  /proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: false
-
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
     dev: true
@@ -6305,12 +6300,12 @@ packages:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
-  /uniapp-axios-adapter@0.3.2(axios@1.6.7):
+  /uniapp-axios-adapter@0.3.2(axios@0.27.2):
     resolution: {integrity: sha512-Wbq8tkjxTw80KaWqpBbrzB575FlJ0YZ+i/EhPFqJmP8iL/x8yzf04RgdrKP7KlI9VArTpEO5PcSe44ciRzTJ8Q==}
     peerDependencies:
       axios: '*'
     dependencies:
-      axios: 1.6.7
+      axios: 0.27.2
     dev: false
 
   /unicode-canonical-property-names-ecmascript@2.0.0:
