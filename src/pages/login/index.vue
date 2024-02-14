@@ -5,15 +5,15 @@ const login = () => {
     uni.login({
         provider: 'weixin',
         success: async (loginRes) => {
-            console.log(loginRes)
-            // we get a json like this here:
-            // {
-            //     code: "0b1ctpFa1OSdUG03z7Ha1vxs0i2ctpFZ"
-            //     errMsg: "login:ok"
-            // }
+            if (loginRes.errMsg !== 'login:ok') {
+                uni.showToast({
+                    title: loginRes.errMsg,
+                    icon: 'none'
+                })
+                return
+            }
 
             const result = await reqLogin(loginRes.code)
-            console.log(result)
 
             if (result.data.code !== 0) {
                 return
@@ -22,13 +22,11 @@ const login = () => {
             uni.setStorageSync('access_token', result.data.data.accessToken)
             uni.setStorageSync('refresh_token', result.data.data.refreshToken)
 
-            // if (result.data.data.studentInfoId !== 0) {
-            //     uni.navigateTo({ url: '/pages/index/index' })
-            // } else {
-            //     uni.navigateTo({ url: '/pages/validate/index' })
-            // }
-
-            uni.navigateTo({ url: '/pages/validate/index' })
+            if (result.data.data.user.studentInfoId !== 0) {
+                uni.navigateTo({ url: '/pages/index/index' })
+            } else {
+                uni.navigateTo({ url: '/pages/validate/index' })
+            }
         }
     })
     // #endif
