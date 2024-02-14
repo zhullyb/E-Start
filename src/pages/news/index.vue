@@ -12,7 +12,7 @@ const buttons = [
 const originInfoList = [
     {   
         id: 1,
-        title: '最新通知1',
+        title: '最新通知1没错这是一个非常长的标题啊啊啊啊啊啊啊啊简直不要太长啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
         content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
     },
     {
@@ -28,7 +28,7 @@ const originInfoList = [
     {
         id: 4,
         title: '最新通知4',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
+        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
     },
     {
         id: 5,
@@ -43,7 +43,7 @@ const originInfoList = [
     {
         id: 7,
         title: '最新通知7',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
+        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
     }
 ]
 
@@ -71,26 +71,42 @@ const infoList = computed(
     <view>
         <view 
             v-for="item in infoList"
-            style="margin: 30px 0;"
+            style="
+                margin: 30px 0;
+                height: 100px;
+            "
         >
-            <text
-                style="
-                        color: rgb(17, 45, 78);
-                        font-size: 17px;
-                        font-weight: 400;
-                        line-height: 23.8px;
-                    "
-            >{{ item.title }}</text>
-            <br />
-            <text
-                style="
-                        color: rgb(17, 45, 78);
-                        font-size: 14px;
-                        font-weight: 400;
-                        line-height: 19.6px;
-                        opacity: 0.5;
-                    "
-            >{{ item.content }}</text>
+            <view style="margin-bottom: 10px;">
+                <text
+                    style="
+                            color: rgb(17, 45, 78);
+                            font-size: 17px;
+                            font-weight: 400;
+                            line-height: 23.8px;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 1;
+                            overflow: hidden;
+                            word-break: break-all;
+                        "
+                >{{ item.title }}</text>
+            </view>
+            <view>
+                <text
+                    style="
+                            color: rgb(17, 45, 78);
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 19.6px;
+                            opacity: 0.5;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 3;
+                            overflow: hidden;
+                            word-break: break-all;
+                        "
+                >{{ item.content }}</text>
+            </view>
         </view>
     </view>
 </view>
