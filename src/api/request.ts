@@ -1,23 +1,43 @@
 import axios from "axios"
 import { UniAdapter } from "uniapp-axios-adapter"
+import jsrsasign from "jsrsasign"
 
 const request = axios.create({
     baseURL: "https://api.lonesome.cn/api/wx",
     adapter: UniAdapter
 })
 
-request.interceptors.request.use((config: any) => {
-    config.headers["Authorization"] = "Bearer " + uni.getStorageSync("access_token");
-    return config;
+request.interceptors.request.use( async (config: any) => {
+    const access_token = uni.getStorageSync("access_token")
+
+    if (access_token && isTokenExpired(access_token)) {
+        try {
+            const res = await uni.request({
+                url: "https://api.lonesome.cn/api/wx/refresh-token",
+                method: "POST",
+                header: {
+                    "Authorization": "Bearer " + uni.getStorageSync("refresh_token")
+                }
+            }) as any;
+
+            uni.setStorageSync("access_token", res.data.data.accessToken);
+            uni.setStorageSync("refresh_token", res.data.data.refreshToken);
+            config.headers["Authorization"] = "Bearer " + res.data.data.accessToken;
+            return config;
+        } catch (error) {
+            console.error("Failed to refresh token:", error);
+            uni.reLaunch({
+                url: "/pages/login/index"
+            });
+        }
+    } else {
+        config.headers["Authorization"] = "Bearer " + access_token
+        return config;
+    }
 })
 
 request.interceptors.response.use((response) => {
-    if (response.data.code === 200113) {
-        doRefreshToken()
-        return request(response.config)
-    }
-
-    if ( response.status !== 200 && response.data.code !== 0) {
+    if (response.status !== 200 && response.data.code !== 0) {
         console.log("===== Axios Received an Exception Response (Start) =====")
         console.log(response)
         console.log("===== Axios Received an Exception Response (End) =====")
@@ -25,26 +45,14 @@ request.interceptors.response.use((response) => {
     return response
 })
 
-const doRefreshToken = () => {
-    uni.request({
-        url: "https://api.lonesome.cn/api/wx/refresh-token",
-        method: "POST",
-        header: {
-            "Authorization": "Bearer " + uni.getStorageSync("refresh_token")
-        },
-        success: (res: any) => {
-            const data = JSON.parse(res.data)
-            if (data.code === 200) {
-                uni.setStorageSync("access_token", data.data.access_token);
-                uni.setStorageSync("refresh_token", data.data.refresh_token);
-            }
-        },
-        fail: () => {
-            uni.reLaunch({
-                url: "/pages/login/index"
-            })
-        }
-    })
+const isTokenExpired = (token: string) => {
+    if (!token) {
+        return true
+    }
+    const jwt = jsrsasign.KJUR.jws.JWS.parse(token)
+    const exp = (jwt.payloadObj as { exp: number }).exp
+    const now = Math.floor(new Date().getTime() / 1000)
+    return now >= exp
 }
 
 export default request
