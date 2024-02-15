@@ -52,6 +52,15 @@ const infoList = computed(
         item => item.id % 3 === selectedItem.value
     )
 )
+
+const toNewsDetail = (id: number) => {
+    uni.navigateTo({
+        url: '/pages/news/detail',
+        success: (res) => {
+            res.eventChannel.emit('acceptDataFromOpenerPage', { data: originInfoList.find(item => item.id === id) })
+        }
+    })
+}
 </script>
 
 <template>
@@ -71,6 +80,7 @@ const infoList = computed(
     <view>
         <view 
             v-for="item in infoList"
+            @click="toNewsDetail(item.id)"
             style="
                 margin: 30px 0;
                 height: 100px;
