@@ -20,6 +20,9 @@
 	},
 	{
 		"path": "pages/news/detail"
+	},
+	{
+		"path": "pages/restaurant/detail"
 	}
 ],
 	"globalStyle": {
