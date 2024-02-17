@@ -16,7 +16,7 @@ const newLoginStatus = useLoginStatus()
 
 const toNews = () => {
   console.log('to news')
-  uni.navigateTo({url: '/pages/news/index'})
+  uni.navigateTo({url: '/pages/tasks/index'})
 }
 
 onMounted(() => {

@@ -15,3 +15,12 @@
     color: rgb(249, 250, 251);
     background: rgb(63, 114, 175);
 }
+
+.es-button.no-border {
+    border: 1px solid rgb(249, 250, 251);
+    background: rgb(249, 250, 251);
+}
+
+.shadow {
+    box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.1);
+}

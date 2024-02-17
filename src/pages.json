@@ -23,6 +23,9 @@
 	},
 	{
 		"path": "pages/restaurant/detail"
+	},
+	{
+		"path": "pages/tasks/index"
 	}
 ],
 	"globalStyle": {
