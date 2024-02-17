@@ -2,7 +2,7 @@
 import UniIcons from '../../components/uni-icons/uni-icons.vue'
 
 const toIndex = () => {
-    uni.navigateTo({ url: '/pages/index/index' })
+    uni.redirectTo({ url: '/pages/index/index' })
 }
 </script>
 
