@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { reqInformation } from '@/api/information';
+import { onMounted } from 'vue';
 import { computed, ref } from 'vue';
+import type { info } from '../../types/info';
+import { reactive } from 'vue';
 
 const selectedItem = ref(1);
+const infoLists = reactive<{
+    infoList0: info[],
+    infoList1: info[],
+    infoList2: info[]
+}>({
+    infoList0: [],
+    infoList1: [],
+    infoList2: []
+})
 
 const buttons = [
     { text: '最新通知' },
@@ -9,58 +22,35 @@ const buttons = [
     { text: '系统公告' }
 ];
 
-const originInfoList = [
-    {   
-        id: 1,
-        title: '最新通知1没错这是一个非常长的标题啊啊啊啊啊啊啊啊简直不要太长啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 2,
-        title: '最新通知2',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 3,
-        title: '最新通知3',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 4,
-        title: '最新通知4',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 5,
-        title: '最新通知5',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 6,
-        title: '最新通知6',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    },
-    {
-        id: 7,
-        title: '最新通知7',
-        content: '这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容'
-    }
-]
-
 const infoList = computed(
-    () => originInfoList.filter(
-        item => item.id % 3 === selectedItem.value
-    )
+    () => {
+        if (selectedItem.value === 0) {
+            return infoLists.infoList0
+        } else if (selectedItem.value === 1) {
+            return infoLists.infoList1
+        } else {
+            return infoLists.infoList2
+        }
+    }
 )
 
 const toNewsDetail = (id: number) => {
     uni.navigateTo({
         url: '/pages/news/detail',
         success: (res) => {
-            res.eventChannel.emit('acceptDataFromOpenerPage', { data: originInfoList.find(item => item.id === id) })
+            res.eventChannel.emit('acceptDataFromOpenerPage', { data: infoList.value.find(item => item.id === id) })
         }
     })
 }
+
+onMounted( async() => {
+    const res0 = await reqInformation(1)
+    const res1 = await reqInformation(2)
+    const res2 = await reqInformation(3)
+    infoLists.infoList0 = res0.data.data.list
+    infoLists.infoList1 = res1.data.data.list
+    infoLists.infoList2 = res2.data.data.list
+})
 </script>
 
 <template>
