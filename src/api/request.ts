@@ -13,7 +13,7 @@ request.interceptors.request.use( async (config: any) => {
     if (access_token && isTokenExpired(access_token)) {
         try {
             const res = await uni.request({
-                url: "https://api.lonesome.cn/api/wx/refresh-token",
+                url: "https://api.lonesome.cn/api/wx/refreshToken",
                 method: "POST",
                 header: {
                     "Authorization": "Bearer " + uni.getStorageSync("refresh_token")
