@@ -9,8 +9,9 @@ onLoad(() => {
     const eventChannel = $instance.getOpenerEventChannel()
     eventChannel.on('acceptDataFromOpenerPage', (data: {data: info}) => {
         detail.value = data.data
-        const time = new Date(data.data.updatedAt)
-        detail.value.updatedAt = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`
+        // const time = new Date(data.data.updatedAt)
+        // detail.value.updatedAt = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`
+        detail.value.updatedAt = data.data.updatedAt.slice(0, 10)
     })
 })
 
