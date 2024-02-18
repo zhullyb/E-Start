@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import type { taskList } from '../../types/tasks'
 import { reqTaskList } from '../../api/tasks'
 import { reactive } from 'vue';
+import { onPullDownRefresh } from '@dcloudio/uni-app';
 
 const taskLists = reactive<{
     taskList1: taskList[],
@@ -40,8 +41,7 @@ const timeParse = (time: string) => {
     return `${year}年${month}月${day}日${hour}:${minute}`
 }
 
-
-onMounted(async() => {
+const loadData = async() => {
     const res1 = await reqTaskList({ category: 1, isCompleted: 0 })
     const res2 = await reqTaskList({ category: 1, isCompleted: 1 })
     const res3 = await reqTaskList({ category: 2, isCompleted: 0 })
@@ -55,8 +55,15 @@ onMounted(async() => {
     taskLists.taskList4 = res4.data.data.list,
     taskLists.taskList5 = res5.data.data.list,
     taskLists.taskList6 = res6.data.data.list
+}
 
-    console.log(taskLists)
+onMounted(async()=>{
+    await loadData()
+})
+
+onPullDownRefresh(async() => {
+    await loadData()
+    uni.stopPullDownRefresh()
 })
 
 const taskUncompleted = computed(() => {

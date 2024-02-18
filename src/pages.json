@@ -25,7 +25,10 @@
 		"path": "pages/restaurant/detail"
 	},
 	{
-		"path": "pages/tasks/index"
+		"path": "pages/tasks/index",
+		"style": {
+			"enablePullDownRefresh": true
+		}
 	}
 ],
 	"globalStyle": {
