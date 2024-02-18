@@ -83,7 +83,7 @@ const timeParse = (time: string) => {
                         class="es-button shadow"
                         :class="taskTypeSelected === 0 ? 'selected' : 'no-border'"
                         @click="taskTypeSelected = 0"
-                        style="display: flex;"
+                        style="display: flex; padding: 8px 16px;"
                     >
                         <view
                             style="
@@ -113,7 +113,7 @@ const timeParse = (time: string) => {
                         class="es-button shadow"
                         :class="taskTypeSelected === 1 ? 'selected' : 'no-border'"
                         @click="taskTypeSelected = 1"
-                        style="display: flex;"
+                        style="display: flex; padding: 8px 16px;"
                     >
                         <view
                             style="
@@ -140,7 +140,7 @@ const timeParse = (time: string) => {
                 </uni-col>
             </uni-row>
             <view>
-                <view v-for="task in tasks" class="shadow" >
+                <view v-for="task in tasks" class="shadow" style="margin: 12px 0;">
                     <view style="padding: 16px;">
                         <view
                             style="
@@ -151,55 +151,53 @@ const timeParse = (time: string) => {
                                     margin-bottom: 10px;
                                 "
                         >{{ buttons[buttonSelected] }}</view>
-                        <uni-row style="display: flex;">
-                            <uni-col
-                                :span="16"
-                                style="
-                                        display: flex;
-                                        align-items: center;
+                        <uni-row>
+                            <view style="display: flex;align-items: center;">
+                                <uni-col :span="16">
+                                    <text 
+                                        class="text-title"
+                                        style="
+                                                display: -webkit-box;
+                                                -webkit-box-orient: vertical;
+                                                -webkit-line-clamp: 2;
+                                                overflow: hidden;
+                                                word-break: break-all;
+                                                margin-right: 4px;
                                         "
-                            >
-                                <text 
-                                    class="text-title"
+                                    >
+                                        {{ task.title }}
+                                    </text>
+                                </uni-col>
+                                <uni-col :span="8">
+                                    <button
+                                        class="es-button"
+                                        :class="{ selected: taskTypeSelected === 0 }"
+                                        style="padding: 7px;"
+                                        @click=""
+                                    >
+                                        {{ taskTypeSelected === 0 ? '进入' : '已完成' }}
+                                    </button>
+                                </uni-col>
+                            </view>
+                        </uni-row>
+                        <uni-row>
+                            <view style="margin: 5px 0; min-height: 40px;">
+                                <text
                                     style="
+                                            color: rgb(17, 45, 78);
+                                            font-size: 10px;
+                                            font-weight: 400;
+                                            line-height: 13px;
                                             display: -webkit-box;
                                             -webkit-box-orient: vertical;
-                                            -webkit-line-clamp: 2;
+                                            -webkit-line-clamp: 3;
                                             overflow: hidden;
                                             word-break: break-all;
-                                            margin-right: 4px;
-                                    "
+                                            "
                                 >
-                                    {{ task.title }}
+                                    {{ task.desc }}
                                 </text>
-                            </uni-col>
-                            <uni-col :span="8">
-                                <button
-                                    class="es-button"
-                                    :class="{ selected: taskTypeSelected === 0 }"
-                                    style="padding: 7px;"
-                                    @click=""
-                                >
-                                    {{ taskTypeSelected === 0 ? '进入' : '已完成' }}
-                                </button>
-                            </uni-col>
-                        </uni-row>
-                        <uni-row style="margin: 5px 0; min-height: 40px;">
-                            <text
-                                style="
-                                        color: rgb(17, 45, 78);
-                                        font-size: 10px;
-                                        font-weight: 400;
-                                        line-height: 13px;
-                                        display: -webkit-box;
-                                        -webkit-box-orient: vertical;
-                                        -webkit-line-clamp: 3;
-                                        overflow: hidden;
-                                        word-break: break-all;
-                                        "
-                            >
-                                {{ task.desc }}
-                            </text>
+                            </view>
                         </uni-row>
                         <view>
                             <view class="text-title" style="display: flex; justify-content: space-between;">
