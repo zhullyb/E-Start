@@ -96,11 +96,10 @@ const timeParse = (time: string) => {
                                 "
                         >
                             <uni-icons
-                                custom-prefix="iconfont"
-                                type="es-run"
-                                size="24"
+                                fontFamily="iconfont"
+                                :size="24"
                                 class="center"
-                            />
+                            >{{ '\ue643' }}</uni-icons>
                         </view>
                         <view>
                             <text style="font-weight: 700;">6</text>
