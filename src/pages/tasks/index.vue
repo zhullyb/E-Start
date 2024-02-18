@@ -1,50 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import type { taskList } from '../../types/tasks'
+import { reqTaskList } from '../../api/tasks'
+import { reactive } from 'vue';
+
+const taskLists = reactive<{
+    taskList1: taskList[],
+    taskList2: taskList[],
+    taskList3: taskList[],
+    taskList4: taskList[],
+    taskList5: taskList[],
+    taskList6: taskList[]
+}>({
+    taskList1: [],
+    taskList2: [],
+    taskList3: [],
+    taskList4: [],
+    taskList5: [],
+    taskList6: []
+})
 
 const buttonSelected = ref(0)
+const taskTypeSelected = ref(0)
 
 const buttons = [
     "主线任务",
-    "直线任务",
+    "支线任务",
     "每日任务",
     "隐藏任务"
-]
-
-const taskTypeSelected = ref(0)
-
-const tasks = [
-    {
-        "id": 1,
-        "createdAt": "2024-02-18T16:33:49+08:00",
-        "updatedAt": "2024-02-18T16:33:52+08:00",
-        "category": 1,
-        "title": "报到注册",
-        // "title": "报到注册，但是也非常长，非常非常长的一句话，结尾处应当会有省略号显示",
-        "desc": "报到注册的描述",
-        // "desc": "报到注册的描述，参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。",
-        "campus": "全部",
-        "college": "全部",
-        "reward": 100,
-        "needMain": false,
-        "startTime": "2024-02-18T16:35:01+08:00",
-        "endTime": "2024-02-25T16:35:03+08:00"
-    },
-    {
-        "id": 2,
-        "createdAt": "2024-02-18T16:33:49+08:00",
-        "updatedAt": "2024-02-18T16:33:52+08:00",
-        "category": 1,
-        // "title": "报到注册",
-        "title": "报到注册，但是也非常长，非常非常长的一句话，结尾处应当会有省略号显示",
-        // "desc": "报到注册的描述",
-        "desc": "报到注册的描述，参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。参与者需完成报到注册流程，提供个人信息并领取必要的证件。完成后，将获得进一步指引，确保顺利参与活动。",
-        "campus": "全部",
-        "college": "全部",
-        "reward": 100,
-        "needMain": false,
-        "startTime": "2024-02-18T16:35:01+08:00",
-        "endTime": "2024-02-25T16:35:03+08:00"
-    }
 ]
 
 const timeParse = (time: string) => {
@@ -56,6 +39,68 @@ const timeParse = (time: string) => {
     const minute = String(objectedTime.getMinutes()).padStart(2, '0')
     return `${year}年${month}月${day}日${hour}:${minute}`
 }
+
+
+onMounted(async() => {
+    const res1 = await reqTaskList({ category: 1, isCompleted: 0 })
+    const res2 = await reqTaskList({ category: 1, isCompleted: 1 })
+    const res3 = await reqTaskList({ category: 2, isCompleted: 0 })
+    const res4 = await reqTaskList({ category: 2, isCompleted: 1 })
+    const res5 = await reqTaskList({ category: 3, isCompleted: 0 })
+    const res6 = await reqTaskList({ category: 3, isCompleted: 1 })
+
+    taskLists.taskList1 = res1.data.data.list,
+    taskLists.taskList2 = res2.data.data.list,
+    taskLists.taskList3 = res3.data.data.list,
+    taskLists.taskList4 = res4.data.data.list,
+    taskLists.taskList5 = res5.data.data.list,
+    taskLists.taskList6 = res6.data.data.list
+
+    console.log(taskLists)
+})
+
+const taskUncompleted = computed(() => {
+    switch (buttonSelected.value) {
+        case 0:
+            return taskLists.taskList1.length
+        case 1:
+            return taskLists.taskList3.length
+        case 3:
+            return taskLists.taskList5.length
+        // case 2: 该情况为隐藏任务
+        default:
+            return -1
+    }
+})
+
+
+const taskCompleted = computed(() => {
+    switch (buttonSelected.value) {
+        case 0:
+            return taskLists.taskList2.length
+        case 1:
+            return taskLists.taskList4.length
+        case 3:
+            return taskLists.taskList6.length
+        // case 2: 该情况为隐藏任务
+        default:
+            return -1
+    }
+})
+
+const tasks = computed(() => {
+    switch (buttonSelected.value) {
+        case 0:
+            return taskTypeSelected.value === 0 ? taskLists.taskList1 : taskLists.taskList2
+        case 1:
+            return taskTypeSelected.value === 0 ? taskLists.taskList3 : taskLists.taskList4
+        case 3:
+            return taskTypeSelected.value === 0 ? taskLists.taskList5 : taskLists.taskList6
+        // case 2: 该情况为隐藏任务
+        default:
+            return []
+    }
+})
 </script>
 
 <template>
@@ -102,7 +147,7 @@ const timeParse = (time: string) => {
                             >{{ '\ue643' }}</uni-icons>
                         </view>
                         <view>
-                            <text style="font-weight: 700;">6</text>
+                            <text style="font-weight: 700;">{{ taskUncompleted }}</text>
                             <br />
                             <text>进行中</text>
                         </view>
@@ -132,9 +177,9 @@ const timeParse = (time: string) => {
                             />
                         </view>
                         <view>
-                            <text style="font-weight: 700;">5</text>
+                            <text style="font-weight: 700;">{{ taskCompleted }}</text>
                             <br />
-                            <text>进行中</text>
+                            <text>已完成</text>
                         </view>
                     </button>
                 </uni-col>
