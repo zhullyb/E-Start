@@ -24,3 +24,13 @@ export const reqSelectTask = async ( id: number ) => {
         }
     })
 }
+
+export const reqTaskStage = async ( id: number ) => {
+    return request({
+        url: "/task/stage",
+        method: "GET",
+        params: {
+            id
+        }
+    })
+}

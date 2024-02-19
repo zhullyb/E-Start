@@ -41,7 +41,7 @@ const timeParse = (time: string) => {
     return `${year}年${month}月${day}日${hour}:${minute}`
 }
 
-const openTask = async (id: number) => {
+const openTask = async (task: taskList) => {
     if (taskTypeSelected.value === 1) {
         uni.showToast({
             title: '任务已完成',
@@ -50,7 +50,7 @@ const openTask = async (id: number) => {
         return
     }
 
-    const res = await reqSelectTask(id)
+    const res = await reqSelectTask(task.id)
     if (res.status !== 200 && res.data.code !== 0){
         uni.showToast({
             title: res.data.msg,
@@ -59,7 +59,10 @@ const openTask = async (id: number) => {
     }
 
     uni.navigateTo({
-        url: `/pages/tasks/detail?id=${id}`
+        url: `/pages/tasks/detail?id=${task.id}`,
+        success: (res) => {
+            res.eventChannel.emit('acceptDataFromOpenerPage', task)
+        }
     })
 }
 
@@ -247,7 +250,7 @@ const tasks = computed(() => {
                                         class="es-button"
                                         :class="{ selected: taskTypeSelected === 0 }"
                                         style="padding: 7px;"
-                                        @click="openTask(task.id)"
+                                        @click="openTask(task)"
                                     >
                                         {{ taskTypeSelected === 0 ? '进入' : '已完成' }}
                                     </button>
