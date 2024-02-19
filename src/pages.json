@@ -29,6 +29,9 @@
 		"style": {
 			"enablePullDownRefresh": true
 		}
+	},
+	{
+		"path": "pages/tasks/detail"
 	}
 ],
 	"globalStyle": {

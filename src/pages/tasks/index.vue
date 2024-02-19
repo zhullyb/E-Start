@@ -41,6 +41,19 @@ const timeParse = (time: string) => {
     return `${year}年${month}月${day}日${hour}:${minute}`
 }
 
+const openTask = (id: number) => {
+    if (taskTypeSelected.value === 1) {
+        uni.showToast({
+            title: '任务已完成',
+            icon: 'none'
+        })
+        return
+    }
+    uni.navigateTo({
+        url: `/pages/tasks/detail?id=${id}`
+    })
+}
+
 const loadData = async() => {
     const res1 = await reqTaskList({ category: 1, isCompleted: 0 })
     const res2 = await reqTaskList({ category: 1, isCompleted: 1 })
@@ -225,7 +238,7 @@ const tasks = computed(() => {
                                         class="es-button"
                                         :class="{ selected: taskTypeSelected === 0 }"
                                         style="padding: 7px;"
-                                        @click=""
+                                        @click="openTask(task.id)"
                                     >
                                         {{ taskTypeSelected === 0 ? '进入' : '已完成' }}
                                     </button>
