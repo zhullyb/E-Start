@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import type { taskList } from '../../types/tasks'
-import { reqTaskList } from '../../api/tasks'
+import { reqSelectTask, reqTaskList } from '../../api/tasks'
 import { reactive } from 'vue';
 import { onPullDownRefresh } from '@dcloudio/uni-app';
 
@@ -41,7 +41,7 @@ const timeParse = (time: string) => {
     return `${year}年${month}月${day}日${hour}:${minute}`
 }
 
-const openTask = (id: number) => {
+const openTask = async (id: number) => {
     if (taskTypeSelected.value === 1) {
         uni.showToast({
             title: '任务已完成',
@@ -49,6 +49,15 @@ const openTask = (id: number) => {
         })
         return
     }
+
+    const res = await reqSelectTask(id)
+    if (res.status !== 200 && res.data.code !== 0){
+        uni.showToast({
+            title: res.data.msg,
+        })
+        return
+    }
+
     uni.navigateTo({
         url: `/pages/tasks/detail?id=${id}`
     })

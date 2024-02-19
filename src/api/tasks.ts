@@ -14,3 +14,13 @@ export const reqTaskList = async ( data : {
         }
     })
 }
+
+export const reqSelectTask = async ( id: number ) => {
+    return request({
+        url: "/task/select",
+        method: "POST",
+        data: {
+            id
+        }
+    })
+}
