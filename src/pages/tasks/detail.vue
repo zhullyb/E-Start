@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app';
-import { getCurrentInstance, onMounted } from 'vue';
+import { getCurrentInstance } from 'vue';
 import { ref } from 'vue';
 import type { stage, taskList } from '../../types/tasks';
 import { reqTaskStage } from '@/api/tasks';
@@ -8,7 +8,6 @@ import { reqTaskStage } from '@/api/tasks';
 const $instance = getCurrentInstance()?.proxy as any
 const task = ref<taskList>() as any
 
-const id = ref(-1)
 const curStage = ref(-1)
 const stages = ref<stage[]>()
 const buttonSelected = ref(0)
@@ -20,24 +19,21 @@ const buttons = [
 // #ifdef MP-WEIXIN
 onLoad(() => {
     const eventChannel = $instance.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', (accepted_task: taskList) => {
+    eventChannel.on('acceptDataFromOpenerPage', async (accepted_task: taskList) => {
         task.value = accepted_task
+        uni.setNavigationBarTitle({
+            title: '主线任务：' + task.value.title
+        });
+        const res = await reqTaskStage(task.value.id);
+        if (res.status !== 200 && res.data.code !== 0) {
+            uni.showToast({
+                title: res.data.msg,
+                icon: 'none'
+            })
+        }
+        stages.value = res.data.data.stages
+        curStage.value = res.data.data.curStage
     })
-    uni.setNavigationBarTitle({
-        title: '主线任务：' + task.value.title
-    });
-})
-
-onMounted(async () => {
-    const res = await reqTaskStage(id.value)
-    if (res.status !== 200 && res.data.code !== 0) {
-        uni.showToast({
-            title: res.data.msg,
-            icon: 'none'
-        })
-    }
-    stages.value = res.data.data.stages
-    curStage.value = res.data.data.curStage
 })
 // #endif
 // #ifndef MP-WEIXIN
@@ -145,20 +141,35 @@ const timeParse = (time: string) => {
         <view style="margin: 12px 0;">
             <view v-if="buttonSelected === 0">
                 <view class="es-text-title">任务描述</view>
-                <view class="es-text-desc">{{ task.desc }}</view>
+                <view class="es-text-desc">{{ task?.desc }}</view>
                 <view class="es-text-title">任务奖励</view>
-                <view class="es-text-desc">{{ task.reward }}智慧种子，{{ task.reward }}求索石</view>
+                <view class="es-text-desc">{{ task?.reward }}智慧种子，{{ task?.reward }}求索石</view>
                 <view class="es-text-title">截止时间</view>
-                <view class="es-text-desc">{{ timeParse(task.endTime) }}</view>
+                <view class="es-text-desc">{{ timeParse(task?.endTime) }}</view>
                 <view class="es-text-title">任务进度</view>
                 <ua-timeline>
                     <ua-timeline-item
                         v-for="stage in stages"
+                        style="padding: 0;"
                         :key="stage.id"
-                        :title="stage.title"
-                        :content="stage.desc"
-                        :icon="curStage >= stage.stage ? 'success' : 'pending'"
-                    >{{ timeParse(stage.endTime) }}</ua-timeline-item>
+                        :size="16"
+                        :hideTimestamp="true"
+                        :color="curStage >= stage.stage || curStage == 0 ? '#3F72AF' : '#E4E7ED'"
+                        :lineColor="curStage > stage.stage || curStage == 0 ? '#3F72AF' : '#E4E7ED'"
+                    >
+                        <view class="es-timeline-item" :class="{ 'current-task': curStage === stage.stage }">
+                            <view class="es-text-task-title">{{ stage.title }}</view>
+                            <view v-show="curStage === stage.stage">
+                                <view class="es-text-task-desc">{{ stage.desc }}</view>
+                                <button class="task-button"
+                                    @click=""
+                                >
+                                    点击阅读
+                                    <!-- TODO: 处理多种按钮种类以及对应的而操作逻辑 -->
+                                </button>
+                            </view>
+                        </view>
+                    </ua-timeline-item>
                 </ua-timeline>
             </view>
             <view v-else>
@@ -181,5 +192,48 @@ const timeParse = (time: string) => {
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+}
+
+.es-text-task-title {
+    color: rgb(56, 59, 70);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.es-text-task-desc {
+    color: rgb(56, 59, 70);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.es-timeline-item {
+    margin-left: -6px;
+    margin-right: 6px;
+    padding: 10px 10px 10px 16px;
+}
+
+.current-task {
+    background-color: #F7F8F9;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px 0px rgba(99, 99, 99, 0.2);
+    padding-top: 16px;
+    padding-bottom: 20px;
+}
+
+.task-button {
+    border-radius: 36px;
+    background-color: rgb(238, 244, 255);
+    color: rgb(100, 129, 220);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    width: fit-content;
+    margin: 0;
 }
 </style>
