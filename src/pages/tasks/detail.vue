@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app';
-import { getCurrentInstance } from 'vue';
-import { ref } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
 import type { stage, taskList } from '../../types/tasks';
 import { reqTaskStage } from '@/api/tasks';
 
@@ -15,6 +14,19 @@ const buttons = [
     "任务详情",
     "用户评价"
 ]
+
+// TODO
+const validateLocation = (stage: stage) => {
+}
+
+const navigateTo = (stage: stage) => {
+}
+
+const uploadPic = (stage: stage) => {
+}
+
+const finishTask = (stage: stage) => {
+}
 
 // #ifdef MP-WEIXIN
 onLoad(() => {
@@ -161,12 +173,36 @@ const timeParse = (time: string) => {
                             <view class="es-text-task-title">{{ stage.title }}</view>
                             <view v-show="curStage === stage.stage">
                                 <view class="es-text-task-desc">{{ stage.desc }}</view>
-                                <button class="task-button"
-                                    @click=""
-                                >
-                                    点击阅读
-                                    <!-- TODO: 处理多种按钮种类以及对应的而操作逻辑 -->
-                                </button>
+                                <view style="display: inline-flex;">
+                                    <button
+                                        v-show="stage.needLoc"
+                                        class="task-button"
+                                        @click="validateLocation(stage)"
+                                    >
+                                        位置验证
+                                    </button>
+                                    <button
+                                        v-show="stage.needNav"
+                                        class="task-button"
+                                        @click="navigateTo(stage)"
+                                    >
+                                        需要导航?
+                                    </button>
+                                    <button
+                                        v-show="stage.needPic"
+                                        class="task-button"
+                                        @click="uploadPic(stage)"
+                                    >
+                                        点击上传
+                                    </button>
+                                    <button
+                                        v-show="!stage.needLoc && !stage.needPic"
+                                        class="task-button"
+                                        @click="finishTask(stage)"
+                                    >
+                                        完成任务
+                                    </button>
+                                </view>
                             </view>
                         </view>
                     </ua-timeline-item>
@@ -234,6 +270,6 @@ const timeParse = (time: string) => {
     line-height: 22px;
     text-align: center;
     width: fit-content;
-    margin: 0;
+    margin: 2px;
 }
 </style>
