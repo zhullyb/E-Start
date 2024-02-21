@@ -140,7 +140,7 @@ $timeline-font-size: $font-size-base;
 		position: absolute;
 		left: calc(($timeline-node-size - 2px) / 2);
 	}
-	.ve__timeline-item:last-child .ve__timeline-item__line {display: none;}
+	ua-timeline-item:last-child .ve__timeline-item__line {display: none;}
 	.ve__timeline-item__node {
 		display: inline-flex;
 		align-items: center;
