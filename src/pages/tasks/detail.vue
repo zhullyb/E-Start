@@ -26,7 +26,7 @@ const handleComplete = async (stage: stage) => {
             }
         }
         uni.navigateTo({
-            url: `/pages/tasks/uploadValidate?loc=${loc.value}`
+            url: `/pages/tasks/uploadValidate?loc=${loc.value}&needFace=${stage.needFace}`
         })
     } else if (stage.needLoc){
         if (!locValidate(stage)){
