@@ -34,3 +34,14 @@ export const reqTaskStage = async ( id: number ) => {
         }
     })
 }
+
+export const updTaskStage = async (data: {
+    loc?: string,
+    pic?: string,
+}) => {
+    return request({
+        url: "/task/stage",
+        method: "POST",
+        data
+    })
+}
