@@ -35,6 +35,9 @@
 	},
 	{
 		"path": "pages/tasks/uploadValidate"
+	},
+	{
+		"path": "pages/tasks/validateSuccess"
 	}
 ],
 	"globalStyle": {
