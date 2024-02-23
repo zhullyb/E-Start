@@ -2,30 +2,113 @@
 import { onLoad } from '@dcloudio/uni-app';
 import { getCurrentInstance, ref } from 'vue';
 import type { stage, taskList } from '../../types/tasks';
-import { reqTaskStage } from '@/api/tasks';
+import { reqTaskStage, updTaskStage } from '@/api/tasks';
+
+const loc = ref('')
 
 const $instance = getCurrentInstance()?.proxy as any
 const task = ref<taskList>() as any
 
 const curStage = ref(-1)
-const stages = ref<stage[]>()
+const stages = ref<stage[]>() as any
 const buttonSelected = ref(0)
 const buttons = [
     "任务详情",
     "用户评价"
 ]
 
-// TODO
-const validateLocation = (stage: stage) => {
+// 后端保证如果 needCamera，则不会有 needLoc 和 needPic
+const handleComplete = async (stage: stage) => {
+    if (stage.needPic){
+        if (stage.needLoc){
+            if (!locValidate(stage)){
+                return
+            }
+        }
+        uni.navigateTo({
+            url: `/pages/tasks/uploadValidate?loc=${loc.value}`
+        })
+    } else if (stage.needLoc){
+        if (!locValidate(stage)){
+            return
+        }
+        await doUpdTaskStage({loc: loc.value})
+    } else if (stage.needCamera){
+        // FIXME
+        // navigate to QRCode Page
+    } else {
+        await doUpdTaskStage({})
+    }
+}
+
+const doUpdTaskStage = async (data:{loc?: string}) => {
+    const res = await updTaskStage(data)
+    if (res.status !== 200 && res.data.code !== 0){
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+        return
+    } else {
+        uni.showToast({
+            title: '提交成功'
+        })
+        await getData()
+    }
+}
+
+const locValidate = (stage: stage) => {
+    uni.getLocation({
+        type: 'gcj02',
+        success: (res) => {
+            loc.value = res.longitude + ',' + res.latitude
+        },
+        fail: (res) => {
+            uni.showToast({
+                title: '获取位置失败',
+                icon: 'none'
+            })
+            console.log(res)
+        }
+    });
+    if (getDistance(loc.value, stage.loc) > stage.allowDist){
+        uni.showToast({
+            title: '距离过远，请30秒后重试',
+            icon: 'none'
+        })
+        return false
+    }
+    uni.showToast({
+        title: '位置验证成功'
+    })
+    return true
+}
+
+function getDistance(pos1: string, pos2: string) {
+    const radius = 6378137;
+    const rad = Math.PI / 180.0;
+    let lng1 = Number(pos1.split(',')[0]) * rad;
+    let lat1 = Number(pos1.split(',')[1]) * rad;
+    let lng2 = Number(pos2.split(',')[0]) * rad;
+    let lat2 = Number(pos2.split(',')[1]) * rad;
+    const theta = lng2 - lng1;
+    const dist = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(theta));
+    return dist * radius;
 }
 
 const navigateTo = (stage: stage) => {
-}
-
-const uploadPic = (stage: stage) => {
-}
-
-const finishTask = (stage: stage) => {
+    if (stage.loc == '') {
+        uni.showToast({
+            title: '未知错误',
+            icon: 'none'
+        })
+        console.log(stage)
+        return
+    }
+    uni.openLocation({
+        latitude: Number(stage.loc.split(',')[0]),
+        longitude: Number(stage.loc.split(',')[1])
+    });
 }
 
 // #ifdef MP-WEIXIN
@@ -36,18 +119,21 @@ onLoad(() => {
         uni.setNavigationBarTitle({
             title: '主线任务：' + task.value.title
         });
-        const res = await reqTaskStage(task.value.id);
-        if (res.status !== 200 && res.data.code !== 0) {
-            uni.showToast({
-                title: res.data.msg,
-                icon: 'none'
-            })
-        }
-        stages.value = res.data.data.stages
-        curStage.value = res.data.data.curStage
+        await getData()
     })
 })
 // #endif
+const getData = async () => {
+    const res = await reqTaskStage(task.value.id);
+    if (res.status !== 200 && res.data.code !== 0) {
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+    }
+    stages.value = res.data.data.stages
+    curStage.value = res.data.data.curStage
+}
 // #ifndef MP-WEIXIN
 task.value = {
     "id": 1,
@@ -175,11 +261,10 @@ const timeParse = (time: string) => {
                                 <view class="es-text-task-desc">{{ stage.desc }}</view>
                                 <view style="display: inline-flex;">
                                     <button
-                                        v-show="stage.needLoc"
                                         class="task-button"
-                                        @click="validateLocation(stage)"
+                                        @click="handleComplete(stage)"
                                     >
-                                        位置验证
+                                        去完成
                                     </button>
                                     <button
                                         v-show="stage.needNav"
@@ -187,20 +272,6 @@ const timeParse = (time: string) => {
                                         @click="navigateTo(stage)"
                                     >
                                         需要导航?
-                                    </button>
-                                    <button
-                                        v-show="stage.needPic"
-                                        class="task-button"
-                                        @click="uploadPic(stage)"
-                                    >
-                                        点击上传
-                                    </button>
-                                    <button
-                                        v-show="!stage.needLoc && !stage.needPic"
-                                        class="task-button"
-                                        @click="finishTask(stage)"
-                                    >
-                                        完成任务
                                     </button>
                                 </view>
                             </view>
