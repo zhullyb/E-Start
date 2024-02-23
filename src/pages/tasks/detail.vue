@@ -57,8 +57,8 @@ const doUpdTaskStage = async (data:{loc?: string}) => {
     }
 }
 
-const locValidate = (stage: stage) => {
-    uni.getLocation({
+const locValidate = async(stage: stage) => {
+    await uni.getLocation({
         type: 'gcj02',
         success: (res) => {
             loc.value = res.longitude + ',' + res.latitude
