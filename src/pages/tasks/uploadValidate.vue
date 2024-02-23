@@ -76,8 +76,9 @@ onLoad((options:any) => {
         <view class="es-text-desc">请按要求上传照片</view>
         <view id="photo-container">
             <image
-            :src="pic"
-            mode="scaleToFill"
+                :src="pic"
+                mode="scaleToFill"
+                style="width: 100%;height: 100%;"
             />
         </view>
         <button 
