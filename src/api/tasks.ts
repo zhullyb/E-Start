@@ -41,7 +41,7 @@ export const updTaskStage = async (data: {
 }) => {
     return request({
         url: "/task/stage",
-        method: "POST",
+        method: "PUT",
         data
     })
 }
