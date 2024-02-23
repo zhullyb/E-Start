@@ -69,6 +69,7 @@ const locValidate = (stage: stage) => {
                 icon: 'none'
             })
             console.log(res)
+            return
         }
     });
     if (getDistance(loc.value, stage.loc) > stage.allowDist){
