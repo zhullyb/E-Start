@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { updTaskStage } from '@/api/tasks';
+import { reqReview, updTaskStage } from '@/api/tasks';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
+
+const needReview = ref(false)
 
 const title = "上传图片"
 const pic = ref('')
 const loc =ref('')
 const needFace = ref(false)
 const handleUpload = () => {
+    needReview.value = false
     uni.chooseMedia({
         count: 1,
         mediaType: ['image'],
@@ -39,6 +42,14 @@ const handleUpload = () => {
     })
 }
 
+const handleSubmit = () => {
+    if (!needReview.value){
+        submitValidate()
+    } else {
+        submitReview()
+    }
+}
+
 const submitValidate = async () => {
     if (pic.value === ''){
         uni.showToast({
@@ -51,6 +62,24 @@ const submitValidate = async () => {
         pic: pic.value,
         // 如果 loc 为空，则不传入 loc
         ...(loc.value && { loc: loc.value })
+    })
+    if (res.status !== 200 && res.data.code !== 0){
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+        needReview.value = true
+        return
+    }
+    uni.navigateTo({
+        url: '/pages/tasks/validateSuccess'
+    })
+}
+
+const submitReview = async() => {
+    const res = await reqReview({
+        pic: pic.value,
+        loc: loc.value
     })
     if (res.status !== 200 && res.data.code !== 0){
         uni.showToast({
@@ -93,12 +122,13 @@ onLoad((options:any) => {
         >*照片中应当出现人脸</view>
         <button
             class="es-button selected"
-            @click="submitValidate"
+            @click="handleSubmit"
             style="
                     width: 90vw;
                     margin-top: 16px;
                     margin-bottom: 15vh;
-        ">提交验证</button>
+        ">{{ !needReview ? '提交验证':'人工审核' }}</button>
+        
     </view>
 </template>
 

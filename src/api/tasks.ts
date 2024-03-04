@@ -45,3 +45,14 @@ export const updTaskStage = async (data: {
         data
     })
 }
+
+export const reqReview = async (data: {
+    loc?: string,
+    pic?: string,
+}) => {
+    return request({
+        url: "/task/review",
+        method: "POST",
+        data
+    })
+}
