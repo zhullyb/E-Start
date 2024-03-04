@@ -21,7 +21,7 @@ const buttons = [
 const handleComplete = async (stage: stage) => {
     if (stage.needPic){
         if (stage.needLoc){
-            if (!locValidate(stage)){
+            if (!await locValidate(stage)){
                 return
             }
         }
@@ -29,7 +29,7 @@ const handleComplete = async (stage: stage) => {
             url: `/pages/tasks/uploadValidate?loc=${loc.value}&needFace=${stage.needFace}`
         })
     } else if (stage.needLoc){
-        if (!locValidate(stage)){
+        if (!await locValidate(stage)){
             return
         }
         await doUpdTaskStage({loc: loc.value})
@@ -58,31 +58,34 @@ const doUpdTaskStage = async (data:{loc?: string}) => {
 }
 
 const locValidate = async(stage: stage) => {
-    await uni.getLocation({
-        type: 'gcj02',
-        success: (res) => {
-            loc.value = res.longitude + ',' + res.latitude
-        },
-        fail: (res) => {
-            uni.showToast({
-                title: '获取位置失败',
-                icon: 'none'
-            })
-            console.log(res)
-            return
-        }
-    });
-    if (getDistance(loc.value, stage.loc) > stage.allowDist){
-        uni.showToast({
-            title: '距离过远，请30秒后重试',
-            icon: 'none'
-        })
-        return false
-    }
-    uni.showToast({
-        title: '位置验证成功'
+    return new Promise<boolean>((resolve, reject) => {
+        uni.getLocation({
+            type: 'gcj02',
+            success: (res) => {
+                loc.value = res.longitude + ',' + res.latitude
+                if (getDistance(loc.value, stage.loc) > stage.allowDist){
+                    uni.showToast({
+                        title: '距离过远，请30秒后重试',
+                        icon: 'none'
+                    })
+                    reject(false)
+                    return
+                }
+                uni.showToast({
+                    title: '位置验证成功'
+                })
+                resolve(true)
+            },
+            fail: (res) => {
+                uni.showToast({
+                    title: '获取位置失败',
+                    icon: 'none'
+                })
+                console.log(res)
+                reject(false)
+            }
+        });
     })
-    return true
 }
 
 function getDistance(pos1: string, pos2: string) {
