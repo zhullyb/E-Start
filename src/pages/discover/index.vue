@@ -22,13 +22,8 @@ const clickItem = (index: number) => {
 <template>
     <view>
         <view class="l-swiper">
-            <swiper
-                autoplay
-                circular
-                indicator-dots
-                class="swiper-box" style="--height: 300rpx"
-                previous-margin="60rpx" next-margin="60rpx"
-                @change="change">
+            <swiper autoplay circular class="swiper-box" style="--height: 300rpx" previous-margin="60rpx"
+                next-margin="60rpx" @change="change">
                 <swiper-item v-for="(item, index) in urls" :key="index" class="swiper-item">
                     <image :src="item" class="swiper-image" :class="[curr != index ? 'swiper-scsle' : '']"
                         mode="scaleToFill" lazy-load @tap="clickItem(index)"></image>
@@ -38,7 +33,7 @@ const clickItem = (index: number) => {
     </view>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .l-swiper {
     width: 100%;
     padding: 20rpx 0;
@@ -65,61 +60,6 @@ const clickItem = (index: number) => {
             transform: scaleY(0.9);
             transform-origin: center center;
         }
-
-        /* #ifdef MP-WEIXIN */
-        /deep/ .wx-swiper-dot {
-            width: 8rpx;
-            height: 8rpx;
-            display: inline-flex;
-            background: none;
-            justify-content: space-between;
-        }
-
-        /deep/ .wx-swiper-dot::before {
-            content: '';
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 16rpx;
-            overflow: hidden;
-        }
-
-        /deep/.wx-swiper-dot-active::before {
-            background: #fff;
-        }
-
-        /deep/ .wx-swiper-dot.wx-swiper-dot-active {
-            width: 16rpx;
-        }
-
-        /* #endif
-      
-      /* #ifndef MP-WEIXIN */
-        ::v-deep .uni-swiper-dot {
-            width: 8rpx;
-            height: 8rpx;
-            display: inline-flex;
-            background: none;
-            justify-content: space-between;
-        }
-
-        ::v-deep .uni-swiper-dot::before {
-            content: '';
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 16rpx;
-            overflow: hidden;
-        }
-
-        ::v-deep .uni-swiper-dot-active::before {
-            background: #fff;
-        }
-
-        ::v-deep .uni-swiper-dot.uni-swiper-dot-active {
-            width: 16rpx;
-        }
-
-        /* #endif */
-
     }
 }
 </style>
