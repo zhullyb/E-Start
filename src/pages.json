@@ -41,6 +41,9 @@
 		},
 		{
 			"path": "pages/discover/index"
+		},
+		{
+			"path": "pages/mine/index"
 		}
 	],
 	"globalStyle": {
@@ -68,6 +71,12 @@
 				"text": "发现",
 				"iconPath": "static/tabbar/discover.png",
 				"selectedIconPath": "static/tabbar/discover-active.png"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"text": "我的",
+				"iconPath": "static/tabbar/mine.png",
+				"selectedIconPath": "static/tabbar/mine-active.png"
 			}
 		]
 	}
