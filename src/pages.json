@@ -1,49 +1,68 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-	{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/login/index"
+		},
+		{
+			"path": "pages/validate/index"
+		},
+		{
+			"path": "pages/validate/success"
+		},
+		{
+			"path": "pages/news/index"
+		},
+		{
+			"path": "pages/news/detail"
+		},
+		{
+			"path": "pages/restaurant/detail"
+		},
+		{
+			"path": "pages/tasks/index",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/tasks/detail"
+		},
+		{
+			"path": "pages/tasks/uploadValidate"
+		},
+		{
+			"path": "pages/tasks/validateSuccess"
+		},
+		{
+			"path": "pages/discover/index"
 		}
-	},
-	{
-		"path": "pages/login/index"
-	},
-	{
-		"path": "pages/validate/index"
-	},
-	{
-		"path": "pages/validate/success"
-	},
-	{
-		"path": "pages/news/index"
-	},
-	{
-		"path": "pages/news/detail"
-	},
-	{
-		"path": "pages/restaurant/detail"
-	},
-	{
-		"path": "pages/tasks/index",
-		"style": {
-			"enablePullDownRefresh": true
-		}
-	},
-	{
-		"path": "pages/tasks/detail"
-	},
-	{
-		"path": "pages/tasks/uploadValidate"
-	},
-	{
-		"path": "pages/tasks/validateSuccess"
-	}
-],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png"
+			},
+			{
+				"pagePath": "pages/discover/index",
+				"text": "发现",
+				"iconPath": "static/tabbar/discover.png",
+				"selectedIconPath": "static/tabbar/discover-active.png"
+			}
+		]
 	}
 }

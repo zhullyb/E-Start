@@ -23,7 +23,7 @@ const login = () => {
             uni.setStorageSync('refresh_token', result.data.data.refreshToken)
 
             if (result.data.data.user.studentInfoId !== 0) {
-                uni.redirectTo({ url: '/pages/index/index' })
+                uni.reLaunch({ url: '/pages/index/index' })
             } else {
                 uni.redirectTo({ url: '/pages/validate/index' })
             }
