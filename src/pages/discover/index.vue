@@ -42,6 +42,14 @@ const iconInfo = [
     }
 ]
 
+const recommend = [
+    {
+        "title": "阿英川菜馆",
+        "img": "https://bu.dusays.com/2023/09/18/6507cd24bbe8e.jpg",
+        "tags": ["川菜", "麻辣", "美食"]
+    }
+]
+
 const curr = ref(0)
 
 const change = (e: any) => {
@@ -109,6 +117,24 @@ const clickItem = (index: number) => {
                 </uni-row>
             </view>
         </view>
+        <view style="font-size: large; margin: 16px;">为您定制</view>
+        <view v-for="item in recommend">
+            <view style="background-color: #FFFFFF; border-radius: 16px;
+                    display: flex; align-items: center;">
+                <image
+                    :src="item.img"
+                    mode="scaleToFill"
+                    style="height: 80px; width: 80px;
+                           border-radius: 8px; border: 2px solid #F7924A;
+                           margin: 12px;"
+                />
+                <view style="margin: 12px;">
+                    <view style="font-size: 16px; font-weight: bold;">{{ item.title }}</view>
+                    <view style="font-size: 14px; color: #999999;">{{ item.tags.join(' ') }}</view>
+                </view>
+            </view>
+        </view>
+
     </view>
 </template>
 
