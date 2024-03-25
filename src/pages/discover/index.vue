@@ -7,6 +7,41 @@ const urls = [
     'https://bu.dusays.com/2023/08/10/64d4b999c4ead.jpg'
 ]
 
+const iconInfo = [
+    {
+        "icon": "/static/discover/stu-org.png",
+        "text": "学生组织"
+    },
+    {
+        "icon": "/static/discover/stu-soc.png",
+        "text": "学生社团"
+    },
+    {
+        "icon": "/static/discover/food.png",
+        "text": "餐饮美食"
+    },
+    {
+        "icon": "/static/discover/game.png",
+        "text": "娱乐场所"
+    },
+    {
+        "icon": "/static/discover/rule.png",
+        "text": "规章制度"
+    },
+    {
+        "icon": "/static/discover/file.png",
+        "text": "资料广场"
+    },
+    {
+        "icon": "/static/discover/landmark.png",
+        "text": "风景名胜"
+    },
+    {
+        "icon": "/static/discover/work.png",
+        "text": "勤工俭学"
+    }
+]
+
 const curr = ref(0)
 
 const change = (e: any) => {
@@ -29,6 +64,22 @@ const clickItem = (index: number) => {
                         mode="scaleToFill" lazy-load @tap="clickItem(index)"></image>
                 </swiper-item>
             </swiper>
+        </view>
+        <view style="margin: 20px;">
+            <uni-row :gutter="16">
+                <uni-col :span="6" v-for="item in iconInfo">
+                    <view style="text-align: center; margin: 8px;">
+                        <view>
+                            <image
+                                :src="item.icon"
+                                mode="widthFix"
+                                style="width: 40%"
+                            />
+                        </view>
+                        <view style="font-size: small;">{{ item.text }}</view>
+                    </view>
+                </uni-col>
+            </uni-row>
         </view>
     </view>
 </template>
