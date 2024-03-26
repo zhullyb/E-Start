@@ -35,11 +35,17 @@ const levelInfo = computed(
         return { level: 1, need: 100, percent: 0, imgText: images["v1-text"], imgFigure: images["v1-figure"] }
     }
 )
+
+const toDetail = () => {
+    uni.navigateTo({
+        url: '/pages/mine/detail'
+    })
+}
 </script>
 
 <template>
     <view>
-        <view class="board" style="display: flex; align-items: center;">
+        <view @click="toDetail" class="board" style="display: flex; align-items: center;">
             <view style="margin: 10px;">
                 <image
                     src="/static/logo.png"
