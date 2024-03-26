@@ -1,10 +1,7 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
+			"path": "pages/index/index"
 		},
 		{
 			"path": "pages/login/index"
@@ -27,7 +24,8 @@
 		{
 			"path": "pages/tasks/index",
 			"style": {
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "任务"
 			}
 		},
 		{
@@ -40,15 +38,21 @@
 			"path": "pages/tasks/validateSuccess"
 		},
 		{
-			"path": "pages/discover/index"
+			"path": "pages/discover/index",
+			"style": {
+				"navigationBarTitleText": "发现"
+			}
 		},
 		{
-			"path": "pages/mine/index"
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "E启新篇",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
