@@ -4,16 +4,16 @@ import { computed } from 'vue';
 const score = 600
 
 const images = {
-    "v1-text": "https://bu.dusays.com/2024/03/26/66023e26ee444.png",
-    "v2-text": "https://bu.dusays.com/2024/03/26/66023ef3090f6.png",
-    "v3-text": "https://bu.dusays.com/2024/03/26/66023e26ee444.png",
-    "v4-text": "https://bu.dusays.com/2024/03/26/66023e26ee3a1.png",
-    "v5-text": "https://bu.dusays.com/2024/03/26/66023ef3091d4.png",
-    "v1-figure": "https://bu.dusays.com/2024/03/26/66023e195f355.png",
-    "v2-figure": "https://bu.dusays.com/2024/03/26/66023e1a2bfdd.png",
-    "v3-figure": "https://bu.dusays.com/2024/03/26/66023e1a358f7.png",
-    "v4-figure": "https://bu.dusays.com/2024/03/26/66023e1a418b7.png",
-    "v5-figure": "https://bu.dusays.com/2024/03/26/66023e1a63757.png" 
+    "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
+    "v2-text": "https://bu.dusays.com/2024/03/27/66030a1ca04e5.webp",
+    "v3-text": "https://bu.dusays.com/2024/03/27/66030a1ca176e.webp",
+    "v4-text": "https://bu.dusays.com/2024/03/27/66030a1c95d94.webp",
+    "v5-text": "https://bu.dusays.com/2024/03/27/66030a1ca3ecc.webp",
+    "v1-figure": "https://bu.dusays.com/2024/03/27/66030a1ccdeb5.webp",
+    "v2-figure": "https://bu.dusays.com/2024/03/27/66030a1ce82d7.webp",
+    "v3-figure": "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
+    "v4-figure": "https://bu.dusays.com/2024/03/27/66030a1d71d5d.webp",
+    "v5-figure": "https://bu.dusays.com/2024/03/27/66030a1d71d5d.webp" 
 }
 
 const levelInfo = computed(
