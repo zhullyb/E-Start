@@ -41,6 +41,12 @@ const toDetail = () => {
         url: '/pages/mine/detail'
     })
 }
+
+const toTask = () => {
+    uni.switchTab({
+        url: '/pages/tasks/index'
+    })
+}
 </script>
 
 <template>
@@ -102,12 +108,13 @@ const toDetail = () => {
                             style="width: 100%;"
                         />
                     </view>
-                    <button style=" margin-top: 12px;
-                                    background-color: #3A3842;
-                                    border-radius: 24px;
-                                    color: #FFFFFF;
-                                    width: fit-content;
-                                    font-size: 12px;"
+                    <button @click="toTask"
+                        style=" margin-top: 12px;
+                                background-color: #3A3842;
+                                border-radius: 24px;
+                                color: #FFFFFF;
+                                width: fit-content;
+                                font-size: 12px;"
                     >去做任务</button>
                 </uni-col>
             </uni-row>
