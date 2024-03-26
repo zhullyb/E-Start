@@ -47,6 +47,11 @@ const recommend = [
         "title": "阿英川菜馆",
         "img": "https://bu.dusays.com/2023/09/18/6507cd24bbe8e.jpg",
         "tags": ["川菜", "麻辣", "美食"]
+    },
+    {
+        "title": "老登咖啡馆",
+        "img": "https://bu.dusays.com/2023/10/01/651860224035c.jpg",
+        "tags": ["咖啡", "下午茶", "美食"]
     }
 ]
 
@@ -119,12 +124,12 @@ const clickItem = (index: number) => {
         </view>
         <view style="font-size: large; margin: 16px;">为您定制</view>
         <view v-for="item in recommend">
-            <view style="background-color: #FFFFFF; border-radius: 16px;
+            <view style="background-color: #FFFFFF; border-radius: 16px; margin: 10px;
                     display: flex; align-items: center;">
                 <image
                     :src="item.img"
                     mode="scaleToFill"
-                    style="height: 80px; width: 80px;
+                    style="height: 100px; width: 100px;
                            border-radius: 8px; border: 2px solid #F7924A;
                            margin: 12px;"
                 />
