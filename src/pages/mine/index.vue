@@ -120,6 +120,17 @@ const toTask = () => {
             </uni-row>
         </view>
         <view style="font-size: 20px; margin: 16px;">账户信息</view>
+        <view class="board">
+            <view class="item">订单</view>
+            <view class="item">积分明细</view>
+            <view class="item">浏览记录</view>
+        </view>
+        <view style="font-size: 20px; margin: 16px;">设置</view>
+        <view class="board">
+            <view class="item">账户与安全</view>
+            <view class="item">通知设置</view>
+            <view class="item">关于我们</view>
+        </view>
     </view>
 </template>
 
@@ -133,5 +144,10 @@ page {
 .board {
     margin: 10px;
     background-color: #FFFFFF;
+}
+
+.board .item {
+    padding: 15px;
+    border-bottom: 1px solid #F8F8F9;
 }
 </style>
