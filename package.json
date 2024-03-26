@@ -54,7 +54,6 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-3081220230817001",
     "axios": "^0.27.2",
     "jsrsasign": "^11.1.0",
-    "pinia": "2.0.33",
     "sass": "^1.70.0",
     "uniapp-axios-adapter": "^0.3.2",
     "vue": "^3.2.45",

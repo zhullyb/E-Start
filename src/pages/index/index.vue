@@ -8,23 +8,21 @@
 </template>
 
 <script setup lang="ts">
-import useLoginStatus from '@/stores/loginStatus';
 import { onMounted } from 'vue';
 import { ref } from 'vue'
 const title = ref('Hello')
-const newLoginStatus = useLoginStatus()
 
 const toNews = () => {
   console.log('to news')
   uni.navigateTo({url: '/pages/tasks/index'})
 }
 
-onMounted(() => {
-  if (!newLoginStatus.loginStatus) {
-    newLoginStatus.setLoginStatus(true)
-    uni.navigateTo({url: '/pages/login/index'})
-  }
-})
+// onMounted(() => {
+//   if (!newLoginStatus.loginStatus) {
+//     newLoginStatus.setLoginStatus(true)
+//     uni.navigateTo({url: '/pages/login/index'})
+//   }
+// })
 </script>
 
 <style>
