@@ -52,7 +52,9 @@ page {
     position: relative;
     height: 100%;
 }
+</style>
 
+<style scoped>
 .center {
     position: absolute;
     top: 50%;

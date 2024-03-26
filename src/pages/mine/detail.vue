@@ -38,11 +38,13 @@
     </view>
 </template>
 
-<style scoped>
+<style>
 page {
     background-color: #FFFFFF;
 }
+</style>
 
+<style scoped>
 .label {
     font-size: 12px;
     color: #999999;

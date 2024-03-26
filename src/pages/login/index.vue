@@ -78,14 +78,15 @@ const login = () => {
     </view>
 </template>
 
-
 <style>
 page {
     background: url('../../static/bg-small.png') no-repeat;
     position: relative;
     height: 100%;
 }
+</style>
 
+<style scoped>
 .center {
     position: absolute;
     top: 50%;

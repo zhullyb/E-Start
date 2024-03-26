@@ -155,12 +155,14 @@ const doValidate = async () => {
     </view>
 </template>
 
-
 <style>
 page {
     position: relative;
     height: 100%;
 }
+</style>
+
+<style scoped>
 
 .center {
     position: absolute;

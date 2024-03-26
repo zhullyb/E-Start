@@ -123,11 +123,13 @@ const toTask = () => {
     </view>
 </template>
 
-<style scoped>
+<style>
 page {
     background-color: #F8F8F9;
 }
+</style>
 
+<style scoped>
 .board {
     margin: 10px;
     background-color: #FFFFFF;
