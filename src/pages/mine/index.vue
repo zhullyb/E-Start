@@ -14,7 +14,7 @@ const images = {
 </script>
 
 <template>
-    <view style="background-color: #F8F8F9;">
+    <view>
         <view class="board" style="display: flex; align-items: center;">
             <view style="margin: 10px;">
                 <image
@@ -86,6 +86,10 @@ const images = {
 </template>
 
 <style scoped>
+page {
+    background-color: #F8F8F9;
+}
+
 .board {
     margin: 10px;
     background-color: #FFFFFF;
