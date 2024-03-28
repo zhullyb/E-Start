@@ -90,7 +90,7 @@ onMounted(async () => {
         <view v-if="seletedItem == 0" style="margin-bottom: 88px;">
             <image
                 :src="detail.pic"
-                mode="center"
+                mode="aspectFill"
                 style="
                         width: 100%;
                         border-radius: 12px;
