@@ -24,7 +24,21 @@ const buttons = [
     '优惠券'
 ]
 
+const coupons = [
+    {
+        "id": 1,
+        "name": "满50元减10元券",
+        "redeemPoints": 0
+    },
+    {
+        "id": 2,
+        "name": "全场8折券",
+        "redeemPoints": 5
+    }
+]
+
 const seletedItem = ref(0)
+const couponCategory = ref(0)
 
 const openNavigation = () => {
     uni.openLocation({
@@ -115,7 +129,21 @@ onMounted(async () => {
             <view>这里是评论，暂时没实现</view>
         </view>
         <view v-if="seletedItem == 2" style="margin-bottom: 88px;">
-            <view>这里是优惠券，暂时没实现</view>
+            <view style="text-align: center; margin: 20px;">
+                <text class="coupon-cate-text" :class="{ selected: couponCategory === 0 }" @click="couponCategory = 0">可兑换的券</text>
+                <text class="coupon-cate-text" :class="{ selected: couponCategory === 1 }" @click="couponCategory = 1">未使用的券</text>
+            </view>
+            <uni-row :gutter="24">
+                <view v-for="item in coupons">
+                    <uni-col :span="12">
+                        <view class="coupon-card">
+                            <view class="small">{{ item.name }}</view>
+                            <view class="large">{{ item.redeemPoints }}积分</view>
+                            <button>兑换</button>
+                        </view>
+                    </uni-col>
+                </view>
+            </uni-row>
         </view>
         <!-- 微信小程序上需要这 1px 的空白才能生效 -->
         <view style="height: 1px;"></view>
@@ -134,3 +162,44 @@ onMounted(async () => {
         </view>
     </view>
 </template>>
+
+<style scoped>
+.coupon-cate-text {
+    color: #464646;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 14px;
+    margin: 8px;
+}
+
+.coupon-cate-text.selected {
+    color: #EA9415;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.coupon-card {
+    padding: 12px;
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.coupon-card .small {
+    font-size: 14px;
+    color: #112D4E;
+    margin: 4px;
+}
+
+.coupon-card .large {
+    font-size: 20px;
+    color: #112D4E;
+    margin: 4px;
+}
+
+.coupon-card button {
+    background-color: #FDF699;
+    width: fit-content;
+    border-radius: 16px;
+    font-size: 12px;
+}
+</style>
