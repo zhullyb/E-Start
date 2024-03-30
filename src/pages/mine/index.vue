@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { reqStudentInfo } from '@/api/user';
+import { onLoad } from '@dcloudio/uni-app';
+import { computed, ref } from 'vue';
+import type { studentInfo } from '@/types/user';
 
 const score = 600
+const studentInfo = ref<studentInfo>()
 
 const images = {
     "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
@@ -47,6 +51,22 @@ const toTask = () => {
         url: '/pages/tasks/index'
     })
 }
+
+onLoad(async() => {
+    studentInfo.value = uni.getStorageSync('studentInfo')
+    if (!studentInfo.value) {
+        const res = await reqStudentInfo()
+        if (res.data.code === 0) {
+            studentInfo.value = res.data.data
+            uni.setStorageSync('studentInfo', studentInfo.value)
+        } else {
+            uni.showToast({
+                title: res.data.msg,
+                icon: 'none'
+            })
+        }
+    }
+})
 </script>
 
 <template>
@@ -60,9 +80,9 @@ const toTask = () => {
                 />
             </view>
             <view style="margin: 10px;">
-                <view style="font-size: 16px; font-weight: bold;">E小新</view>
-                <view style="font-size: 14px; color: #999999;">计算机科学与技术学院（软件学院）</view>
-                <view style="font-size: 14px; color: #999999;">计算机类2401班</view>
+                <view style="font-size: 16px; font-weight: bold;">{{ studentInfo?.name }}</view>
+                <view style="font-size: 14px; color: #999999;">{{ studentInfo?.college }}</view>
+                <view style="font-size: 14px; color: #999999;">{{ studentInfo?.class }}</view>
             </view>
             <view style="margin: auto 16px auto auto;">
                 <image

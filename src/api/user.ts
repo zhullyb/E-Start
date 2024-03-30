@@ -12,3 +12,10 @@ export const reqVerify = async ( data:{
         data
     })
 }
+
+export const reqStudentInfo = async () => {
+    return request({
+        url: "/user/studentInfo",
+        method: "GET"
+    })
+}

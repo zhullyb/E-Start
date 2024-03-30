@@ -64,7 +64,8 @@
 		{
 			"path": "pages/mine/detail",
 			"style": {
-				"navigationBarTitleText": "个人信息"
+				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": true
 			}
 		}
 	],

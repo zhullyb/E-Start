@@ -1,5 +1,27 @@
 <script setup lang="ts">
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
+import type { studentInfo } from '@/types/user';
+import { ref } from 'vue';
+import { reqStudentInfo } from '@/api/user';
 
+const studentInfo = ref<studentInfo>()
+
+onLoad(() => {
+    studentInfo.value = uni.getStorageSync('studentInfo')
+})
+
+onPullDownRefresh(async() => {
+    const res = await reqStudentInfo()
+    if (res.data.code === 0) {
+        studentInfo.value = res.data.data
+        uni.setStorageSync('studentInfo', res.data.data)
+    } else {
+        uni.showToast({
+            title: res.data.msg,
+        })
+    }
+    uni.stopPullDownRefresh()
+})
 </script>
 
 <template>
@@ -13,25 +35,25 @@
         </view>
         <view style="margin: 20px;">
             <view class="label">姓名</view>
-            <view class="content">E小新</view>
+            <view class="content">{{ studentInfo?.name }}</view>
             <view class="divider"></view>
-            <view class="label">身份证号码</view>
-            <view class="content">123456789012345678</view>
-            <view class="divider"></view>
-            <view class="label">手机号</view>
-            <view class="content">12345678901</view>
-            <view class="divider"></view>
-            <view class="label">学院</view>
-            <view class="content">计算机科学与技术学院（软件学院）</view>
-            <view class="divider"></view>
-            <view class="label">班级</view>
-            <view class="content">计算机类2401班</view>
+            <view class="label">性别</view>
+            <view class="content">{{ studentInfo?.gender }}</view>
             <view class="divider"></view>
             <view class="label">学号</view>
-            <view class="content">2024000001</view>
+            <view class="content">{{ studentInfo?.studentId }}</view>
+            <view class="divider"></view>
+            <view class="label">学院</view>
+            <view class="content">{{ studentInfo?.college }}</view>
+            <view class="divider"></view>
+            <view class="label">班级</view>
+            <view class="content">{{ studentInfo?.class }}</view>
+            <view class="divider"></view>
+            <view class="label">校区</view>
+            <view class="content">{{ studentInfo?.campus }}</view>
             <view class="divider"></view>
             <view class="label">寝室</view>
-            <view class="content">尚德园13号楼 619室 4号床</view>
+            <view class="content">{{ studentInfo?.dormitory }}</view>
             <view class="divider"></view>
         </view>
         <view style="height: 20vh;"></view>
