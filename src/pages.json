@@ -19,7 +19,10 @@
 			"path": "pages/news/detail"
 		},
 		{
-			"path": "pages/restaurant/detail"
+			"path": "pages/restaurant/detail",
+			"style": {
+				"enablePullDownRefresh": true
+			}
 		},
 		{
 			"path": "pages/tasks/index",

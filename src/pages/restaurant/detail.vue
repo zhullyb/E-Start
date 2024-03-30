@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { reqBusiness, reqCouponList, redeemCoupon } from '@/api/restaurant'
 import type { Business } from '@/types/restaurant'
-// TODO: replace it with real id
-const id = 1
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
+const id = ref(1)
 
 const detail = ref<Business>({
     "id": 0,
@@ -55,9 +55,9 @@ const handleRedeem = async (coupon: any) => {
     }
 }
 
-onMounted(async () => {
+const fetchData = async() => {
     // 店铺概况
-    const res = await reqBusiness(id)
+    const res = await reqBusiness(id.value)
     if (res.data.code === 0) {
         detail.value = res.data.data
     } else {
@@ -66,12 +66,9 @@ onMounted(async () => {
             icon: 'none'
         })
     }
-
-    uni.setNavigationBarTitle({
-        title: detail.value.name
-    });
+    
     // 获取优惠券
-    const res1 = await reqCouponList(id)
+    const res1 = await reqCouponList(id.value)
     if (res1.data.code === 0) {
         couponsObtainable.value = res1.data.data
     } else {
@@ -80,7 +77,7 @@ onMounted(async () => {
             icon: 'none'
         })
     }
-    const res2 = await reqCouponList(id, 2)
+    const res2 = await reqCouponList(id.value, 2)
     if (res2.data.code === 0) {
         couponsUnused.value = res2.data.data
     } else {
@@ -89,6 +86,24 @@ onMounted(async () => {
             icon: 'none'
         })
     }
+
+}
+
+onLoad(async(option: any)=>{
+    if (option.id) {
+        id.value = option.id
+    }
+
+    await fetchData()
+
+    uni.setNavigationBarTitle({
+        title: detail.value.name
+    });
+})
+
+onPullDownRefresh(async() => {
+    await fetchData()
+    uni.stopPullDownRefresh()
 })
 
 const timeParse = (time: string) => {
