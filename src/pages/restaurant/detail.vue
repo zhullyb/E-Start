@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { reqBusiness } from '@/api/restaurant'
-import type { Business } from '@/types/restaurant'
+import { reqBusiness, reqCouponList } from '@/api/restaurant'
+import type { Business, Coupon } from '@/types/restaurant'
 // TODO: replace it with real id
 const id = 1
 
@@ -24,18 +24,8 @@ const buttons = [
     '优惠券'
 ]
 
-const coupons = [
-    {
-        "id": 1,
-        "name": "满50元减10元券",
-        "redeemPoints": 0
-    },
-    {
-        "id": 2,
-        "name": "全场8折券",
-        "redeemPoints": 5
-    }
-]
+const couponsObtainable = ref<Coupon>()
+const couponsUnused = ref<Coupon>()
 
 const seletedItem = ref(0)
 const couponCategory = ref(0)
@@ -51,6 +41,7 @@ const openNavigation = () => {
 }
 
 onMounted(async () => {
+    // 店铺概况
     const res = await reqBusiness(id)
     if (res.data.code === 0) {
         detail.value = res.data.data
@@ -64,7 +55,34 @@ onMounted(async () => {
     uni.setNavigationBarTitle({
         title: detail.value.name
     });
+    // 获取优惠券
+    const res1 = await reqCouponList(id)
+    if (res1.data.code === 0) {
+        couponsObtainable.value = res1.data.data
+    } else {
+        uni.showToast({
+            title: '获取优惠券信息失败',
+            icon: 'none'
+        })
+    }
+    const res2 = await reqCouponList(id, 2)
+    if (res2.data.code === 0) {
+        couponsUnused.value = res2.data.data
+    } else {
+        uni.showToast({
+            title: '获取优惠券信息失败',
+            icon: 'none'
+        })
+    }
 })
+
+const timeParse = (time: string) => {
+    const objectedTime = new Date(time)
+    const year = objectedTime.getFullYear()
+    const month = String(objectedTime.getMonth() + 1).padStart(2, '0')
+    const day = String(objectedTime.getDate()).padStart(2, '0')
+    return `${year}/${month}/${day}`
+}
 </script>
 
 <template>
@@ -134,12 +152,21 @@ onMounted(async () => {
                 <text class="coupon-cate-text" :class="{ selected: couponCategory === 1 }" @click="couponCategory = 1">未使用的券</text>
             </view>
             <uni-row :gutter="24">
-                <view v-for="item in coupons">
+                <view v-if="couponCategory === 0" v-for="item in couponsObtainable">
                     <uni-col :span="12">
                         <view class="coupon-card">
                             <view class="small">{{ item.name }}</view>
                             <view class="large">{{ item.redeemPoints }}积分</view>
                             <button>兑换</button>
+                        </view>
+                    </uni-col>
+                </view>
+                <view v-if="couponCategory === 1" v-for="item in couponsUnused">
+                    <uni-col :span="12">
+                        <view class="coupon-card">
+                            <view class="small">{{ timeParse(item.fixedEndTime) }}过期</view>
+                            <view class="large">{{ item.name }}</view>
+                            <button>核销</button>
                         </view>
                     </uni-col>
                 </view>

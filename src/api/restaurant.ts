@@ -21,3 +21,14 @@ export const reqBusiness = async (id: number) => {
         }
     })
 }
+
+export const reqCouponList = async (id: number, cate?: number) => {
+    return request({
+        url: "/business/couponList",
+        method: "GET",
+        params: {
+            id,
+            "category": cate ? cate : 1
+        }
+    })
+}
