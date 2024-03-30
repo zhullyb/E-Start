@@ -50,6 +50,12 @@
 			}
 		},
 		{
+			"path": "pages/discover/map",
+			"style": {
+				"navigationBarTitleText": "地图"
+			}
+		},
+		{
 			"path": "pages/mine/index",
 			"style": {
 				"navigationBarTitleText": "我的"

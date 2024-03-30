@@ -66,6 +66,10 @@ const clickItem = (index: number) => {
     console.log('clickItem', index)
 }
 
+const toMap = () => {
+    uni.navigateTo({ url: '/pages/discover/map' })
+}
+
 </script>
 <template>
     <view style="background-color: #F9FAFB;">
@@ -97,7 +101,7 @@ const clickItem = (index: number) => {
         <view style="margin: 10px;">
             <view style="border-radius: 16px; background-color: #FFFFFF;">
                 <uni-row>
-                    <view style="display: flex; align-items: center;">
+                    <view @click="toMap" style="display: flex; align-items: center;">
                         <uni-col :span="6">
                             <view style="margin:10px; background-color: #FFF1DE; border-radius: 16px; width: min-content;">
                                 <image
