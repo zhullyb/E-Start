@@ -20,7 +20,6 @@ onMounted(() => {
     try {
         const loginStatus = uni.getStorageSync('loginStatus')
         if (!loginStatus) {
-            uni.setStorageSync('loginStatus', true)
             uni.reLaunch({ url: '/pages/login/index' })
         }
     } catch (e) {
