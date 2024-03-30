@@ -1,4 +1,4 @@
-export interface info {
+export interface news {
     category: number;
     content: string;
     createdAt: string;

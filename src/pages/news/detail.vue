@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app';
 import { getCurrentInstance, ref } from 'vue';
-import type { info } from '../../types/info';
+import type { news } from '../../types/news';
 
-const detail = ref<info>();
+const detail = ref<news>();
 const $instance = getCurrentInstance()?.proxy as any
 onLoad(() => {
     const eventChannel = $instance.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', (data: {data: info}) => {
+    eventChannel.on('acceptDataFromOpenerPage', (data: {data: news}) => {
         detail.value = data.data
-        // const time = new Date(data.data.updatedAt)
-        // detail.value.updatedAt = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`
         detail.value.updatedAt = data.data.updatedAt.slice(0, 10)
     })
 })
@@ -62,4 +60,4 @@ onLoad(() => {
             >{{ detail?.content }}</text>
         </view>
     </view>
-</template>
+</template>../../types/newa

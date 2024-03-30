@@ -2,14 +2,14 @@
 import { reqInformation } from '@/api/information';
 import { onMounted } from 'vue';
 import { computed, ref } from 'vue';
-import type { info } from '../../types/info';
+import type { news } from '../../types/news';
 import { reactive } from 'vue';
 
 const selectedItem = ref(1);
 const infoLists = reactive<{
-    infoList0: info[],
-    infoList1: info[],
-    infoList2: info[]
+    infoList0: news[],
+    infoList1: news[],
+    infoList2: news[]
 }>({
     infoList0: [],
     infoList1: [],
@@ -111,3 +111,4 @@ onMounted( async() => {
     </view>
 </view>
 </template>
+../../types/newa
