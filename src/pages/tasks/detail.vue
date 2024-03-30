@@ -43,7 +43,7 @@ const handleComplete = async (stage: stage) => {
 
 const doUpdTaskStage = async (data:{loc?: string}) => {
     const res = await updTaskStage(data)
-    if (res.status !== 200 && res.data.code !== 0){
+    if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
             title: res.data.msg,
             icon: 'none'
@@ -116,20 +116,13 @@ const navigateTo = (stage: stage) => {
 }
 
 // #ifdef MP-WEIXIN
-onLoad(() => {
-    const eventChannel = $instance.getOpenerEventChannel()
-    eventChannel.on('acceptDataFromOpenerPage', async (accepted_task: taskList) => {
-        task.value = accepted_task
-        uni.setNavigationBarTitle({
-            title: '主线任务：' + task.value.title
-        });
-        await getData()
-    })
+onLoad(async() => {
+    await getData()
 })
 // #endif
 const getData = async () => {
     const res = await reqTaskStage(task.value.id);
-    if (res.status !== 200 && res.data.code !== 0) {
+    if (res.status !== 200 || res.data.code !== 0) {
         uni.showToast({
             title: res.data.msg,
             icon: 'none'

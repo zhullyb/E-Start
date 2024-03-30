@@ -63,7 +63,7 @@ const submitValidate = async () => {
         // 如果 loc 为空，则不传入 loc
         ...(loc.value && { loc: loc.value })
     })
-    if (res.status !== 200 && res.data.code !== 0){
+    if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
             title: res.data.msg,
             icon: 'none'
@@ -81,7 +81,7 @@ const submitReview = async() => {
         pic: pic.value,
         loc: loc.value
     })
-    if (res.status !== 200 && res.data.code !== 0){
+    if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
             title: res.data.msg,
             icon: 'none'

@@ -51,9 +51,10 @@ const openTask = async (task: taskList) => {
     }
 
     const res = await reqSelectTask(task.id)
-    if (res.status !== 200 && res.data.code !== 0){
+    if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
             title: res.data.msg,
+            icon: 'none'
         })
         return
     }
