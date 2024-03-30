@@ -32,3 +32,13 @@ export const reqCouponList = async (id: number, cate?: number) => {
         }
     })
 }
+
+export const redeemCoupon = async (id: number) => {
+    return request({
+        url: "/business/coupon/redeem",
+        method: "POST",
+        data: {
+            id
+        }
+    })
+}

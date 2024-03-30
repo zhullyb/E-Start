@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { reqBusiness, reqCouponList } from '@/api/restaurant'
+import { reqBusiness, reqCouponList, redeemCoupon } from '@/api/restaurant'
 import type { Business, Coupon } from '@/types/restaurant'
 // TODO: replace it with real id
 const id = 1
@@ -24,8 +24,8 @@ const buttons = [
     '优惠券'
 ]
 
-const couponsObtainable = ref<Coupon>()
-const couponsUnused = ref<Coupon>()
+const couponsObtainable = ref<any>()
+const couponsUnused = ref<any>()
 
 const seletedItem = ref(0)
 const couponCategory = ref(0)
@@ -38,6 +38,21 @@ const openNavigation = () => {
         name: detail.value.name,
         address: detail.value.address
     });
+}
+
+const handleRedeem = async (coupon: Coupon) => {
+    const res = await redeemCoupon(coupon.id)
+    if (res.data.code === 0) {
+        uni.showToast({
+            title: '兑换成功',
+            icon: 'success'
+        })
+    } else {
+        uni.showToast({
+            title: '兑换失败',
+            icon: 'none'
+        })
+    }
 }
 
 onMounted(async () => {
@@ -157,14 +172,14 @@ const timeParse = (time: string) => {
                         <view class="coupon-card">
                             <view class="small">{{ item.name }}</view>
                             <view class="large">{{ item.redeemPoints }}积分</view>
-                            <button>兑换</button>
+                            <button @click="handleRedeem(item)">兑换</button>
                         </view>
                     </uni-col>
                 </view>
                 <view v-if="couponCategory === 1" v-for="item in couponsUnused">
                     <uni-col :span="12">
                         <view class="coupon-card">
-                            <view class="small">{{ timeParse(item.fixedEndTime) }}过期</view>
+                            <view class="small">{{ timeParse(item.expTime) }}过期</view>
                             <view class="large">{{ item.name }}</view>
                             <button>核销</button>
                         </view>
