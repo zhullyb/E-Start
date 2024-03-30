@@ -56,3 +56,13 @@ export const reqReview = async (data: {
         data
     })
 }
+
+export const reqTask = async (id: number) => {
+    return request({
+        url: "/task",
+        method: "GET",
+        params: {
+            id
+        }
+    })
+}

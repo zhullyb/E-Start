@@ -60,10 +60,7 @@ const openTask = async (task: taskList) => {
     }
 
     uni.navigateTo({
-        url: `/pages/tasks/detail?id=${task.id}`,
-        success: (res) => {
-            res.eventChannel.emit('acceptDataFromOpenerPage', task)
-        }
+        url: `/pages/tasks/detail?id=${task.id}`
     })
 }
 

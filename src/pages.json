@@ -29,8 +29,11 @@
 			}
 		},
 		{
-			"path": "pages/tasks/detail"
-		},
+			"path": "pages/tasks/detail",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},	
 		{
 			"path": "pages/tasks/uploadValidate"
 		},

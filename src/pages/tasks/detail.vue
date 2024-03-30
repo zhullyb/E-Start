@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import { getCurrentInstance, ref } from 'vue';
 import type { stage, taskList } from '../../types/tasks';
-import { reqTaskStage, updTaskStage } from '@/api/tasks';
+import { reqTask, reqTaskStage, updTaskStage } from '@/api/tasks';
 
 const loc = ref('')
 
@@ -103,7 +103,7 @@ function getDistance(pos1: string, pos2: string) {
 const navigateTo = (stage: stage) => {
     if (stage.loc == '') {
         uni.showToast({
-            title: '未知错误',
+            title: '暂无导航信息',
             icon: 'none'
         })
         console.log(stage)
@@ -116,8 +116,23 @@ const navigateTo = (stage: stage) => {
 }
 
 // #ifdef MP-WEIXIN
-onLoad(async() => {
+onLoad(async(options: any) => {
+    const id = options.id
+    const res = await reqTask(id)
+    if (res.data.code === 0){
+        task.value = res.data.data
+    } else {
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+    }
     await getData()
+})
+
+onPullDownRefresh(async() => {
+    await getData()
+    uni.stopPullDownRefresh()
 })
 // #endif
 const getData = async () => {
