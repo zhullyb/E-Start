@@ -6,7 +6,6 @@ import type { info, studentInfo } from '@/types/user';
 
 const studentInfo = ref<studentInfo>()
 const info = ref<info>()
-const score = computed(() => info.value?.score || 0)
 
 const images = {
     "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
@@ -30,10 +29,11 @@ const levelInfo = computed(
             { min: 1000, max: 2000, imgText: images["v4-text"], imgFigure: images["v4-figure"] },
             { min: 2000, imgText: images["v5-text"], imgFigure: images["v5-figure"] },
         ]
+        const expValue = info.value?.exp ?? 0;
         for (const l of level) {
-            if (score.value >= l.min && score.value < (l.max || Infinity)) {
-                const need = (l.max || Infinity) - score.value
-                const percent = (score.value - l.min) / ((l.max || 2000) - l.min)
+            if (expValue >= l.min && expValue < (l.max || Infinity)) {
+                const need = (l.max || Infinity) - expValue
+                const percent = (expValue - l.min) / ((l.max || 2000) - l.min)
                 return { level: level.indexOf(l) + 1, need, percent, imgText: l.imgText, imgFigure: l.imgFigure }
             }
         }
@@ -121,7 +121,7 @@ onPullDownRefresh(async() => {
                             mode="heightFix"
                             style="height: 36px;"
                         />
-                        <view style="color: #977A48; font-size: 15px; margin: 4px 0; font-weight: bold;">智慧值: {{ score }}</view>
+                        <view style="color: #977A48; font-size: 15px; margin: 4px 0; font-weight: bold;">智慧值: {{ info?.exp }}</view>
                         <view style="color: #977A48; font-size: 12px; margin: 4px 0;">还需要 {{ levelInfo.need }} 点智慧值升级</view>
                         <view style="margin-top: 20px; height: 8px; background-color: rgb(192, 198, 200); border-radius: 8px;">
                             <view
