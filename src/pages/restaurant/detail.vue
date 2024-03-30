@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { reqBusiness, reqCouponList, redeemCoupon } from '@/api/restaurant'
-import type { Business, Coupon } from '@/types/restaurant'
+import type { Business } from '@/types/restaurant'
 // TODO: replace it with real id
 const id = 1
 
@@ -40,7 +40,7 @@ const openNavigation = () => {
     });
 }
 
-const handleRedeem = async (coupon: Coupon) => {
+const handleRedeem = async (coupon: any) => {
     const res = await redeemCoupon(coupon.id)
     if (res.data.code === 0) {
         uni.showToast({
