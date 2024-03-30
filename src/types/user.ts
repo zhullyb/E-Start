@@ -61,3 +61,55 @@ export interface studentInfo {
     updatedAt: string;
     [property: string]: any;
 }
+
+export interface info {
+    /**
+     * 头像
+     */
+    avatar: string;
+    /**
+     * 创建时间
+     */
+    createdAt: string;
+    /**
+     * 当前任务，=0说明当前没有正在执行任务
+     */
+    curTask: number;
+    /**
+     * 经验值，智慧种子
+     */
+    exp: number;
+    /**
+     * 爱好
+     */
+    hobby: string;
+    /**
+     * 主键ID
+     */
+    id: number;
+    /**
+     * 是否完成主线任务
+     */
+    isCompletedMain: boolean;
+    /**
+     * 积分，求索石
+     */
+    points: number;
+    /**
+     * 个性签名
+     */
+    signature: string;
+    /**
+     * 关联学生信息，=0说明未经过认证
+     */
+    studentInfoId: number;
+    /**
+     * 更新时间
+     */
+    updatedAt: string;
+    /**
+     * 用户名
+     */
+    username: string;
+    [property: string]: any;
+}

@@ -19,3 +19,10 @@ export const reqStudentInfo = async () => {
         method: "GET"
     })
 }
+
+export const reqInfo = async () => {
+    return request({
+        url: "/user/info",
+        method: "GET"
+    })
+}

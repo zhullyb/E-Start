@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { reqStudentInfo } from '@/api/user';
+import { reqInfo, reqStudentInfo } from '@/api/user';
 import { onLoad } from '@dcloudio/uni-app';
 import { computed, ref } from 'vue';
-import type { studentInfo } from '@/types/user';
+import type { info, studentInfo } from '@/types/user';
 
-const score = 600
 const studentInfo = ref<studentInfo>()
+const info = ref<info>()
+const score = computed(() => info.value?.score || 0)
 
 const images = {
     "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
@@ -30,9 +31,9 @@ const levelInfo = computed(
             { min: 2000, imgText: images["v5-text"], imgFigure: images["v5-figure"] },
         ]
         for (const l of level) {
-            if (score >= l.min && score < (l.max || Infinity)) {
-                const need = (l.max || Infinity) - score
-                const percent = (score - l.min) / ((l.max || 2000) - l.min)
+            if (score.value >= l.min && score.value < (l.max || Infinity)) {
+                const need = (l.max || Infinity) - score.value
+                const percent = (score.value - l.min) / ((l.max || 2000) - l.min)
                 return { level: level.indexOf(l) + 1, need, percent, imgText: l.imgText, imgFigure: l.imgFigure }
             }
         }
@@ -65,6 +66,15 @@ onLoad(async() => {
                 icon: 'none'
             })
         }
+    }
+    const res = await reqInfo()
+    if (res.data.code === 0) {
+        info.value = res.data.data
+    } else {
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
     }
 })
 </script>
