@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reqInfo, reqStudentInfo } from '@/api/user';
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import { computed, ref } from 'vue';
 import type { info, studentInfo } from '@/types/user';
 
@@ -53,6 +53,18 @@ const toTask = () => {
     })
 }
 
+const fetchData = async() => {
+    const res = await reqInfo()
+    if (res.data.code === 0) {
+        info.value = res.data.data
+    } else {
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+    }
+}
+
 onLoad(async() => {
     studentInfo.value = uni.getStorageSync('studentInfo')
     if (!studentInfo.value) {
@@ -67,15 +79,13 @@ onLoad(async() => {
             })
         }
     }
-    const res = await reqInfo()
-    if (res.data.code === 0) {
-        info.value = res.data.data
-    } else {
-        uni.showToast({
-            title: res.data.msg,
-            icon: 'none'
-        })
-    }
+
+    await fetchData()
+})
+
+onPullDownRefresh(async() => {
+    await fetchData()
+    uni.stopPullDownRefresh()
 })
 </script>
 

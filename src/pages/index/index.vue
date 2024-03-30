@@ -13,7 +13,7 @@ import { ref } from 'vue'
 const title = ref('Hello')
 
 const toNews = () => {
-    uni.navigateTo({ url: '/pages/restaurant/detail' })
+    uni.navigateTo({ url: '/pages/news/index' })
 }
 
 onMounted(() => {

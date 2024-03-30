@@ -31,6 +31,9 @@
 			}
 		},
 		{
+			"path": "pages/restaurant/writeOff"
+		},
+		{
 			"path": "pages/tasks/index",
 			"style": {
 				"enablePullDownRefresh": true,
@@ -64,7 +67,8 @@
 		{
 			"path": "pages/mine/index",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
