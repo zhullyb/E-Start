@@ -49,7 +49,7 @@ const handleRedeem = async (coupon: any) => {
         })
     } else {
         uni.showToast({
-            title: '兑换失败',
+            title: res.data.msg || '兑换失败',
             icon: 'none'
         })
     }
