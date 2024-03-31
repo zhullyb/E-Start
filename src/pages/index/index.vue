@@ -5,6 +5,13 @@
             <text class="title">{{ title }}</text>
         </view>
     </view>
+    <view style="display: none;">
+        <image
+            v-for="image in imageToPreload"
+            :src="image"
+            mode="scaleToFill"
+        />
+    </view>
 </template>
 
 <script setup lang="ts">
@@ -15,6 +22,19 @@ const title = ref('Hello')
 const toNews = () => {
     uni.navigateTo({ url: '/pages/restaurant/detail?id=1' })
 }
+
+const imageToPreload = [
+    "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1ca04e5.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1ca176e.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1c95d94.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1ca3ecc.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1ccdeb5.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1ce82d7.webp",
+    "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
+    "https://bu.dusays.com/2024/04/01/6609d4a87058f.webp",
+    "https://bu.dusays.com/2024/04/01/6609d4dd26ff7.webp"
+]
 
 onMounted(() => {
     try {
