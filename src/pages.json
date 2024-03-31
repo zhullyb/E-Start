@@ -31,7 +31,10 @@
 			}
 		},
 		{
-			"path": "pages/restaurant/writeOff"
+			"path": "pages/restaurant/writeOff",
+			"style": {
+				"navigationBarTitleText": "优惠券核销"
+			}
 		},
 		{
 			"path": "pages/tasks/index",

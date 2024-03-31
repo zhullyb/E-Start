@@ -55,6 +55,12 @@ const handleRedeem = async (coupon: any) => {
     }
 }
 
+const handleWriteOff = (coupon: any) => {
+    uni.redirectTo({
+        url: `/pages/restaurant/writeOff?id=${coupon.id}`
+    })
+}
+
 const fetchData = async() => {
     // 店铺概况
     const res = await reqBusiness(id.value)
@@ -196,7 +202,7 @@ const timeParse = (time: string) => {
                         <view class="coupon-card">
                             <view class="small">{{ timeParse(item.expTime) }}过期</view>
                             <view class="large">{{ item.name }}</view>
-                            <button>核销</button>
+                            <button @click="handleWriteOff(item)">核销</button>
                         </view>
                     </uni-col>
                 </view>

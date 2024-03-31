@@ -42,3 +42,13 @@ export const redeemCoupon = async (id: number) => {
         }
     })
 }
+
+export const reqCoupon = async (id: number) => {
+    return request({
+        url: "/business/coupon",
+        method: "GET",
+        params: {
+            id
+        }
+    })
+}
