@@ -31,9 +31,11 @@ const seletedItem = ref(0)
 const couponCategory = ref(0)
 
 const openNavigation = () => {
+    const longitude = Number(detail.value.loc.split(',')[0])
+    const latitude = Number(detail.value.loc.split(',')[1])
     uni.openLocation({
-        latitude: Number(detail.value.loc.split(',')[0]),
-        longitude: Number(detail.value.loc.split(',')[1]),
+        longitude: longitude,
+        latitude: latitude,
         scale: 14,
         name: detail.value.name,
         address: detail.value.address
