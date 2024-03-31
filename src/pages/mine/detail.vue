@@ -18,6 +18,7 @@ onPullDownRefresh(async() => {
     } else {
         uni.showToast({
             title: res.data.msg,
+            icon: 'none'
         })
     }
     uni.stopPullDownRefresh()
