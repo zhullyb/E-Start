@@ -15,9 +15,9 @@ const images = {
     "v5-text": "https://bu.dusays.com/2024/03/27/66030a1ca3ecc.webp",
     "v1-figure": "https://bu.dusays.com/2024/03/27/66030a1ccdeb5.webp",
     "v2-figure": "https://bu.dusays.com/2024/03/27/66030a1ce82d7.webp",
-    "v3-figure": "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
-    "v4-figure": "https://bu.dusays.com/2024/03/27/66030a1d71d5d.webp",
-    "v5-figure": "https://bu.dusays.com/2024/03/27/66030a1d71d5d.webp" 
+    "v3-figure": "https://bu.dusays.com/2024/04/01/6609d4a87058f.webp",
+    "v4-figure": "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
+    "v5-figure": "https://bu.dusays.com/2024/04/01/6609d4dd26ff7.webp" 
 }
 
 const levelInfo = computed(
