@@ -26,13 +26,13 @@ const login = () => {
                 uni.setStorageSync('loginStatus', true)
                 uni.reLaunch({ url: '/pages/index/index' })
             } else {
-                uni.redirectTo({ url: '/pages/validate/index' })
+                uni.redirectTo({ url: '/pages/login/validate' })
             }
         }
     })
     // #endif
     // #ifndef MP-WEIXIN
-    uni.navigateTo({ url: '/pages/validate/index' })
+    uni.navigateTo({ url: '/pages/login/validate' })
     // #endif
 }
 </script>

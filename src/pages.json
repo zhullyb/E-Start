@@ -7,10 +7,10 @@
 			"path": "pages/login/index"
 		},
 		{
-			"path": "pages/validate/index"
+			"path": "pages/login/validate"
 		},
 		{
-			"path": "pages/validate/success"
+			"path": "pages/login/validateSuccess"
 		},
 		{
 			"path": "pages/news/index",
