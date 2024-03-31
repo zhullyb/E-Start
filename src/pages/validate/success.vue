@@ -3,7 +3,7 @@ import UniIcons from '../../components/uni-icons/uni-icons.vue'
 
 const toIndex = () => {
     uni.setStorageSync('loginStatus', true)
-    uni.redirectTo({ url: '/pages/index/index' })
+    uni.reLaunch({ url: '/pages/index/index' })
 }
 </script>
 
