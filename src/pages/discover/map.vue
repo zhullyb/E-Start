@@ -2,17 +2,19 @@
 const maps = [
     {
         "campus": "朝晖校区",
-        "map": "https://bu.dusays.com/2024/03/31/660851ab3d48d.webp"
+        "map": "https://bu.dusays.com/2024/04/01/660a1a805340e.webp",
+        "map-hd": "https://bu.dusays.com/2024/03/31/660851ab3d48d.webp"
     },
     {
         "campus": "屏峰校区",
-        "map": "https://bu.dusays.com/2024/03/31/660852597902e.webp"
+        "map": "https://bu.dusays.com/2024/04/01/660a1a20c15e8.webp",
+        "map-hd": "https://bu.dusays.com/2024/03/31/660852597902e.webp"
     }
 ]
 
 const previewMap = (item: any) => {
     uni.previewImage({
-        urls: [item.map]
+        urls: [item['map-hd']]
     })
 }
 </script>
