@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps({
     list: Array<{
+        id: number
         title: string
         img: string
         intro: string
@@ -10,7 +11,10 @@ const props = defineProps({
 
 <template>
     <view v-for="item in list">
-        <view style="background-color: #FFFFFF; border-radius: 16px; margin: 10px;
+        <view 
+            @click="$emit('click', item.id)"
+            style="background-color: #FFFFFF;
+                border-radius: 16px; margin: 10px;
                 display: flex; align-items: center;">
             <image
                 :src="item.img"
