@@ -46,12 +46,12 @@ const recommend = [
     {
         "title": "阿英川菜馆",
         "img": "https://bu.dusays.com/2023/09/18/6507cd24bbe8e.jpg",
-        "tags": ["川菜", "麻辣", "美食"]
+        "intro": "阿英川菜馆位于中国川菜的发源地——四川省，坐落于成都市繁华的市中心地带。作为一家历史悠久的传统川菜馆，阿英川菜馆自创立以来就以其正宗的川菜口味和独特的烹饪技艺而闻名于当地。\n在阿英川菜馆，顾客能够品尝到地道、正宗的四川菜肴，每一道菜品都经过精心挑选的食材和传统的烹饪工艺制作而成。无论是麻辣鲜香的火锅、香味扑鼻的水煮鱼，还是麻辣鲜香的口水鸡，都能让您在品尝的同时感受到四川美食的独特魅力。\n除了传统的川菜，阿英川菜馆还推出了一系列创新菜品，结合了现代烹饪技巧和传统川菜的精髓，既保留了经典口味，又带来了新的风味体验，让顾客能够在品尝中感受到时代的变迁和川菜文化的传承。阿英川菜馆的用餐环境雅致舒适，装修风格充满了浓厚的川西风情，让顾客在品尝美食的同时仿佛置身于四川的山水之间。而专业的服务团队更是为每一位顾客提供贴心周到的服务，让用餐体验更加完美。\n总的来说，阿英川菜馆不仅是品尝正宗川菜的绝佳选择，更是感受四川文化和美食魅力的最佳去处。无论是与家人朋友聚餐还是商务宴请，都能在这里留下美好的回忆。\n"
     },
     {
         "title": "老登咖啡馆",
         "img": "https://bu.dusays.com/2023/10/01/651860224035c.jpg",
-        "tags": ["咖啡", "下午茶", "美食"]
+        "intro": "老登开的咖啡馆"
     }
 ]
 
@@ -127,23 +127,7 @@ const toMap = () => {
             </view>
         </view>
         <view style="font-size: large; margin: 16px;">为您定制</view>
-        <view v-for="item in recommend">
-            <view style="background-color: #FFFFFF; border-radius: 16px; margin: 10px;
-                    display: flex; align-items: center;">
-                <image
-                    :src="item.img"
-                    mode="scaleToFill"
-                    style="height: 100px; width: 100px;
-                           border-radius: 8px; border: 2px solid #F7924A;
-                           margin: 12px;"
-                />
-                <view style="margin: 12px;">
-                    <view style="font-size: 16px; font-weight: bold;">{{ item.title }}</view>
-                    <view style="font-size: 14px; color: #999999;">{{ item.tags.join(' ') }}</view>
-                </view>
-            </view>
-        </view>
-
+        <es-list :list="recommend"></es-list>
     </view>
 </template>
 
