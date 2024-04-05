@@ -25,6 +25,13 @@
 			}
 		},
 		{
+			"path": "pages/restaurant/index",
+			"style": {
+				"navigationBarTitleText": "餐饮美食",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/restaurant/detail",
 			"style": {
 				"enablePullDownRefresh": true

@@ -68,6 +68,19 @@ const clickItem = (index: number) => {
     console.log('clickItem', index)
 }
 
+const iconClick = (index: number) => {
+    switch (index) {
+        case 2:
+            uni.navigateTo({ url: '/pages/restaurant/index' })
+            break
+        default:
+            uni.showToast({
+                title: '暂未开放，敬请期待',
+                icon: 'none'
+            })
+    }
+}
+
 const toMap = () => {
     uni.navigateTo({ url: '/pages/discover/map' })
 }
@@ -86,8 +99,8 @@ const toMap = () => {
         </view>
         <view style="margin: 16px 32px;">
             <uni-row :gutter="16">
-                <uni-col :span="6" v-for="item in iconInfo">
-                    <view style="text-align: center; margin: 8px;">
+                <uni-col :span="6" v-for="(item, index) in iconInfo">
+                    <view @click="iconClick(index)" style="text-align: center; margin: 8px;">
                         <view>
                             <image
                                 :src="item.icon"
