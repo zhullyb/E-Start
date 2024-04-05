@@ -281,7 +281,7 @@ const tasks = computed(() => {
                             </view>
                             <view class="text-title" style="display: flex; justify-content: space-between;">
                                 <text>任务奖励：</text>
-                                <text>{{ task.reward }}智慧种子，{{ task.reward }}求索石</text>
+                                <text>{{ task.reward }}智慧值，{{ task.reward }}求索石</text>
                             </view>
                         </view>
                     </view>

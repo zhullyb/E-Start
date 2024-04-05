@@ -76,7 +76,7 @@ export interface info {
      */
     curTask: number;
     /**
-     * 经验值，智慧种子
+     * 经验值，智慧值
      */
     exp: number;
     /**

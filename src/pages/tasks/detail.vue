@@ -255,7 +255,7 @@ const timeParse = (time: string) => {
                 <view class="es-text-title">任务描述</view>
                 <view class="es-text-desc">{{ task?.desc }}</view>
                 <view class="es-text-title">任务奖励</view>
-                <view class="es-text-desc">{{ task?.reward }}智慧种子，{{ task?.reward }}求索石</view>
+                <view class="es-text-desc">{{ task?.reward }}智慧值，{{ task?.reward }}求索石</view>
                 <view class="es-text-title">截止时间</view>
                 <view class="es-text-desc">{{ timeParse(task?.endTime) }}</view>
                 <view class="es-text-title">任务进度</view>
