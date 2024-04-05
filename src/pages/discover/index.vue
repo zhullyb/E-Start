@@ -70,6 +70,12 @@ const clickItem = (index: number) => {
 
 const iconClick = (index: number) => {
     switch (index) {
+        case 0:
+            uni.navigateTo({ url: '/pages/orgs/index?type=1' })
+            break
+        case 1:
+            uni.navigateTo({ url: '/pages/orgs/index?type=2' })
+            break
         case 2:
             uni.navigateTo({ url: '/pages/restaurant/index' })
             break

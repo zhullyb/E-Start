@@ -44,6 +44,12 @@
 			}
 		},
 		{
+			"path": "pages/orgs/index",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/tasks/index",
 			"style": {
 				"enablePullDownRefresh": true,
