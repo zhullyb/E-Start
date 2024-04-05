@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { reqReview, updTaskStage } from '@/api/tasks';
 import { onLoad } from '@dcloudio/uni-app';
-import { ref } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
+const $instance = getCurrentInstance()?.proxy as any
 
 const needReview = ref(false)
 
@@ -10,7 +11,6 @@ const pic = ref('')
 const loc =ref('')
 const needFace = ref(false)
 const handleUpload = () => {
-    needReview.value = false
     uni.chooseMedia({
         count: 1,
         mediaType: ['image'],
@@ -26,6 +26,7 @@ const handleUpload = () => {
                 },
                 success: (res) => {
                     pic.value = JSON.parse(res.data).data
+                    needReview.value = false
                     uni.showToast({
                         title: '上传成功'
                     })
@@ -46,7 +47,8 @@ const handleSubmit = () => {
     if (!needReview.value){
         submitValidate()
     } else {
-        submitReview()
+        // 打开弹窗
+        $instance.$refs.popup.open()
     }
 }
 
@@ -77,9 +79,21 @@ const submitValidate = async () => {
 }
 
 const submitReview = async() => {
+    $instance.$refs.popup.close()
+    uni.requestSubscribeMessage({
+        tmplIds: ['tfmRn9iQCGCUOOJnMsfImS5Q9HAezfbBIx6BUHn6uwI'],
+        fail (res) {
+            uni.showToast({
+                title: '审核结果订阅失败',
+                icon: 'none'
+            })
+            console.log(res)
+            return
+        }
+    })
     const res = await reqReview({
         pic: pic.value,
-        loc: loc.value
+        ...(loc.value && { loc: loc.value })
     })
     if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
@@ -88,9 +102,11 @@ const submitReview = async() => {
         })
         return
     }
-    uni.navigateTo({
-        url: '/pages/tasks/validateSuccess'
+    uni.showToast({
+        title: '提交成功',
+        icon: 'success'
     })
+    uni.navigateBack()
 }
 
 onLoad((options:any) => {
@@ -128,8 +144,20 @@ onLoad((options:any) => {
                     margin-top: 16px;
                     margin-bottom: 15vh;
         ">{{ !needReview ? '提交验证':'人工审核' }}</button>
-        
     </view>
+    <uni-popup
+        ref="popup"
+        type="dialog"
+        border-radius="20"
+    >
+        <uni-popup-dialog
+            type="info"
+            mode="base"
+            @confirm="submitReview"
+            title="提交人工审核"
+            content="人工审核周期为3个工作日，未审核完前\n无法再次验证，确定要提交人工审核吗？"
+        />
+    </uni-popup>
 </template>
 
 <style>
