@@ -14,7 +14,7 @@
  <!-- #ifdef  VUE3 -->
 <script setup name="WQrcode">
 	import {reactive, watch,onMounted,nextTick,getCurrentInstance ,defineExpose } from 'vue';
-	import { QRCode, GetImg,GetPixelRatio,GetPx } from '@/uni_modules/wmf-code/js_sdk/index.js';
+	import { QRCode, GetImg,GetPixelRatio,GetPx } from '../../js_sdk/index.js';
 	import { getUUid, deepClone,platform } from '../../common/helper.js'
 	//定义props
 	const props = defineProps({
