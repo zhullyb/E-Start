@@ -56,6 +56,12 @@
 			"path": "pages/tasks/validateSuccess"
 		},
 		{
+			"path": "pages/tasks/qrcode",
+			"style": {
+				"navigationBarTitleText": "出示二维码"
+			}
+		},
+		{
 			"path": "pages/discover/index",
 			"style": {
 				"navigationBarTitleText": "发现"
