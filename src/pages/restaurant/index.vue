@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import { computed, ref } from 'vue';
 import type { Business } from '@/types/restaurant';
 import { reqBusinessList } from '@/api/restaurant';
@@ -19,7 +19,7 @@ const goDetail = (id: number) => {
     })
 }
 
-onLoad(async() => {
+const fetchData = async() => {
     const res = await reqBusinessList()
     if (res.data.code === 0) {
         businessList.value = res.data.data.list
@@ -29,6 +29,15 @@ onLoad(async() => {
             icon: 'none'
         })
     }
+}
+
+onLoad(async() => {
+    await fetchData()
+})
+
+onPullDownRefresh(async() => {
+    await fetchData()
+    uni.stopPullDownRefresh()
 })
 </script>
 
