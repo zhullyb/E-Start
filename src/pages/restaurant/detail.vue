@@ -125,7 +125,7 @@ const timeParse = (time: string) => {
 
 <template>
     <view
-        style="margin: 16px;"
+        style="margin: 20px;"
     >
         <uni-row
             :gutter="12"
@@ -158,7 +158,7 @@ const timeParse = (time: string) => {
                         color: rgb(17, 45, 78);
                         font-size: 16px;
                         font-weight: 400;
-                        line-height: 24px;
+                        line-height: 1.5;
                         margin: 5px 0;
                     "
             >
@@ -174,7 +174,7 @@ const timeParse = (time: string) => {
                             color: rgb(17, 45, 78);
                             font-size: 14px;
                             font-weight: 400;
-                            line-height: 18px;
+                            line-height: 1.5;
                         "
                 >
                     {{ detail.introduction }}
