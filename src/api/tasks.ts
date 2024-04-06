@@ -66,3 +66,17 @@ export const reqTask = async (id: number) => {
         }
     })
 }
+
+export const reqRankList = async (
+    sort?: number
+) => {
+    return request({
+        url: "/task/rankList",
+        method: "GET",
+        params: {
+            page: 1,
+            pageSize: 100,
+            sort: sort ? sort : 1
+        }
+    })
+}

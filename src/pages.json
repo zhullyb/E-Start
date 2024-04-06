@@ -75,6 +75,13 @@
 			}
 		},
 		{
+			"path": "pages/tasks/rank",
+			"style": {
+				"navigationBarTitleText": "排行榜",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/discover/index",
 			"style": {
 				"navigationBarTitleText": "发现"
@@ -128,6 +135,12 @@
 				"text": "发现",
 				"iconPath": "static/tabbar/discover.png",
 				"selectedIconPath": "static/tabbar/discover-active.png"
+			},
+			{
+				"pagePath": "pages/tasks/rank",
+				"text": "排行榜",
+				"iconPath": "static/tabbar/rank.png",
+				"selectedIconPath": "static/tabbar/rank-active.png"
 			},
 			{
 				"pagePath": "pages/mine/index",
