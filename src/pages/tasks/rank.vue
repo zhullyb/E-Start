@@ -86,11 +86,11 @@ const fetchData = async() => {
 
 const prizeGenerator = (index: number) => {
     switch (index) {
-        case 0:
-            return '🥇'
         case 1:
-            return '🥈'
+            return '🥇'
         case 2:
+            return '🥈'
+        case 3:
             return '🥉'
         default:
             return ''
@@ -160,7 +160,7 @@ onPullDownRefresh(async() => {
                     />
                 </view>
                 <view>
-                    <view style="font-size: 18px;">{{ item.username }}{{ prizeGenerator(index) }}</view>
+                    <view style="font-size: 18px;">{{ item.username }}{{ prizeGenerator(index + 1) }}</view>
                     <view class="text-disc">{{ item.signature || '这个人很懒什么都没有留下~' }}</view>
                 </view>
                 <view style="margin: auto 16px auto auto;">{{ item.param }}</view>
