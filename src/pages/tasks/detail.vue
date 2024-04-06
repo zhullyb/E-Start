@@ -34,7 +34,6 @@ const handleComplete = async (stage: stage) => {
         }
         await doUpdTaskStage({loc: loc.value})
     } else if (stage.needCamera){
-        // FIXME
         uni.navigateTo({
             url: "/pages/tasks/qrcode"
         })

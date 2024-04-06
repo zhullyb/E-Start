@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import type { taskList } from '../../types/tasks'
 import { reqSelectTask, reqTaskList } from '../../api/tasks'
-import { reactive } from 'vue';
-import { onPullDownRefresh } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 
 const taskLists = reactive<{
     taskList1: taskList[],
@@ -50,6 +49,16 @@ const openTask = async (task: taskList) => {
         return
     }
 
+    uni.requestSubscribeMessage({
+        tmplIds: ['zWqQ0g3O0V2PKlXIYEdfqmmwB_n0tOGExlIPxqbBvd8'],
+        fail () {
+            uni.showToast({
+                title: '消息订阅失败',
+                icon: 'none'
+            })
+        }
+    })
+
     const res = await reqSelectTask(task.id)
     if (res.status !== 200 || res.data.code !== 0){
         uni.showToast({
@@ -80,7 +89,7 @@ const loadData = async() => {
     taskLists.taskList6 = res6.data.data.list
 }
 
-onMounted(async()=>{
+onLoad(async()=>{
     await loadData()
 })
 

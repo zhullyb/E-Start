@@ -12,12 +12,6 @@
             mode="scaleToFill"
         />
     </view>
-    <button @click="messageSubscribe1">
-        任务反馈提醒
-    </button>
-    <button @click="messageSubscribe2">
-        审核结果通知
-    </button>
 </template>
 
 <script setup lang="ts">
@@ -29,29 +23,6 @@ const toNews = () => {
     uni.navigateTo({ url: '/pages/restaurant/detail?id=1' })
 }
 
-const messageSubscribe1 = () => {
-    uni.requestSubscribeMessage({
-        tmplIds: ['zWqQ0g3O0V2PKlXIYEdfqmmwB_n0tOGExlIPxqbBvd8'],
-        success() {
-            uni.showToast({
-                title: '订阅成功',
-                icon: 'success'
-            })
-        }
-    })
-}
-
-const messageSubscribe2 = () => {
-    uni.requestSubscribeMessage({
-        tmplIds: ['tfmRn9iQCGCUOOJnMsfImS5Q9HAezfbBIx6BUHn6uwI'],
-        success() {
-            uni.showToast({
-                title: '订阅成功',
-                icon: 'success'
-            })
-        }
-    })
-}
 
 const imageToPreload = [
     "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
