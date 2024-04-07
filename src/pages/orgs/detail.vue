@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { reqDepartmentList, reqOrganization } from '@/api/orgs';
 import { onLoad } from '@dcloudio/uni-app';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
-const buttons = [
+const buttons = reactive([
     '组织概况',
     '同学评价',
-    '招新情况'
-]
+    '部门分工'
+])
 
 const selectedItem = ref(0)
 
@@ -49,6 +49,8 @@ const fetchData = async () => {
                 icon: 'none'
             })
         }
+    } else {
+        buttons.splice(2, 1)
     }
 }
 
@@ -67,7 +69,7 @@ onLoad(async(option: any) => {
             :gutter="12"
         >
             <uni-col
-                :span="8"
+                :span="24/buttons.length"
                 v-for="(button, index) in buttons"
             >
                 <button
