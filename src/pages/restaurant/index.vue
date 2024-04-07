@@ -13,9 +13,9 @@ const listData = computed(() => {
     }))
 })
 
-const goDetail = (id: number) => {
+const goDetail = (item: any) => {
     uni.navigateTo({
-        url: `/pages/restaurant/detail?id=${id}`
+        url: `/pages/restaurant/detail?id=${item.id}`
     })
 }
 

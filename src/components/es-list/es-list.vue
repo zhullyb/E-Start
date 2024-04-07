@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
     <view v-for="item in list">
         <view 
-            @click="$emit('click', item.id)"
+            @click="$emit('click', item)"
             style="background-color: #FFFFFF;
                 border-radius: 16px; margin: 10px;
                 display: flex; align-items: center;">

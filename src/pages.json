@@ -98,7 +98,7 @@
 			"style": {
 				"navigationBarTitleText": "搜索结果"
 			}
-		}
+		},
 		{
 			"path": "pages/discover/map",
 			"style": {
