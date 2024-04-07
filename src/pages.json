@@ -88,6 +88,12 @@
 			}
 		},
 		{
+			"path": "pages/discover/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		},
+		{
 			"path": "pages/discover/map",
 			"style": {
 				"navigationBarTitleText": "地图"

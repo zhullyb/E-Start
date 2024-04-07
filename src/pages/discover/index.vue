@@ -87,6 +87,10 @@ const iconClick = (index: number) => {
     }
 }
 
+const toSearch = () => {
+    uni.navigateTo({ url: '/pages/discover/search' })
+}
+
 const toMap = () => {
     uni.navigateTo({ url: '/pages/discover/map' })
 }
@@ -94,6 +98,9 @@ const toMap = () => {
 </script>
 <template>
     <view style="background-color: #F9FAFB;">
+        <uni-search-bar
+            @focus="toSearch"
+        />
         <view class="l-swiper">
             <swiper autoplay circular class="swiper-box" style="--height: 300rpx" previous-margin="60rpx"
                 next-margin="60rpx" @change="change">

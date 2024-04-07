@@ -17,7 +17,7 @@
 		<view class="search-title" v-if="recommendList.length">
 			<view class="title">
 				<view class="text">
-					搜索推荐
+					搜索热词
 				</view>
 				<uni-icons @click="handleRecommend" class="icon" type="reload"></uni-icons>
 			</view>
