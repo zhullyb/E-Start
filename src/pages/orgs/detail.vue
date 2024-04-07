@@ -100,6 +100,20 @@ onLoad(async(option: any) => {
                 {{ orgData.introduction }}
             </text>
         </view>
+        <view v-else-if="selectedItem === 1">
+            <view>这里是评论，暂时没实现</view>
+        </view>
+        <view v-else-if="selectedItem === 2">
+            <view style="margin-top: 12px;">
+                <uni-collapse accordion>
+                    <view v-for="item in departmentData">
+                        <uni-collapse-item :title="item.name">
+                             <view class="text-desc">{{ item.desc }}</view>                   
+                        </uni-collapse-item>
+                    </view>
+                </uni-collapse>
+            </view>
+        </view>
         <view style="height: 88px;"></view>
         <view>
             <button
@@ -116,3 +130,9 @@ onLoad(async(option: any) => {
         </view>
     </view>
 </template>
+
+<style scoped>
+.text-desc {
+    margin: 8px 16px;
+}
+</style>
