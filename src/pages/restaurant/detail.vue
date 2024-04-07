@@ -181,10 +181,10 @@ const timeParse = (time: string) => {
                 </text>
             </view>
         </view>
-        <view v-if="seletedItem == 1" style="margin-bottom: 88px;">
+        <view v-if="seletedItem == 1">
             <view>这里是评论，暂时没实现</view>
         </view>
-        <view v-if="seletedItem == 2" style="margin-bottom: 88px;">
+        <view v-if="seletedItem == 2">
             <view style="text-align: center; margin: 20px;">
                 <text class="coupon-cate-text" :class="{ selected: couponCategory === 0 }" @click="couponCategory = 0">可兑换的券</text>
                 <text class="coupon-cate-text" :class="{ selected: couponCategory === 1 }" @click="couponCategory = 1">未使用的券</text>

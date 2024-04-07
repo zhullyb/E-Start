@@ -15,3 +15,23 @@ export const reqOrganizationList = async(
         }
     })
 }
+
+export const reqOrganization = async(id: number) => {
+    return request({
+        url: "/organization",
+        method: "GET",
+        params: {
+            id
+        }
+    })
+}
+
+export const reqDepartmentList = async(id: number) => {
+    return request({
+        url: "/organization/departmentList",
+        method: "GET",
+        params: {
+            id
+        }
+    })
+}
