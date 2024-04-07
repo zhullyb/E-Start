@@ -36,30 +36,28 @@ const listData3 = computed(() => {
     }))
 })
 
-const goDetail = (item: any) => {
-    if (item.link) {
-        uni.setClipboardData({
-            data: item.link,
-            success() {
-                uni.showToast({
-                    title: '链接已复制，请使用自带浏览器打开',
-                    icon: 'none'
-                })
-            }
-        })
-        return
-    }
+const goRecDetail = (item: any) => {
+    uni.setClipboardData({
+        data: item.link,
+        success() {
+            uni.showToast({
+                title: '链接已复制，请使用自带浏览器打开',
+                icon: 'none'
+            })
+        }
+    })
+}
 
-    if (item.category === 2) {
-        uni.navigateTo({
-            url: `/pages/restaurant/detail?id=${item.id}`
-        })
-    } else {
-        uni.navigateTo({
-            url: `/pages/orgs/detail?id=${item.id}`
-        })
-    
-    }
+const goRestDetail = (item: any) => {
+    uni.navigateTo({
+        url: `/pages/restaurant/detail?id=${item.id}`
+    })
+}
+
+const goOrgsDetail = (item: any) => {
+    uni.navigateTo({
+        url: `/pages/orgs/detail?id=${item.id}`
+    })
 }
 
 const fetchData = async () => {
@@ -77,9 +75,6 @@ const fetchData = async () => {
 onLoad(async(option: any) => {
     keyword.value = option.keyword
     await fetchData()
-    console.log(listData1)
-    console.log(listData2)
-    console.log(listData3)
 })
 
 const toSearch = () => {
@@ -94,15 +89,15 @@ const toSearch = () => {
     </view>
     <view v-show="listData1.length">
         <view class="text-title">热门推广</view>
-        <es-list :list="listData1" @click="goDetail"></es-list>
+        <es-list :list="listData1" @click="goRecDetail"></es-list>
     </view>
     <view v-show="listData2.length">
         <view class="text-title">餐饮美食</view>
-        <es-list :list="listData2" @click="goDetail"></es-list>
+        <es-list :list="listData2" @click="goRestDetail"></es-list>
     </view>
     <view v-show="listData3.length">
         <view class="text-title">组织社团</view>
-        <es-list :list="listData3" @click="goDetail"></es-list>
+        <es-list :list="listData3" @click="goOrgsDetail"></es-list>
     </view>
 </template>
 
