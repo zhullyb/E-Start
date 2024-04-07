@@ -20,6 +20,7 @@ const getCurrentTime = () => {
 
 const curTime = ref(getCurrentTime())
 const qrcTime = ref(date.toISOString())
+const refreshTime = ref(15)
 
 const qrcode = computed(() => {
     return {
@@ -33,11 +34,14 @@ const qrcode = computed(() => {
 })
 
 onLoad(async()=>{
-    setInterval(()=>{
+    setInterval(async()=>{
         qrcTime.value = new Date().toISOString()
+        await new Promise(resolve => setTimeout(resolve, 500));
+        refreshTime.value = 15
     }, 15000)
     setInterval(()=>{
         curTime.value = getCurrentTime()
+        refreshTime.value--
     }, 1000)
     studentInfo.value = uni.getStorageSync('studentInfo')
     if (!studentInfo.value) {
@@ -70,7 +74,7 @@ const returnBack = () => {
                 <w-qrcode :options="qrcode" style="margin: auto;"></w-qrcode>
             </view>
             <view class="text-desc">{{ curTime }}</view>
-            <view class="text-desc">每15秒自动更新</view>
+            <view class="text-desc">{{ refreshTime }}秒后自动更新</view>
         </view>
         <button
             @click="returnBack"
