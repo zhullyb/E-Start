@@ -182,7 +182,64 @@ const timeParse = (time: string) => {
             </view>
         </view>
         <view v-if="seletedItem == 1">
-            <view>这里是评论，暂时没实现</view>
+            <view style="display: flex; margin-top: 20px;">
+                <view style="margin: auto; display: flex; padding: 20px; border-radius: 20px; border: 1px solid #3F71AE;">
+                    <uni-rate
+                        readonly
+                        :value="5"
+                        activeColor="#F2DA03"
+                        @change=""
+                    />
+                    <text class="rate-text" style="margin: auto 4px;">4.7</text>
+                </view>
+            </view>
+            <view class="rate-text" style="text-align: center; margin: 8px;">已有40人进行评价</view>
+            <view style="margin: 32px 0;">
+                <view v-for="i in 5">
+                    <view style="display: flex; margin: 20px 12px;">
+                        <text class="rate-text">{{ 6-i }}</text>
+                        <view style="height: 12px; width: 70vw; border-radius: 12px; background: #E4E7EC; margin: auto;">
+                            <view style="height: 12px; width: calc(70vw * 0.2); border-radius: 12px; background: #F2DA03;"></view>
+                        </view>
+                        <text class="rate-text">20%</text>
+                    </view>
+                </view>
+            </view>
+            <view style="margin: 8px 0;">
+                <button class="es-button">撰写评论</button>
+            </view>
+            <view>
+                <view style="display: flex;">
+                    <image
+                        src="/static/logo.png"
+                        mode="scaleToFill"
+                        style="height: 60px; width: 60px;
+                               border-radius: 50%;"
+                    />
+                    <view style="margin: auto 0;">
+                        <view style="font-size: 14px;">不吃猫的鱼</view>
+                        <view style="font-size: 10px; color: #999999;">2024年2月17日19:39</view>
+                    </view>
+                </view>
+                <uni-rate
+                    :value="5"
+                    :size="16"
+                    readonly
+                    @change=""
+                />
+                <view style="margin: 8px 0; line-height: 1.4; color: #666;">
+                    位置不偏，找起来挺方便的，风景不错微风吹拂让人感到非常舒服，早晨起来，打开落地窗，一望无垠的大海映入眼帘，非常美丽，性价比还是挺高的。
+                </view>
+                <view style="display: flex;">
+                    <uni-icons
+                        type="heart"
+                        color="#999999"
+                        size="20"
+                        style="margin: auto 4px auto auto;"
+                    />
+                    <text style="margin: auto 0; color: #999999;">139</text>
+                </view>
+            </view>
         </view>
         <view v-if="seletedItem == 2">
             <view style="text-align: center; margin: 20px;">
@@ -265,5 +322,9 @@ const timeParse = (time: string) => {
     width: fit-content;
     border-radius: 16px;
     font-size: 12px;
+}
+
+.rate-text {
+    color: #3F71AE;
 }
 </style>
