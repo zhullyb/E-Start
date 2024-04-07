@@ -143,7 +143,7 @@ const timeParse = (time: string) => {
                 </button>
             </uni-col>
         </uni-row>
-        <view v-if="seletedItem == 0" style="margin-bottom: 88px;">
+        <view v-if="seletedItem == 0">
             <image
                 :src="detail.pic"
                 mode="aspectFill"
@@ -210,8 +210,7 @@ const timeParse = (time: string) => {
                 </view>
             </uni-row>
         </view>
-        <!-- 微信小程序上需要这 1px 的空白才能生效 -->
-        <view style="height: 1px;"></view>
+        <view style="height: 88px;"></view>
         <view>
             <button
                 class="es-button selected"
@@ -226,7 +225,7 @@ const timeParse = (time: string) => {
             </button>
         </view>
     </view>
-</template>>
+</template>
 
 <style scoped>
 .coupon-cate-text {
