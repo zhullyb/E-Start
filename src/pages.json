@@ -94,6 +94,12 @@
 			}
 		},
 		{
+			"path": "pages/discover/searchResult",
+			"style": {
+				"navigationBarTitleText": "搜索结果"
+			}
+		}
+		{
 			"path": "pages/discover/map",
 			"style": {
 				"navigationBarTitleText": "地图"

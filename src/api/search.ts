@@ -6,3 +6,16 @@ export const reqHotKeywords = async () => {
         method: "GET"
     })
 }
+
+export const reqSearch = async (keyword: string) => {
+    return request({
+        url: "/search",
+        method: "GET",
+        params: {
+            page: 1,
+            pageSize: 100,
+            category: 1,
+            content: keyword
+        }
+    })
+}

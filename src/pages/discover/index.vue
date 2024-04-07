@@ -97,10 +97,11 @@ const toMap = () => {
 
 </script>
 <template>
-    <view style="background-color: #F9FAFB;">
-        <uni-search-bar
-            @focus="toSearch"
-        />
+    <view>
+        <view @click="toSearch" class="fakeSearchBar">
+            <uni-icons type="search" size="24"/>
+            <text style="margin: auto 4px; color: #999999; font-size: 14px;">你想要的都在这里~</text>
+        </view>
         <view class="l-swiper">
             <swiper autoplay circular class="swiper-box" style="--height: 300rpx" previous-margin="60rpx"
                 next-margin="60rpx" @change="change">
@@ -160,6 +161,14 @@ const toMap = () => {
 </template>
 
 <style lang="scss" scoped>
+.fakeSearchBar {
+    display: flex;
+    margin: 8px 20px;
+    background: #F1F1F1;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
 .l-swiper {
     width: 100%;
     padding: 20rpx 0;
@@ -186,5 +195,11 @@ const toMap = () => {
             transform-origin: center center;
         }
     }
+}
+</style>
+
+<style>
+page {
+    background: #F9FAFB;
 }
 </style>
