@@ -20,7 +20,7 @@ import { ref } from 'vue'
 const title = ref('Hello')
 
 const toNews = () => {
-    uni.navigateTo({ url: '/pages/restaurant/detail?id=1' })
+    uni.navigateTo({ url: '/pages/tasks/exams' })
 }
 
 

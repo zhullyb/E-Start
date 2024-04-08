@@ -81,6 +81,12 @@
 			}
 		},
 		{
+			"path": "pages/tasks/exams",
+			"style": {
+				"navigationBarTitleText": "每日答题"
+			}
+		},
+		{
 			"path": "pages/tasks/rank",
 			"style": {
 				"navigationBarTitleText": "排行榜",
