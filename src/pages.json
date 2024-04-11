@@ -94,6 +94,12 @@
 			}
 		},
 		{
+			"path": "pages/tasks/buy",
+			"style": {
+				"navigationBarTitleText": "家人超市"
+			}
+		},
+		{
 			"path": "pages/discover/index",
 			"style": {
 				"navigationBarTitleText": "发现"
