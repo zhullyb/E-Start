@@ -15,7 +15,8 @@ const weather = reactive({
     weather: '☀️',
 })
 
-const news = reactive({
+const news = ref({
+    id: 1,
     title: '国家板球集训队在我校开展冬季集训',
     content: '1月中旬起，国家板球队入驻浙江工业大学（屏峰校区）板球场开展冬季集训，备战亚洲板球理事会男子T20挑战者杯比赛和亚洲板球理事会女子板球精英赛。'
 })
@@ -91,8 +92,21 @@ const toNewsList = () => {
     uni.navigateTo({ url: '/pages/news/index' })
 }
 
+const toNewsDetail = () => {
+    uni.navigateTo({
+        url: '/pages/news/detail',
+        success: (res) => {
+            res.eventChannel.emit('acceptDataFromOpenerPage', { data: news.value })
+        }
+    })
+}
+
 const toTasks = () => {
     uni.switchTab({ url: '/pages/tasks/index' })
+}
+
+const toTaskDetail = (task: any) => {
+    uni.navigateTo({ url: `/pages/tasks/detail?id=${task.id}` })
 }
 
 const toAiChat = () => {
@@ -133,8 +147,7 @@ const fetchData = async() => {
 
     const res2 = await reqInformation(2)
     if (res2.data.code === 0 && res2.data.data.list.length !== 0) {
-        news.title = res2.data.data.list[0].title
-        news.content = res2.data.data.list[0].content
+        news.value = res2.data.data.list[0]
     }
 
     let category = 1
@@ -212,7 +225,7 @@ onPullDownRefresh(async() => {
                 <view class="title">新闻公告</view>
                 <view class="check-more" @click="toNewsList">查看更多</view>
             </view>
-            <view class="white-board">
+            <view class="white-board" @click="toNewsDetail">
                 <view class="news-title">{{ news.title }}</view>
                 <view class="news-text">{{ news.content }}</view>
             </view>
@@ -236,7 +249,12 @@ onPullDownRefresh(async() => {
                 <view class="check-more" @click="toTasks">查看更多</view>
             </view>
             <scroll-view scroll-x style="margin: 12px 0px; white-space: nowrap;">
-                <view class="task-card" v-for="(task, index) in tasks" :style="index === 0 ? 'margin-left: 20px;' : ''">
+                <view
+                    class="task-card"
+                    v-for="(task, index) in tasks"
+                    @click="toTaskDetail(task)"
+                    :style="index === 0 ? 'margin-left: 20px;' : ''"
+                >
                     <view class="task-title">{{ task.title }}</view>
                     <view style="display: flex;">
                         <text class="task-text">截止时间</text>
