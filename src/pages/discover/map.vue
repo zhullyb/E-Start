@@ -56,8 +56,8 @@ const label = computed(() => {
 
 const goto = () => {
     uni.openLocation({
-        latitude: position.value['x'],
-        longitude: position.value['y'],
+        longitude: position.value['x'],
+        latitude: position.value['y'],
         name: position.value['name']
     })
 }
