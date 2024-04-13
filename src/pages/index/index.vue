@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 import { ref } from 'vue'
 import type { info } from '@/types/user'
 import { onLoad } from '@dcloudio/uni-app';
 import { reqInfo } from '@/api/user';
+import getWeather from '@/api/getWeather';
 
 const info = ref<info>()
+
+const weather = reactive({
+    temperature: '',
+    weather: '',
+})
 
 const images = {
     "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
@@ -67,12 +73,16 @@ const imageToPreload = [
 ]
 
 const fetchData = async() => {
-    const res = await reqInfo()
-    if (res.data.code === 0) {
-        info.value = res.data.data
+    const res = await getWeather()
+    weather.temperature = res.temperature
+    weather.weather = res.weather
+
+    const res1 = await reqInfo()
+    if (res1.data.code === 0) {
+        info.value = res1.data.data
     } else {
         uni.showToast({
-            title: res.data.msg,
+            title: res1.data.msg,
             icon: 'none'
         })
     }
@@ -90,13 +100,29 @@ onLoad(async() => {
 
     await fetchData()
 })
+
+const tasks = [
+    {
+        title: "准备脸盆",
+        time: "2024年9月1日12:00",
+        process: 0
+    },
+    {
+        title: "阅读校规",
+        time: "2024年9月1日12:00",
+        process: 30
+    }
+]
 </script>
 
 <template>
     <view>
         <view id="index-board">
             <view style="height: 44px; background: transparent;"></view>
-            <view style="color: #FFFFFF; font-size: 16px; margin: 8px 20px;">E启新篇</view>
+            <view style="margin: 8px 20px;">
+                <text style="font-size: 28px;">{{ weather.weather }}</text>
+                <text style="color: #FFFFFF; font-size: 16px;"> {{ weather.temperature }}℃</text>
+            </view>
             <uni-row>
                 <uni-col :span="14">
                     <view style="margin: 16px 16px;">
@@ -155,20 +181,20 @@ onLoad(async() => {
                 <view class="title">待办任务</view>
                 <view class="check-more" @click="toTasks">查看更多</view>
             </view>
-            <scroll-view scroll-x style="margin: 12px 15px; white-space: nowrap;">
-                <view class="task-card" v-for="i in [0, 1, 2]">
-                    <view class="task-title">准备脸盆</view>
+            <scroll-view scroll-x style="margin: 12px 0px; white-space: nowrap;">
+                <view class="task-card" v-for="(task, index) in tasks" :style="index === 0 ? 'margin-left: 10px;' : ''">
+                    <view class="task-title">{{ task.title }}</view>
                     <view style="display: flex;">
                         <text class="task-text">截止时间</text>
-                        <text class="task-text bold" style="margin: auto 0px auto auto;">2024年9月1日12:00</text>
+                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ task.time }}</text>
                     </view>
                     <view style="display: flex;">
                         <text class="task-text">任务进度</text>
-                        <text class="task-text bold" style="margin: auto 0px auto auto;">50%</text>
+                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ task.process }}%</text>
                     </view>
                     <view style="margin-top: 12px;">
                         <view style="height: 4px; width: 100%; background: rgba(3, 3, 3, 0.4); border-radius: 4px;">
-                            <view style="height: 4px; width: 50%; background: #3F72AF; border-radius: 4px;"></view>
+                            <view style="height: 4px; background: #3F72AF; border-radius: 4px;" :style="`width: ${task.process}%`"></view>
                         </view>
                     </view>
                 </view>

@@ -1,0 +1,3 @@
+const Amapkey = 'Your Amap Key'
+
+export default Amapkey
