@@ -116,6 +116,12 @@ const navigateTo = (stage: stage) => {
     });
 }
 
+const toBuy = () => {
+    uni.navigateTo({
+        url: '/pages/tasks/buy'
+    })
+}
+
 // #ifdef MP-WEIXIN
 onLoad(async(options: any) => {
     const id = options.id
@@ -285,6 +291,13 @@ const timeParse = (time: string) => {
                                         @click="navigateTo(stage)"
                                     >
                                         需要导航?
+                                    </button>
+                                    <button
+                                        v-show="'脸盆' in stage"
+                                        class="task-button"
+                                        @click="toBuy"
+                                    >
+                                        在线选购
                                     </button>
                                 </view>
                             </view>
