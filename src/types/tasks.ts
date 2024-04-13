@@ -36,6 +36,10 @@ export interface taskList {
      */
     reward: number;
     /**
+     * 阶段数
+     */
+    stageNum: number;
+    /**
      * 开始时间
      */
     startTime: string;

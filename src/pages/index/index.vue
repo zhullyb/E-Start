@@ -6,18 +6,52 @@ import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import { reqInfo } from '@/api/user';
 import getWeather from '@/api/getWeather';
 import { reqInformation } from '@/api/information';
+import { reqTaskList } from '@/api/tasks';
 
 const info = ref<info>()
 
 const weather = reactive({
-    temperature: '',
-    weather: '',
+    temperature: '25',
+    weather: '☀️',
 })
 
 const news = reactive({
     title: '国家板球集训队在我校开展冬季集训',
     content: '1月中旬起，国家板球队入驻浙江工业大学（屏峰校区）板球场开展冬季集训，备战亚洲板球理事会男子T20挑战者杯比赛和亚洲板球理事会女子板球精英赛。'
 })
+
+const tasks = ref([
+    {
+        title: "准备脸盆",
+        endTime: "2024-04-30T00:00:00+08:00",
+        stageNum: 1,
+        curStage: 1
+    },
+    {
+        title: "阅读校规",
+        endTime: "2024-04-30T00:00:00+08:00",
+        stageNum: 10,
+        curStage: 4
+    }
+])
+
+const taskPercent = (task: { stageNum: number, curStage: number }) => {
+    if (task.curStage === 0) {
+        return 0
+    } else {
+        return Math.floor((task.curStage-1) / task.stageNum * 100)
+    }
+}
+
+const timeParse = (time: string) => {
+    const date = new Date(time)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hour = String(date.getHours()).padStart(2, '0')
+    const minute = String(date.getMinutes()).padStart(2, '0')
+    return `${year}年${month}月${day}日 ${hour}:${minute}`
+}
 
 const images = {
     "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
@@ -79,9 +113,13 @@ const imageToPreload = [
 ]
 
 const fetchData = async() => {
-    const res = await getWeather()
-    weather.temperature = res.temperature
-    weather.weather = res.weather
+    try {
+        const res = await getWeather()
+        weather.temperature = res.temperature
+        weather.weather = res.weather
+    } catch (error) {
+        console.log(error)
+    }
 
     const res1 = await reqInfo()
     if (res1.data.code === 0) {
@@ -94,9 +132,21 @@ const fetchData = async() => {
     }
 
     const res2 = await reqInformation(2)
-    if (res2.data.code === 0 && res2.data.data.list) {
+    if (res2.data.code === 0 && res2.data.data.list.length !== 0) {
         news.title = res2.data.data.list[0].title
         news.content = res2.data.data.list[0].content
+    }
+
+    let category = 1
+    if (info.value?.mainProgress === 100) {
+        category = 2
+    }
+    const res3 = await reqTaskList({
+        category,
+        isCompleted: 0
+    })
+    if (res3.data.code === 0) {
+        tasks.value = res3.data.data.list
     }
 }
 
@@ -105,30 +155,18 @@ onLoad(async() => {
         const loginStatus = uni.getStorageSync('loginStatus')
         if (!loginStatus) {
             uni.reLaunch({ url: '/pages/login/index' })
+        } else {
+            await fetchData()
         }
     } catch (e) {
         console.log('error: ', e)
     }
-
-    await fetchData()
 })
 
 onPullDownRefresh(async() => {
     await fetchData()
     uni.stopPullDownRefresh()
 })
-const tasks = [
-    {
-        title: "准备脸盆",
-        time: "2024年9月1日12:00",
-        process: 0
-    },
-    {
-        title: "阅读校规",
-        time: "2024年9月1日12:00",
-        process: 30
-    }
-]
 </script>
 
 <template>
@@ -202,15 +240,15 @@ const tasks = [
                     <view class="task-title">{{ task.title }}</view>
                     <view style="display: flex;">
                         <text class="task-text">截止时间</text>
-                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ task.time }}</text>
+                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ timeParse(task.endTime) }}</text>
                     </view>
                     <view style="display: flex;">
                         <text class="task-text">任务进度</text>
-                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ task.process }}%</text>
+                        <text class="task-text bold" style="margin: auto 0px auto auto;">{{ taskPercent(task) }}%</text>
                     </view>
                     <view style="margin-top: 12px;">
                         <view style="height: 4px; width: 100%; background: rgba(3, 3, 3, 0.4); border-radius: 4px;">
-                            <view style="height: 4px; background: #3F72AF; border-radius: 4px;" :style="`width: ${task.process}%`"></view>
+                            <view style="height: 4px; background: #3F72AF; border-radius: 4px;" :style="`width: ${taskPercent(task)}%`"></view>
                         </view>
                     </view>
                 </view>
