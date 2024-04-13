@@ -11,7 +11,7 @@ const listData1 = computed(() => {
         id: item.id,
         title: item.name,
         img: item.pic,
-        intro: item.introduction,
+        intro: item.text,
         ...item
     }))
 })
