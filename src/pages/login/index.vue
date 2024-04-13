@@ -81,7 +81,7 @@ const login = () => {
 
 <style>
 page {
-    background: url('../../static/bg-small.png') no-repeat;
+    background: linear-gradient(135deg, #5563DC, #5EC1F5);
     position: relative;
     height: 100%;
 }
