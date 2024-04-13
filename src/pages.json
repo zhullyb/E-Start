@@ -139,6 +139,12 @@
 				"navigationBarTitleText": "个人信息",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/aichat/index",
+			"style": {
+				"navigationBarTitleText": "在线咨询"
+			}
 		}
 	],
 	"globalStyle": {

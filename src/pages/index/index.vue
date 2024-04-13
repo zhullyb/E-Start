@@ -11,6 +11,10 @@ const toTasks = () => {
     uni.switchTab({ url: '/pages/tasks/index' })
 }
 
+const toAiChat = () => {
+    uni.navigateTo({ url: '/pages/aichat/index' })
+}
+
 const imageToPreload = [
     "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
     "https://bu.dusays.com/2024/03/27/66030a1ca04e5.webp",
@@ -87,7 +91,7 @@ onMounted(() => {
                 <view class="title">在线咨询</view>
                 <view class="check-more">人工服务</view>
             </view>
-            <view id="chat-search">
+            <view id="chat-search" @click="toAiChat">
                 <uni-icons type="search" size="24" style="margin: auto 0;"/>
                 <text style="margin: auto 8px; color: #999999; font-size: 14px;">
                     AI智能在线咨询
