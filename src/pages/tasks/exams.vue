@@ -5,7 +5,7 @@
 			<view class="items-center" @tap="open"><image src="/static/exam/submit.png" mode="aspectFit" style="width: 70rpx;height:80rpx;"></image></view>
 		</view>
         <view class="slide-area">
-            <exam-item :examItem="item" @answ="answ" :total="5" :current="1" currentType="单选" :oneAnswer="oneAnswer"></exam-item>
+            <exam-item :examItem="item" @answ="answ" :total="5" :current="1" currentType="单选"></exam-item>
         </view>
 	</view>
 </template>
@@ -29,14 +29,6 @@ const item = {
 const answ = (item: any) => {
     console.log("answ", item)
 }
-
-const oneAnswer = computed(() => {
-    return {
-        value: 'B',
-        id: 1
-    }
-})
-
 
 const open = () => {
     uni.navigateTo({

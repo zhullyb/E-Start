@@ -73,6 +73,20 @@ const openTask = async (task: taskList) => {
     })
 }
 
+const openDailyTask = (index: number) => {
+    uni.navigateTo({
+        url: '/pages/tasks/exams'
+    })
+}
+
+const dailytasks = reactive([
+    {
+        desc: "每日任务1的描述",
+        reward: 25,
+        title: "每日任务1",
+    }
+])
+
 const loadData = async() => {
     const res1 = await reqTaskList({ category: 1, isCompleted: 0 })
     const res2 = await reqTaskList({ category: 1, isCompleted: 1 })
@@ -160,7 +174,7 @@ const tasks = computed(() => {
             </uni-col>
         </uni-row>
         <view style="height: 12px;"></view>
-        <view>
+        <view v-if="buttonSelected !== 2">
             <uni-row :gutter="24">
                 <uni-col :span="12">
                     <button
@@ -288,6 +302,77 @@ const tasks = computed(() => {
                                 <text>截止时间：</text>
                                 <text>{{ timeParse(task.endTime) }}</text>
                             </view>
+                            <view class="text-title" style="display: flex; justify-content: space-between;">
+                                <text>任务奖励：</text>
+                                <text>{{ task.reward }}智慧值，{{ task.reward }}求索石</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view v-else>
+            <view>
+                <view v-for="(task,index) in dailytasks" class="shadow" style="margin: 12px 0;">
+                    <view style="padding: 16px;">
+                        <view
+                            style="
+                                    color: rgb(63, 114, 175);
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    line-height: 13px;
+                                    margin-bottom: 10px;
+                                "
+                        >{{ buttons[buttonSelected] }}</view>
+                        <uni-row>
+                            <view style="display: flex;align-items: center;">
+                                <uni-col :span="16">
+                                    <text 
+                                        class="text-title"
+                                        style="
+                                                display: -webkit-box;
+                                                -webkit-box-orient: vertical;
+                                                -webkit-line-clamp: 2;
+                                                overflow: hidden;
+                                                word-break: break-all;
+                                                margin-right: 4px;
+                                        "
+                                    >
+                                        {{ task.title }}
+                                    </text>
+                                </uni-col>
+                                <uni-col :span="8">
+                                    <button
+                                        class="es-button"
+                                        :class="{ selected: taskTypeSelected === 0 }"
+                                        style="padding: 7px;"
+                                        @click="openDailyTask(index)"
+                                    >
+                                        {{ taskTypeSelected === 0 ? '进入' : '已完成' }}
+                                    </button>
+                                </uni-col>
+                            </view>
+                        </uni-row>
+                        <uni-row>
+                            <view style="margin: 5px 0; min-height: 40px;">
+                                <text
+                                    style="
+                                            color: rgb(17, 45, 78);
+                                            font-size: 10px;
+                                            font-weight: 400;
+                                            line-height: 13px;
+                                            display: -webkit-box;
+                                            -webkit-box-orient: vertical;
+                                            -webkit-line-clamp: 3;
+                                            overflow: hidden;
+                                            word-break: break-all;
+                                            "
+                                >
+                                    {{ task.desc }}
+                                </text>
+                            </view>
+                        </uni-row>
+                        <view>
                             <view class="text-title" style="display: flex; justify-content: space-between;">
                                 <text>任务奖励：</text>
                                 <text>{{ task.reward }}智慧值，{{ task.reward }}求索石</text>
