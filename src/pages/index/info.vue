@@ -5,6 +5,7 @@ import { reqInfo, updInfo } from '@/api/user';
 
 const username = ref<string>('')
 const signature = ref<string>('')
+const upload = ref<boolean>(false)
 
 const info = ref<any>({
     avatar: 'https://bu.dusays.com/2024/04/14/661adb9d5972a.webp'
@@ -15,47 +16,42 @@ const changeAvatar = () => {
         count: 1,
         success: function (res) {
             info.value.avatar = res.tempFilePaths[0]
+            upload.value = true
         }
     })
 }
 
 const save = async() => {
-    uni.uploadFile({
-        url: 'https://api.lonesome.cn/api/wx/upload',
-        filePath: info.value.avatar,
-        name: 'file',
-        header: {
-            'Authorization': 'Bearer ' + uni.getStorageSync('access_token')
-        },
-        success: async(res) => {
-            info.value.avatar = JSON.parse(res.data).data
-            const data = {
-                avatar: info.value.avatar,
-                hobby: info.value.hobby,
-                signature: signature.value,
-                username: username.value
+    if (upload.value) {
+        const res = await uni.uploadFile({
+            url: 'https://api.lonesome.cn/api/wx/upload',
+            filePath: info.value.avatar,
+            name: 'file',
+            header: {
+                'Authorization': 'Bearer ' + uni.getStorageSync('access_token')
             }
-            const res1 = await updInfo(data)
-            if (res1.data.code === 0) {
-                uni.showToast({
-                    title: '保存成功'
-                })
-            } else {
-                uni.showToast({
-                    title: res1.data.msg,
-                    icon: 'none'
-                })
-            }
-        },
-        fail: (res) => {
-            uni.showToast({
-                title: '上传失败',
-                icon: 'none'
-            })
-            console.log(res)
-        }
-    })
+        })
+    
+        info.value.avatar = JSON.parse(res.data).data
+    }
 
+    const data = {
+        avatar: info.value.avatar,
+        hobby: info.value.hobby,
+        signature: signature.value,
+        username: username.value
+    }
+    const res1 = await updInfo(data)
+    if (res1.data.code === 0) {
+        uni.showToast({
+            title: '保存成功'
+        })
+    } else {
+        uni.showToast({
+            title: res1.data.msg,
+            icon: 'none'
+        })
+    }
 }
 
 const fetchData = async() => {
