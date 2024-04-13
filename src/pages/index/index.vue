@@ -175,7 +175,7 @@ onPullDownRefresh(async() => {
             <view style="height: 44px; background: transparent;"></view>
             <view style="margin: 8px 20px;">
                 <text style="font-size: 28px;">{{ weather.weather }}</text>
-                <text style="color: #FFFFFF; font-size: 16px;"> {{ weather.temperature }}℃</text>
+                <text style="color: #FFFFFF; font-size: 16px; margin-left: 4px;">{{ weather.temperature }}℃</text>
             </view>
             <uni-row>
                 <uni-col :span="14">
