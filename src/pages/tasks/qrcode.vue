@@ -56,6 +56,12 @@ onLoad(async()=>{
             })
         }
     }
+    
+    // sleep 10s
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    uni.showToast({
+        title: '扫码成功',
+    })
 })
 
 const returnBack = () => {
