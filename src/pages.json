@@ -7,13 +7,22 @@
 			}
 		},
 		{
-			"path": "pages/login/index"
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		},
 		{
-			"path": "pages/login/validate"
+			"path": "pages/login/validate",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		},
 		{
-			"path": "pages/login/validateSuccess"
+			"path": "pages/login/validateSuccess",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		},
 		{
 			"path": "pages/news/index",
