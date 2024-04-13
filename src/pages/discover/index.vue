@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 
 const urls = [
-    'https://bu.dusays.com/2023/09/18/6507cd24bbe8e.jpg',
-    'https://bu.dusays.com/2023/10/01/651860224035c.jpg',
-    'https://bu.dusays.com/2023/08/10/64d4b999c4ead.jpg'
+    'https://bu.dusays.com/2024/04/13/661a8c1d27f1b.webp',
+    'https://bu.dusays.com/2024/04/13/661a8c1d357ef.webp',
+    'https://bu.dusays.com/2024/04/13/661a8c1d3871d.webp'
 ]
 
 const iconInfo = [
@@ -45,15 +45,15 @@ const iconInfo = [
 const recommend = [
     {
         "id": 1,
-        "title": "阿英川菜馆",
-        "img": "https://bu.dusays.com/2023/09/18/6507cd24bbe8e.jpg",
-        "intro": "阿英川菜馆位于中国川菜的发源地——四川省，坐落于成都市繁华的市中心地带。作为一家历史悠久的传统川菜馆，阿英川菜馆自创立以来就以其正宗的川菜口味和独特的烹饪技艺而闻名于当地。\n在阿英川菜馆，顾客能够品尝到地道、正宗的四川菜肴，每一道菜品都经过精心挑选的食材和传统的烹饪工艺制作而成。无论是麻辣鲜香的火锅、香味扑鼻的水煮鱼，还是麻辣鲜香的口水鸡，都能让您在品尝的同时感受到四川美食的独特魅力。\n除了传统的川菜，阿英川菜馆还推出了一系列创新菜品，结合了现代烹饪技巧和传统川菜的精髓，既保留了经典口味，又带来了新的风味体验，让顾客能够在品尝中感受到时代的变迁和川菜文化的传承。阿英川菜馆的用餐环境雅致舒适，装修风格充满了浓厚的川西风情，让顾客在品尝美食的同时仿佛置身于四川的山水之间。而专业的服务团队更是为每一位顾客提供贴心周到的服务，让用餐体验更加完美。\n总的来说，阿英川菜馆不仅是品尝正宗川菜的绝佳选择，更是感受四川文化和美食魅力的最佳去处。无论是与家人朋友聚餐还是商务宴请，都能在这里留下美好的回忆。\n"
+        "title": "肯德基",
+        "img": "https://bu.dusays.com/2024/04/13/661a8d3bcbd40.png",
+        "intro": "肯德基，以其香脆可口的炸鸡和美味的配菜而闻名，是全球领先的快餐连锁店之一。凭借其标志性的秘方和广泛的菜单，肯德基为各年龄段的顾客提供了各种选择，从经典的鸡块到美味的汉堡和卷饼。" 
     },
     {
         "id": 2,
-        "title": "老登咖啡馆",
-        "img": "https://bu.dusays.com/2023/10/01/651860224035c.jpg",
-        "intro": "老登开的咖啡馆"
+        "title": "麦当劳",
+        "img": "https://bu.dusays.com/2024/04/13/661a8d842d012.png",
+        "intro": "麦当劳是全球最大的快餐连锁店，以其标志性的巨无霸汉堡、金黄酥脆的薯条和香浓顺滑的奶昔而闻名。凭借其广泛的菜单和便利的位置，麦当劳已成为世界各地顾客的热门选择。无论您是在寻找快速午餐、家庭晚餐还是深夜小吃，麦当劳都能满足您的需求，提供各种美味佳肴和饮品。"
     }
 ]
 
@@ -95,6 +95,9 @@ const toMap = () => {
     uni.navigateTo({ url: '/pages/discover/map' })
 }
 
+const toRestaurant = (item: any) => {
+    uni.navigateTo({ url: `/pages/restaurant/detail?id=${item.id}` })
+}
 </script>
 <template>
     <view>
@@ -156,7 +159,7 @@ const toMap = () => {
             </view>
         </view>
         <view style="font-size: large; margin: 16px;">为您定制</view>
-        <es-list :list="recommend" @click="clickItem"></es-list>
+        <es-list :list="recommend" @click="toRestaurant"></es-list>
     </view>
 </template>
 
