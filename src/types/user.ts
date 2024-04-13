@@ -111,5 +111,9 @@ export interface info {
      * 用户名
      */
     username: string;
+    /**
+     * 主线进度，百分比不带%
+     */
+    mainProgress: number;
     [property: string]: any;
 }

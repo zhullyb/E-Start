@@ -1,7 +1,45 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { computed } from 'vue';
 import { ref } from 'vue'
-const title = ref('Hello')
+import type { info } from '@/types/user'
+import { onLoad } from '@dcloudio/uni-app';
+import { reqInfo } from '@/api/user';
+
+const info = ref<info>()
+
+const images = {
+    "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
+    "v2-text": "https://bu.dusays.com/2024/03/27/66030a1ca04e5.webp",
+    "v3-text": "https://bu.dusays.com/2024/03/27/66030a1ca176e.webp",
+    "v4-text": "https://bu.dusays.com/2024/03/27/66030a1c95d94.webp",
+    "v5-text": "https://bu.dusays.com/2024/03/27/66030a1ca3ecc.webp",
+    "v1-figure": "https://bu.dusays.com/2024/03/27/66030a1ccdeb5.webp",
+    "v2-figure": "https://bu.dusays.com/2024/03/27/66030a1ce82d7.webp",
+    "v3-figure": "https://bu.dusays.com/2024/04/01/6609d4a87058f.webp",
+    "v4-figure": "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
+    "v5-figure": "https://bu.dusays.com/2024/04/01/6609d4dd26ff7.webp" 
+}
+
+const levelInfo = computed(
+    () => {
+        const level = [
+            { min: 0, max: 100, imgText: images["v1-text"], imgFigure: images["v1-figure"], title: "启程者" },
+            { min: 100, max: 500, imgText: images["v2-text"], imgFigure: images["v2-figure"], title: "探索者" },
+            { min: 500, max: 1000, imgText: images["v3-text"], imgFigure: images["v3-figure"], title: "求真者" },
+            { min: 1000, max: 2000, imgText: images["v4-text"], imgFigure: images["v4-figure"], title: "悟道者" },
+            { min: 2000, imgText: images["v5-text"], imgFigure: images["v5-figure"], title: "集大成者"},
+        ]
+        const expValue = info.value?.exp ?? 0;
+        for (const l of level) {
+            if (expValue >= l.min && expValue < (l.max || Infinity)) {
+                const need = (l.max || Infinity) - expValue
+                const percent = (expValue - l.min) / ((l.max || 2000) - l.min)
+                return { level: level.indexOf(l) + 1, need, percent, imgText: l.imgText, imgFigure: l.imgFigure, title: l.title }
+            }
+        }
+        return { level: 1, need: 100, percent: 0, imgText: images["v1-text"], imgFigure: images["v1-figure"], title: "启程者" }
+    }
+)
 
 const toNewsList = () => {
     uni.navigateTo({ url: '/pages/news/index' })
@@ -28,7 +66,19 @@ const imageToPreload = [
     "https://bu.dusays.com/2024/04/01/6609d4dd26ff7.webp"
 ]
 
-onMounted(() => {
+const fetchData = async() => {
+    const res = await reqInfo()
+    if (res.data.code === 0) {
+        info.value = res.data.data
+    } else {
+        uni.showToast({
+            title: res.data.msg,
+            icon: 'none'
+        })
+    }
+}
+
+onLoad(async() => {
     try {
         const loginStatus = uni.getStorageSync('loginStatus')
         if (!loginStatus) {
@@ -37,6 +87,8 @@ onMounted(() => {
     } catch (e) {
         console.log('error: ', e)
     }
+
+    await fetchData()
 })
 </script>
 
@@ -48,12 +100,12 @@ onMounted(() => {
             <uni-row>
                 <uni-col :span="14">
                     <view style="margin: 16px 16px;">
-                        <view class="title">童博扬</view>
-                        <view class="title" style="font-size: 16px;">(Lv.1 启程者)</view>
+                        <view class="title">{{ info?.username }}</view>
+                        <view class="title" style="font-size: 16px;">(Lv.{{ levelInfo.level }} {{ levelInfo.title }})</view>
                     </view>
                     <view style="margin-left: 20px; margin-top: 12px;">
-                        <text class="tag">50 智慧值</text>
-                        <text class="tag">50 求索值</text>
+                        <text class="tag">{{ info?.exp }} 智慧值</text>
+                        <text class="tag">{{ info?.points }} 求索石</text>
                     </view>
                 </uni-col>
                 <uni-col :span="10">
@@ -66,10 +118,10 @@ onMounted(() => {
             </uni-row>
             <view>
                 <text style="margin-left: 20px; font-size: 16px; color: #FFFFFF;">主线任务进度: </text>
-                <text style="margin-left: 4px; font-size: 16px; color: #FFFFFF; font-weight: bolder;">8%</text>
+                <text style="margin-left: 4px; font-size: 16px; color: #FFFFFF; font-weight: bolder;">{{ info?.mainProgress}}%</text>
                 <view style="margin: 20px;">
                     <view style="height: 6px; width: 100%; background: rgba(3, 3, 3, 0.4); border-radius: 6px;">
-                        <view style="height: 6px; width: 8%; background: #1FE032; border-radius: 6px;"></view>
+                        <view style="height: 6px; background: #1FE032; border-radius: 6px;" :style="`width: ${info?.mainProgress}%`"></view>
                     </view>
                 </view>
             </view>
