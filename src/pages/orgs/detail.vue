@@ -136,5 +136,6 @@ onLoad(async(option: any) => {
 <style scoped>
 .text-desc {
     margin: 8px 16px;
+    white-space: pre-line;
 }
 </style>

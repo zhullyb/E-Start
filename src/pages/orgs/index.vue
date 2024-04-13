@@ -30,6 +30,15 @@ const fetchData = async() => {
 onLoad(async(option: any)=>{
     type.value = option.type
     await fetchData()
+    if (type.value == 1) {
+        uni.setNavigationBarTitle({
+            title: '学生组织'
+        })
+    } else {
+        uni.setNavigationBarTitle({
+            title: '学生社团'
+        })
+    }
 })
 
 onPullDownRefresh(async()=>{
