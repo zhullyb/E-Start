@@ -62,7 +62,15 @@
             }
         },
         "requiredPrivateInfos": ["getLocation"],
-        "lazyCodeLoading": "requiredComponents"
+        "lazyCodeLoading": "requiredComponents",
+        "packOptions": {
+            "include": [
+                {
+                    "type": "file",
+                    "value": "static/map.json"
+                }
+            ]
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
