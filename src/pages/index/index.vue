@@ -5,12 +5,18 @@ import type { info } from '@/types/user'
 import { onLoad } from '@dcloudio/uni-app';
 import { reqInfo } from '@/api/user';
 import getWeather from '@/api/getWeather';
+import { reqInformation } from '@/api/information';
 
 const info = ref<info>()
 
 const weather = reactive({
     temperature: '',
     weather: '',
+})
+
+const news = reactive({
+    title: '国家板球集训队在我校开展冬季集训',
+    content: '1月中旬起，国家板球队入驻浙江工业大学（屏峰校区）板球场开展冬季集训，备战亚洲板球理事会男子T20挑战者杯比赛和亚洲板球理事会女子板球精英赛。'
 })
 
 const images = {
@@ -86,6 +92,12 @@ const fetchData = async() => {
             icon: 'none'
         })
     }
+
+    const res2 = await reqInformation(2)
+    if (res2.data.code === 0 && res2.data.data.list) {
+        news.title = res2.data.data.list[0].title
+        news.content = res2.data.data.list[0].content
+    }
 }
 
 onLoad(async() => {
@@ -159,8 +171,8 @@ const tasks = [
                 <view class="check-more" @click="toNewsList">查看更多</view>
             </view>
             <view class="white-board">
-                <view class="news-title">国家板球集训队在我校开展冬季集训</view>
-                <view class="news-text">1月中旬起，国家板球队入驻浙江工业大学（屏峰校区）板球场开展冬季集训，备战亚洲板球理事会男子T20挑战者杯比赛和亚洲板球理事会女子板球精英赛。</view>
+                <view class="news-title">{{ news.title }}</view>
+                <view class="news-text">{{ news.content }}</view>
             </view>
         </view>
         <view style="text-align: center; color: #3F72AF; margin: 12px 0;">家庭有困难？点击申请绿色通道</view>
