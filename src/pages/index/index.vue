@@ -2,7 +2,7 @@
 import { computed, reactive } from 'vue';
 import { ref } from 'vue'
 import type { info } from '@/types/user'
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import { reqInfo } from '@/api/user';
 import getWeather from '@/api/getWeather';
 import { reqInformation } from '@/api/information';
@@ -113,6 +113,10 @@ onLoad(async() => {
     await fetchData()
 })
 
+onPullDownRefresh(async() => {
+    await fetchData()
+    uni.stopPullDownRefresh()
+})
 const tasks = [
     {
         title: "准备脸盆",
