@@ -46,11 +46,11 @@ const taskPercent = (task: { stageNum: number, curStage: number }) => {
 const timeParse = (time: string) => {
     const date = new Date(time)
     const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
+    const month = date.getMonth() + 1
+    const day = date.getDate()
     const hour = String(date.getHours()).padStart(2, '0')
     const minute = String(date.getMinutes()).padStart(2, '0')
-    return `${year}年${month}月${day}日 ${hour}:${minute}`
+    return `${year}年${month}月${day}日${hour}:${minute}`
 }
 
 const images = {
@@ -236,7 +236,7 @@ onPullDownRefresh(async() => {
                 <view class="check-more" @click="toTasks">查看更多</view>
             </view>
             <scroll-view scroll-x style="margin: 12px 0px; white-space: nowrap;">
-                <view class="task-card" v-for="(task, index) in tasks" :style="index === 0 ? 'margin-left: 10px;' : ''">
+                <view class="task-card" v-for="(task, index) in tasks" :style="index === 0 ? 'margin-left: 20px;' : ''">
                     <view class="task-title">{{ task.title }}</view>
                     <view style="display: flex;">
                         <text class="task-text">截止时间</text>
@@ -355,7 +355,7 @@ onPullDownRefresh(async() => {
     border-radius: 12px;
     border: 1px dashed #3F72AF;
     padding: 12px;
-    width: 200px;
+    width: 220px;
     display: inline-block;
     margin-right: 10px;
 }
