@@ -8,6 +8,12 @@
 			}
 		},
 		{
+			"path": "pages/index/info",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationStyle": "custom"

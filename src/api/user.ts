@@ -26,3 +26,16 @@ export const reqInfo = async () => {
         method: "GET"
     })
 }
+
+export const updInfo = async (data: {
+    username: string,
+    signature: string,
+    hobby: string,
+    avatar: string
+}) => {
+    return request({
+        url: "/user/info",
+        method: "PUT",
+        data
+    })
+}

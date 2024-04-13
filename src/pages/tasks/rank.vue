@@ -131,7 +131,7 @@ onPullDownRefresh(async() => {
                     </view>
                     <view style="display: flex; align-items: center; justify-content: center;">
                         <image
-                            src="/static/logo.png"
+                            :src="info?.avatar"
                             mode="scaleToFill"
                             style="height: 60px; width: 60px; border-radius: 50%; margin: 8px;"
                         />

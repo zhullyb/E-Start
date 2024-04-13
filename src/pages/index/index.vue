@@ -101,6 +101,10 @@ const toNewsDetail = () => {
     })
 }
 
+const toInfo = () => {
+    uni.navigateTo({ url: '/pages/index/info' })
+}
+
 const toTasks = () => {
     uni.switchTab({ url: '/pages/tasks/index' })
 }
@@ -192,8 +196,16 @@ onPullDownRefresh(async() => {
             </view>
             <uni-row>
                 <uni-col :span="14">
-                    <view style="margin: 16px 16px;">
-                        <view class="title">{{ info?.username }}</view>
+                    <view style="margin: 16px 16px;" @click="toInfo">
+                        <view style="display: flex;">
+                            <view class="title">{{ info?.username }}</view>
+                            <uni-icons
+                                type="compose"
+                                color="#FFFFFF"
+                                size="18"
+                                style="margin: auto auto 0 4px;"
+                            />
+                        </view>
                         <view class="title" style="font-size: 16px;">(Lv.{{ levelInfo.level }} {{ levelInfo.title }})</view>
                     </view>
                     <view style="margin-left: 20px; margin-top: 12px;">
