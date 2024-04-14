@@ -1,33 +1,51 @@
 <template>
 	<view class="background">
 		<view class="flex-row justify-between items-center head-info">
-			<view class="items-center"><image src="/static/exam/clock.png" mode="aspectFit"/>02:00</view>
+			<view class="items-center"><image src="/static/exam/clock.png" mode="aspectFit"/>{{ lasttime }} 秒</view>
 			<view class="items-center" @tap="open"><image src="/static/exam/submit.png" mode="aspectFit" style="width: 70rpx;height:80rpx;"></image></view>
 		</view>
         <view class="slide-area">
-            <exam-item :examItem="item" @answ="answ" :total="5" :current="1" currentType="单选"></exam-item>
+            <exam-item :examItem="item" @answ="answ" :total="5" :current="index + 1" currentType="单选"></exam-item>
         </view>
 	</view>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
+import { computed, ref } from 'vue';
 
+const index = ref(0)
+const lasttime = ref(120)
 
-const item = {
-    id:1,
-    type:0,
-    topic:'浙江工业大学的校训是？',
-    optionJson:[
-        "厚德载物",
-        "厚德健行",
-        "取精用宏",
-        "博大精深"
-    ]
-}
+const items = [
+	{
+		id:1,
+		type:0,
+		topic:'我们学校的校训是？',
+		optionJson:[
+			"求是创新",
+			"厚德健行",
+			"笃学力行、守正求新",
+			"实事求是，经世致用"
+		]
+	},
+	{
+		id:2,
+		type:0,
+		topic:'我们学校的建校时间是？',
+		optionJson:[
+			"1897年",
+			"1953年",
+			"1956年",
+			"1986年"
+		]
+	}
+]
+
+const item = computed(() => items[index.value])
 
 const answ = (item: any) => {
-    console.log("answ", item)
+    index.value += 1
 }
 
 const open = () => {
@@ -36,6 +54,11 @@ const open = () => {
     })
 }
 
+onLoad(() => {
+	setInterval(() => {
+		lasttime.value -= 1
+	}, 1000)
+})
 </script>
 
 <style lang="scss" scoped>

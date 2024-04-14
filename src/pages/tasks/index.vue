@@ -81,9 +81,9 @@ const openDailyTask = (index: number) => {
 
 const dailytasks = reactive([
     {
-        desc: "每日任务1的描述",
+        desc: "快来看看你对校史了解多少吧 ~",
         reward: 25,
-        title: "每日任务1",
+        title: "每日答题",
     }
 ])
 
