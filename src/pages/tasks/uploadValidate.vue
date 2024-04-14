@@ -111,7 +111,11 @@ const submitReview = async() => {
 
 onLoad((options:any) => {
     loc.value = options.loc
-    needFace.value = options.needFace
+    if (options.needFace === "false"){
+        needFace.value = false
+    } else {
+        needFace.value = true
+    }
 })
 </script>
 
@@ -133,7 +137,7 @@ onLoad((options:any) => {
         >上传照片</button>
         <view
             class="es-text-desc"
-            v-show="needFace"
+            v-if="needFace"
             style="color: rgb(226, 59, 59);"
         >*照片中应当出现人脸</view>
         <button
