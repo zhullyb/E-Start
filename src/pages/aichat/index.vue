@@ -2,16 +2,30 @@
 import { ref } from 'vue';
 
 const input = ref('')
+const answer = ref('')
+const question = ref('')
+
+const send = async() => {
+    question.value = "好转专业吗？转专业方不方便？"
+    input.value = ''
+
+    answer.value = "."
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    answer.value = ".."
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    answer.value = "..."
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    answer.value = "分两种情况，普通生转专业：学生（中外合作办学专业学生除外）在第二、三、四学期，可在全校范围内申请转专业。中外合作办学专业学生若第一学年平均学分绩点列专业前 2%且无不及格课程，在第二学年初可在全校范围内申请转专业。特长生转专业：学生在某一专业上有明显专长，并已取得相应成果，且课程平均绩点在 2.0（含）以上，可在第二、三、四学期申请转专业，申请专业应为其特长专业。"
+}
 </script>
 
 <template>
 <view>
-    <view class="message mine">
-            好转专业吗？转专业方不方便？
+    <view class="message mine" v-if="question.length > 0">
+            {{ question }}
     </view>
     <view class="message">
-        分两种情况，普通生转专业：学生（中外合作办学专业学生除外）在第二、三、四学期，可在全校范围内申请转专业。中外合作办学专业学生若第一学年平均学分绩点列专业前 2%且无不及格课程，在第二学年初可在全校范围内申请转专业。
-特长生转专业：学生在某一专业上有明显专长，并已取得相应成果，且课程平均绩点在 2.0（含）以上，可在第二、三、四学期申请转专业，申请专业应为其特长专业。
+        {{ answer }}
     </view>
     <view style="height: 100px;"></view>
     <view class="bottom">
@@ -29,6 +43,7 @@ const input = ref('')
                     color=""
                     size="24"
                     style="margin: auto;"
+                    @click="send"
                 />
             </view>
         </view>
