@@ -29,7 +29,7 @@ onPullDownRefresh(async() => {
     <view>
         <view style="display: flex; height: 36vh;">
             <image
-                src="https://bu.dusays.com/2024/04/14/661aeba6d2ac7.webp"
+                src="/static/logo.png"
                 mode="scaleToFill"
                 style="height: 200px; width: 200px; margin: auto"
             />

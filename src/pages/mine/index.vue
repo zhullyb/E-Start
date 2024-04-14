@@ -94,7 +94,7 @@ onPullDownRefresh(async() => {
         <view @click="toDetail" class="board" style="display: flex; align-items: center;">
             <view style="margin: 10px;">
                 <image
-                    src="https://bu.dusays.com/2024/04/14/661aeba6d2ac7.webp"
+                    src="/static/logo.png"
                     mode="scaleToFill"
                     style="height: 60px; width: 60px; border-radius: 50%;"
                 />
