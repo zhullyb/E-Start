@@ -110,9 +110,10 @@ const navigateTo = (stage: stage) => {
         console.log(stage)
         return
     }
+
     uni.openLocation({
-        latitude: Number(stage.loc.split(',')[0]),
-        longitude: Number(stage.loc.split(',')[1])
+        longitude: Number(stage.loc.split(',')[0]),
+        latitude: Number(stage.loc.split(',')[1])
     });
 }
 
@@ -293,7 +294,7 @@ const timeParse = (time: string) => {
                                         需要导航?
                                     </button>
                                     <button
-                                        v-show="'脸盆' in stage"
+                                        v-if="task.id == 5"
                                         class="task-button"
                                         @click="toBuy"
                                     >
