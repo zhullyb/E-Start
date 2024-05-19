@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import UniIcons from '../../components/uni-icons/uni-icons.vue'
 
-const toIndex = () => {
+const toChsRecmd = () => {
     uni.setStorageSync('loginStatus', true)
-    uni.reLaunch({ url: '/pages/index/index' })
+    uni.navigateTo({ url: '/pages/login/chsRcmd' })
 }
 </script>
 
@@ -40,7 +40,7 @@ const toIndex = () => {
                     width: 60px;
                     background: rgb(63, 114, 175);
                 "
-            @click="toIndex"
+            @click="toChsRecmd"
         >
             <uni-icons type="arrow-right" size="24" color="white"></uni-icons>
         </button>

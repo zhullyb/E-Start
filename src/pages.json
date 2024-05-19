@@ -1,38 +1,44 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/index/info",
-			"style": {
-				"navigationBarTitleText": "个人信息"
-			}
-		},
-		{
-			"path": "pages/login/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/login/validate",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/login/validateSuccess",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/news/index",
+	{
+		"path": "pages/index/index",
+		"style": {
+			"navigationStyle": "custom",
+			"enablePullDownRefresh": true
+		}
+	},
+	{
+		"path": "pages/index/info",
+		"style": {
+			"navigationBarTitleText": "个人信息"
+		}
+	},
+	{
+		"path": "pages/login/index",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/login/validate",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/login/validateSuccess",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/login/chsRcmd",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path": "pages/news/index",
 			"style": {
 				"navigationBarTitleText": "新闻公告"
 			}

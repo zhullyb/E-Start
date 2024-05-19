@@ -77,7 +77,7 @@ const doValidate = async () => {
         })
         return
     }
-    uni.reLaunch({ url: '/pages/login/validateSuccess' })
+    uni.navigateTo({ url: '/pages/login/validateSuccess' })
 }
 </script>
 <template>
