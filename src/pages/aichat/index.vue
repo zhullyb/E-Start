@@ -36,6 +36,7 @@ const send = async() => {
                 placeholder="请输入内容"
                 id="input"
                 @confirm=""
+                adjustPosition
             />
             <view id="send-icon">
                 <uni-icons
