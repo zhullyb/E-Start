@@ -79,33 +79,81 @@ const doValidate = async () => {
     }
     uni.navigateTo({ url: '/pages/login/validateSuccess' })
 }
+
+const doScan = () => {
+    uni.scanCode({
+        success: (res) => {
+            // res.result 是一个 json 字符串，包含 name, idCard 和 admissionLetterId
+            const result = JSON.parse(res.result)
+            if (!result.name || !result.idCard || !result.admissionLetterId) {
+                uni.showToast({
+                    title: '请扫描正确的二维码',
+                    icon: 'none'
+                })
+                return
+            }
+            validateInfo.name = result.name
+            validateInfo.idCard = result.idCard
+            validateInfo.admissionLetterId = result.admissionLetterId
+        },
+        fail: (res) => {
+            uni.showToast({
+                title: '扫码失败',
+                icon: 'none'
+            })
+            console.log(res)
+        }
+    })
+}
 </script>
 <template>
     <view class="center">
         <view
-            style="padding: 20px;"
+            style="
+                padding: 20px;
+                display: flex;
+                "
+            @click="doScan"
         >
             <view>
-                <text style="
-                        color: rgb(17, 45, 78);
-                        font-size: 24px;
-                        font-weight: 700;
-                        line-height: 32px;
-                        "
-                >验证身份</text>
-            </view>
-            <view style="height: 2vh;"></view>
-            <view>
-                <text style="
-                                color: rgb(17, 45, 78);
-                                font-size: 14px;
-                                font-weight: 400;
-                                line-height: 20px;
+                <view>
+                    <text
+                        style="
+                            color: rgb(17, 45, 78);
+                            font-size: 24px;
+                            font-weight: 700;
+                            line-height: 32px;
                             "
-                >请输入以下信息以验证您的新生身份</text>
+                    >验证身份</text>
+                </view>
+                <view style="height: 2vh;"></view>
+                <view>
+                    <text style="
+                                    color: rgb(17, 45, 78);
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                "
+                    >请输入以下信息以验证您的新生身份</text>
+                </view>
+            </view>
+            <view style="margin: 2px -16px auto auto;">
+                <image
+                    src="/static/scan.png"
+                    mode="scaleToFill"
+                    style="
+                            width: 30px;
+                            height: 30px;
+                            margin-left: 6px;
+                            padding: 6px;
+                            border-radius: 25%;
+                            border: 1px solid rgb(17, 45, 78);
+                            background-color: rgb(249, 250, 251);
+                        "
+                />
             </view>
         </view>
-    
+        
         <view style="display: flex; justify-content: center; padding-top: 20px;">
             <view
                 style="
