@@ -190,10 +190,10 @@ const timeParse = (time: string) => {
                         activeColor="#F2DA03"
                         @change=""
                     />
-                    <text class="rate-text" style="margin: auto 4px;">4.7</text>
+                    <text class="rate-text" style="margin: auto 4px;">3.0</text>
                 </view>
             </view>
-            <view class="rate-text" style="text-align: center; margin: 8px;">已有40人进行评价</view>
+            <view class="rate-text" style="text-align: center; margin: 8px;">已有5人进行评价</view>
             <view style="margin: 32px 0;">
                 <view v-for="i in 5">
                     <view style="display: flex; margin: 20px 12px;">

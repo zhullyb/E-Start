@@ -81,9 +81,19 @@ const openDailyTask = (index: number) => {
 
 const dailytasks = reactive([
     {
-        desc: "快来看看你对校史了解多少吧 ~",
-        reward: 25,
+        title: "每日签到",
+        reward: 5,
+        desc: "点击即可完成签到",
+    },
+    {
         title: "每日答题",
+        reward: 15,
+        desc: "快来看看你对校史了解多少吧 ",
+    },
+    {
+        title: "学霸养成打卡",
+        reward: 10,
+        desc: "每天进步一点点",
     }
 ])
 
