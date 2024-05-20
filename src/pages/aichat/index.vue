@@ -20,15 +20,16 @@ const send = async() => {
 </script>
 
 <template>
-<view>
-    <view class="message mine" v-if="question.length > 0">
-            {{ question }}
+<view style="display: flex; flex-wrap: wrap; height: 100vh;">
+    <view style="min-width: 100vw;">
+        <view class="message mine" v-if="question.length > 0">
+                {{ question }}
+        </view>
+        <view class="message">
+            {{ answer }}
+        </view>
     </view>
-    <view class="message">
-        {{ answer }}
-    </view>
-    <view style="height: 100px;"></view>
-    <view class="bottom">
+    <view class="bottom" style="min-width: 100vw;">
         <view style="margin: auto; display: flex; width: 90vw;">  
             <uni-easyinput
                 v-model="input"
@@ -69,12 +70,11 @@ const send = async() => {
 .message.mine {
     color: white;
     background: #3F72AF;
-    margin: 12px 12px 12px auto;
+    margin: 20px 20px 20px auto;
 }
 
 .bottom {
-    position: fixed;
-    bottom: 20px;
+    margin: auto auto 20px auto;
     width: 100%;
     display: flex;
 }
