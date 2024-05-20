@@ -82,19 +82,9 @@ const doValidate = async () => {
 
 const doScan = () => {
     uni.scanCode({
+        scanType: ['barCode'],
         success: (res) => {
-            // res.result 是一个 json 字符串，包含 name, idCard 和 admissionLetterId
-            const result = JSON.parse(res.result)
-            if (!result.name || !result.idCard || !result.admissionLetterId) {
-                uni.showToast({
-                    title: '请扫描正确的二维码',
-                    icon: 'none'
-                })
-                return
-            }
-            validateInfo.name = result.name
-            validateInfo.idCard = result.idCard
-            validateInfo.admissionLetterId = result.admissionLetterId
+            validateInfo.admissionLetterId = res.result
         },
         fail: (res) => {
             uni.showToast({
