@@ -395,6 +395,9 @@ onPullDownRefresh(async() => {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .task-text {
