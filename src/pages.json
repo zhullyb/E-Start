@@ -166,6 +166,12 @@
 			}
 		},
 		{
+			"path": "pages/mine/roomDistribution",
+			"style": {
+				"navigationBarTitleText": "寝室分配"
+			}
+		},
+		{
 			"path": "pages/aichat/index",
 			"style": {
 				"navigationBarTitleText": "在线咨询"
