@@ -154,6 +154,18 @@
 			}
 		},
 		{
+			"path": "pages/mine/exchange",
+			"style": {
+				"navigationBarTitleText": "申请调换"
+			}
+		},
+		{
+			"path": "pages/mine/roommateList",
+			"style": {
+				"navigationBarTitleText": "查看室友"
+			}
+		},
+		{
 			"path": "pages/aichat/index",
 			"style": {
 				"navigationBarTitleText": "在线咨询"

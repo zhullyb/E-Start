@@ -6,6 +6,18 @@ import { reqStudentInfo } from '@/api/user';
 
 const studentInfo = ref<studentInfo>()
 
+const toRoommateList = () => {
+    uni.navigateTo({
+        url: '/pages/mine/roommateList'
+    })
+}
+
+const toExchange = () => {
+    uni.navigateTo({
+        url: '/pages/mine/exchange'
+    })
+}
+
 onLoad(() => {
     studentInfo.value = uni.getStorageSync('studentInfo')
 })
@@ -53,7 +65,29 @@ onPullDownRefresh(async() => {
             <view class="label">校区</view>
             <view class="content">{{ studentInfo?.campus }}</view>
             <view class="divider"></view>
-            <view class="label">寝室</view>
+            <view style="display: flex">
+                <view class="label">寝室</view>
+                <view style="display: flex; margin: auto 2px auto auto;">
+                    <view @click="toRoommateList"
+                        style="margin-right: 4px;">
+                        <uni-icons
+                            type="home"
+                            color="#3F4870"
+                            size="18"
+                        />
+                        <text style="color: #3F4870; font-size: 12px; margin: auto;">查看室友</text>
+                    </view>
+                    <view @click="toExchange">
+                        <uni-icons
+                            type="compose"
+                            color="#3F4870"
+                            size="18"
+                            style="margin: auto;"
+                        />
+                        <text style="color: #3F4870; font-size: 12px; margin: auto;">申请调换</text>
+                    </view>
+                </view>
+            </view>
             <view class="content">{{ studentInfo?.dormitory }}</view>
             <view class="divider"></view>
         </view>
