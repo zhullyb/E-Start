@@ -26,12 +26,6 @@
 		}
 	},
 	{
-		"path": "pages/login/validateSuccess",
-		"style": {
-			"navigationStyle": "custom"
-		}
-	},
-	{
 		"path": "pages/login/chsRcmd",
 		"style": {
 			"navigationStyle": "custom"
@@ -95,9 +89,6 @@
 		},	
 		{
 			"path": "pages/tasks/uploadValidate"
-		},
-		{
-			"path": "pages/tasks/validateSuccess"
 		},
 		{
 			"path": "pages/tasks/qrcode",
@@ -166,6 +157,12 @@
 			"path": "pages/aichat/index",
 			"style": {
 				"navigationBarTitleText": "在线咨询"
+			}
+		},
+		{
+			"path": "pages/utils/success",
+			"style": {
+				"navigationStyle": "custom"
 			}
 		}
 	],

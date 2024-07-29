@@ -74,7 +74,13 @@ const submitValidate = async () => {
         return
     }
     uni.navigateTo({
-        url: '/pages/tasks/validateSuccess'
+        url: '/pages/utils/success?data=' + encodeURIComponent(
+            JSON.stringify({
+                title: '验证通过',
+                desc: '',
+                nextUrl: '/pages/tasks/index'
+            })
+        )
     })
 }
 

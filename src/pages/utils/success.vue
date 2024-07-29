@@ -1,10 +1,24 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
 import UniIcons from '../../components/uni-icons/uni-icons.vue'
+import { onLoad } from '@dcloudio/uni-app';
 
-const toChsRecmd = () => {
-    uni.setStorageSync('loginStatus', true)
-    uni.navigateTo({ url: '/pages/login/chsRcmd' })
+const pageData = ref({
+    title: '',
+    desc: '',
+    nextUrl: ''
+})
+
+const toNext = () => {
+    uni.redirectTo({
+        url: pageData.value.nextUrl
+    })
 }
+
+onLoad((option: any) => {
+    const data = JSON.parse(decodeURIComponent(option.data))
+    pageData.value = data
+})
 </script>
 
 <template>
@@ -22,15 +36,17 @@ const toChsRecmd = () => {
                         font-weight: 700;
                         line-height: 32px;
                     "
-            >验证通过</text>
-            <view style="height: 2vh;"></view>
-            <text style="
-                            color: rgb(17, 45, 78);
-                            font-size: 13px;
-                            font-weight: 400;
-                            line-height: 22px;
-                        "
-            >点击下面的按钮进入大学生活</text>
+            >{{ pageData.title }}</text>
+            <view v-if="pageData.desc">
+                <view style="height: 2vh;"></view>
+                <text style="
+                                color: rgb(17, 45, 78);
+                                font-size: 13px;
+                                font-weight: 400;
+                                line-height: 22px;
+                            "
+                >{{ pageData.desc }}</text>
+            </view>
         </view>
         <button
             style="
@@ -40,7 +56,7 @@ const toChsRecmd = () => {
                     width: 60px;
                     background: rgb(63, 114, 175);
                 "
-            @click="toChsRecmd"
+            @click="toNext"
         >
             <uni-icons type="arrow-right" size="24" color="white"></uni-icons>
         </button>

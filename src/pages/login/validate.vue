@@ -77,7 +77,17 @@ const doValidate = async () => {
         })
         return
     }
-    uni.navigateTo({ url: '/pages/login/validateSuccess' })
+    uni.setStorageSync('loginStatus', true)
+    uni.navigateTo(
+        {
+            url: '/pages/utils/success?data=' + encodeURIComponent(
+                JSON.stringify({
+                    title: '验证成功',
+                    desc: '点击下面的按钮进入大学生活',
+                    nextUrl: '/pages/login/chsRcmd'
+                })
+        )
+    })
 }
 
 const doScan = () => {
@@ -98,23 +108,18 @@ const doScan = () => {
 </script>
 <template>
     <view class="center">
-        <view
-            style="
+        <view style="
                 padding: 20px;
                 display: flex;
-                "
-            @click="doScan"
-        >
+                " @click="doScan">
             <view>
                 <view>
-                    <text
-                        style="
+                    <text style="
                             color: rgb(17, 45, 78);
                             font-size: 24px;
                             font-weight: 700;
                             line-height: 32px;
-                            "
-                    >验证身份</text>
+                            ">验证身份</text>
                 </view>
                 <view style="height: 2vh;"></view>
                 <view>
@@ -123,15 +128,11 @@ const doScan = () => {
                                     font-size: 14px;
                                     font-weight: 400;
                                     line-height: 20px;
-                                "
-                    >请输入以下信息以验证您的新生身份</text>
+                                ">请输入以下信息以验证您的新生身份</text>
                 </view>
             </view>
             <view style="margin: 2px -16px auto auto;">
-                <image
-                    src="/static/scan.png"
-                    mode="scaleToFill"
-                    style="
+                <image src="/static/scan.png" mode="scaleToFill" style="
                             width: 30px;
                             height: 30px;
                             margin-left: 6px;
@@ -139,55 +140,40 @@ const doScan = () => {
                             border-radius: 25%;
                             border: 1px solid rgb(17, 45, 78);
                             background-color: rgb(249, 250, 251);
-                        "
-                />
+                        " />
             </view>
         </view>
-        
+
         <view style="display: flex; justify-content: center; padding-top: 20px;">
-            <view
-                style="
+            <view style="
                 border-color: grey;
                 border-width: 1px;
                 border-radius: 10px;
                 margin-bottom: 30px;
-                "
-            >   
-                <view
-                    style="
+                ">
+                <view style="
                     padding: 10px;
                     width: 80vw;
                     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-                    "
-                >
+                    ">
                     <input placeholder="姓名" v-model="validateInfo.name" />
                     <input placeholder="身份证号" v-model="validateInfo.idCard" />
                     <input placeholder="录取通知书编号" v-model="validateInfo.admissionLetterId" />
                 </view>
             </view>
-    
+
         </view>
-        <button
-            hover-class="button-hover"
-            @click="doChooseMedia"
-            class="es-button"
-            style="
+        <button hover-class="button-hover" @click="doChooseMedia" class="es-button" style="
                     width: 88vw;
                     margin-bottom: 20px;
-                "
-        >
+                ">
             上传人脸照片
         </button>
 
-        <button
-            hover-class="button-hover"
-            @click="doValidate"
-            class="es-button selected"
-            style="
+        <button hover-class="button-hover" @click="doValidate" class="es-button selected" style="
                 width: 88vw;
                 margin-bottom: 15vh;
-            "
-        >
+            ">
             验证
         </button>
     </view>
@@ -201,7 +187,6 @@ page {
 </style>
 
 <style scoped>
-
 .center {
     position: absolute;
     top: 50%;
