@@ -3,27 +3,28 @@ import { ref } from 'vue';
 import { reqChat } from '@/api/aichat';
 
 const input = ref('')
-const answer = ref('')
-const question = ref('')
+const dialogs = ref<Array<{question: string, answer: string}>>([])
 
 const send = async() => {
-    question.value = input.value
+    dialogs.value.push({question: input.value, answer: ''})
     input.value = ''
 
     const timer = setInterval(() => {
-        if (answer.value.length >= 3) {
-            answer.value = '.'
+        if (dialogs.value[dialogs.value.length - 1].answer.length >= 3) {
+            dialogs.value[dialogs.value.length - 1].answer = '.'
         } else {
-            answer.value += '.'
+            dialogs.value[dialogs.value.length - 1].answer += '.'
         }
     }, 1000)
 
-    const res = await reqChat(question.value)
+    const question = dialogs.value[dialogs.value.length - 1].question
+
+    const res = await reqChat(dialogs.value[dialogs.value.length - 1].question)
 
     clearInterval(timer)
 
     if (res.data.code === 0) {
-        answer.value = res.data.data.answer
+        dialogs.value[dialogs.value.length - 1].answer = res.data.data.answer
     } else {
         uni.showToast({
             title: res.data.msg,
@@ -35,15 +36,15 @@ const send = async() => {
 
 <template>
 <view style="display: flex; flex-wrap: wrap; height: 100vh;">
-    <view style="min-width: 100vw;">
-        <view class="message mine" v-if="question.length > 0">
-                {{ question }}
-        </view>
-        <view class="message">
-            {{ answer }}
-        </view>
-    </view>
     <view class="bottom" style="min-width: 100vw;">
+        <view v-for ="dialog in dialogs">
+            <view class="message mine">
+                    {{ dialog.question }}
+            </view>
+            <view class="message">
+                {{ dialog.answer }}
+            </view>
+        </view>
         <view style="margin: auto; display: flex; width: 90vw;">  
             <uni-easyinput
                 v-model="input"
@@ -91,7 +92,6 @@ const send = async() => {
 .bottom {
     margin: auto auto 20px auto;
     width: 100%;
-    display: flex;
 }
 
 #input {
