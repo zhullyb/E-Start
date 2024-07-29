@@ -57,6 +57,13 @@ const open = () => {
 onLoad(() => {
 	setInterval(() => {
 		lasttime.value -= 1
+		if (lasttime.value <= 0) {
+			uni.showToast({
+				title: '时间到',
+				icon: 'none'
+			})
+			uni.navigateBack()
+		}
 	}, 1000)
 })
 </script>
