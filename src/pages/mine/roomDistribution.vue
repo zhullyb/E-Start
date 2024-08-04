@@ -70,6 +70,13 @@ const item = computed(() => items[index.value])
 
 const answ = (item: any) => {
     index.value += 1
+	if (index.value == 5) {
+		uni.showToast({
+			title: '填写完成',
+			icon: 'success'
+		})
+		uni.navigateBack({ delta: 1 })
+	}
 }
 
 const open = () => {
