@@ -9,7 +9,7 @@ const reason = ref<string>('');
 <view style="display: flex; height: 100vh;">
     <view style="margin: auto;">
         <view class="text-title">您目前所在的寝室</view>
-        <view class="text-desc">尚德园 13 号楼 619 室 4 号床</view>
+        <view class="text-desc">尚德园 3 号楼 325 室 1 号床</view>
         <view class="text-title">申请调换理由及需求</view>
         <textarea
             id="reason"

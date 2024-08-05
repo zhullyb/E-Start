@@ -4,7 +4,7 @@
 			<view class="items-center" @tap="open"><image src="/static/exam/submit.png" mode="aspectFit" style="width: 70rpx;height:80rpx;"></image></view>
 		</view>
         <view class="slide-area">
-            <exam-item :examItem="item" @answ="answ" :total="5" :current="index + 1" currentType="单选"></exam-item>
+            <exam-item :examItem="item" @answ="answ" :total="5" :current="index + 1" currentType="住宿习惯调查问卷"></exam-item>
         </view>
 	</view>
 </template>
@@ -68,14 +68,19 @@ const items = [
 
 const item = computed(() => items[index.value])
 
-const answ = (item: any) => {
-    index.value += 1
-	if (index.value == 5) {
-		uni.showToast({
+const answ = async (item: any) => {
+	console.log(item)
+	console.log(index.value)
+	if (index.value < 4) {
+		index.value += 1
+	} else {
+	 	uni.showToast({
 			title: '填写完成',
 			icon: 'success'
 		})
-		uni.navigateBack({ delta: 1 })
+		// sleep 1s
+		await new Promise(resolve => setTimeout(resolve, 1000))
+		uni.switchTab({ url: '/pages/index/index' })
 	}
 }
 
@@ -84,7 +89,7 @@ const open = () => {
 		title: '填写完成',
 		icon: 'success'
 	})
-    uni.navigateBack({ delta: 1 })
+    uni.switchTab({ url: '/pages/index/index' })
 }
 
 </script>
