@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 
 const urls = [
-    'https://bu.dusays.com/2024/04/13/661a8c1d27f1b.webp',
-    'https://bu.dusays.com/2024/04/13/661a8c1d357ef.webp',
-    'https://bu.dusays.com/2024/04/13/661a8c1d3871d.webp'
+    'https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/8ade58a3-3a22-4e58-a6ce-f54846ff4944.webp',
+    'https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/925db960-9fb5-4821-95a4-aabff419d4b8.webp',
+    'https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/3a40ef45-aa6b-4820-b282-73cdee105f12.webp'
 ]
 
 const iconInfo = [
@@ -46,13 +46,13 @@ const recommend = [
     {
         "id": 1,
         "title": "肯德基",
-        "img": "https://bu.dusays.com/2024/04/13/661a8d3bcbd40.png",
+        "img": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/f60f5364-3937-4ac6-bf2a-c39c18b3d74f.png",
         "intro": "肯德基，以其香脆可口的炸鸡和美味的配菜而闻名，是全球领先的快餐连锁店之一。凭借其标志性的秘方和广泛的菜单，肯德基为各年龄段的顾客提供了各种选择，从经典的鸡块到美味的汉堡和卷饼。" 
     },
     {
         "id": 2,
         "title": "麦当劳",
-        "img": "https://bu.dusays.com/2024/04/13/661a8d842d012.png",
+        "img": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/f6ca2fbd-dac3-478c-b2e7-053f91d0af52.png",
         "intro": "麦当劳是全球最大的快餐连锁店，以其标志性的巨无霸汉堡、金黄酥脆的薯条和香浓顺滑的奶昔而闻名。凭借其广泛的菜单和便利的位置，麦当劳已成为世界各地顾客的热门选择。无论您是在寻找快速午餐、家庭晚餐还是深夜小吃，麦当劳都能满足您的需求，提供各种美味佳肴和饮品。"
     }
 ]

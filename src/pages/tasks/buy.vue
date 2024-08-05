@@ -25,7 +25,7 @@ const colors = [
         >
             <swiper-item style="height: 250px;">
                 <image
-                    src="https://bu.dusays.com/2024/04/09/66154b1887f82.png"
+                    src="https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/c2fcd975-8ffa-47f3-9698-b660fafcfb34.png"
                     mode="scaleToFill"
                     style="width: 100%; height: 100%;"
                 />

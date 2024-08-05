@@ -8,16 +8,16 @@ const studentInfo = ref<studentInfo>()
 const info = ref<info>()
 
 const images = {
-    "v1-text": "https://bu.dusays.com/2024/03/27/66030a1c8ae3d.webp",
-    "v2-text": "https://bu.dusays.com/2024/03/27/66030a1ca04e5.webp",
-    "v3-text": "https://bu.dusays.com/2024/03/27/66030a1ca176e.webp",
-    "v4-text": "https://bu.dusays.com/2024/03/27/66030a1c95d94.webp",
-    "v5-text": "https://bu.dusays.com/2024/03/27/66030a1ca3ecc.webp",
-    "v1-figure": "https://bu.dusays.com/2024/03/27/66030a1ccdeb5.webp",
-    "v2-figure": "https://bu.dusays.com/2024/03/27/66030a1ce82d7.webp",
-    "v3-figure": "https://bu.dusays.com/2024/04/01/6609d4a87058f.webp",
-    "v4-figure": "https://bu.dusays.com/2024/03/27/66030a1d61b53.webp",
-    "v5-figure": "https://bu.dusays.com/2024/04/01/6609d4dd26ff7.webp" 
+    "v1-text": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/36451dd2-0c06-4db3-982d-dcf4a5334d10.webp",
+    "v2-text": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/ee66ff10-65e4-42d3-b478-9348b871358f.webp",
+    "v3-text": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/e168ed83-77d8-459b-bb92-fa209f8c8545.webp",
+    "v4-text": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/70996a5b-9507-43c9-a53d-c381e1a32aec.webp",
+    "v5-text": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/fada9073-35bc-492f-b4dc-5244df188bcc.webp",
+    "v1-figure": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/6bc1954d-cbc4-4cf9-9846-70e43055b03e.webp",
+    "v2-figure": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/0cbd3996-6050-4ac8-9f5c-67de4aed745d.webp",
+    "v3-figure": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/27732833-4108-468b-b4c4-7a792081c87c.webp",
+    "v4-figure": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/4d0034f7-e48d-4032-83a4-3b2c41ab6ca5.webp",
+    "v5-figure": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/2bec1afe-2b91-4b67-a00a-f999c71d1eb7.webp" 
 }
 
 const levelInfo = computed(

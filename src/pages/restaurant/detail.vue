@@ -10,7 +10,7 @@ const detail = ref<Business>({
     "createdAt": "unknown",
     "updatedAt": "unknown",
     "name": "unknown",
-    "pic": "https://bu.dusays.com/2024/03/28/6604d3dd75f5d.png",
+    "pic": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/ee9f6080-5501-4e64-832f-2ab280f57d96.png",
     "address": "unknown",
     "loc": "0,0",
     "businessHours": "unknown",

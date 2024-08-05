@@ -8,7 +8,7 @@ const signature = ref<string>('')
 const upload = ref<boolean>(false)
 
 const info = ref<any>({
-    avatar: 'https://bu.dusays.com/2024/04/14/661adb9d5972a.webp'
+    avatar: 'https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/2c4259e3-8fc2-43d3-80b0-d29da620a643.webp'
 })
 
 const changeAvatar = () => {

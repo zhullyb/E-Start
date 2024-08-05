@@ -9,13 +9,13 @@ const selectedValue = ref("")
 const campus = [
     {
         "campus": "朝晖校区",
-        "map": "https://bu.dusays.com/2024/04/01/660a1a805340e.webp",
-        "map-hd": "https://bu.dusays.com/2024/03/31/660851ab3d48d.webp"
+        "map": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/a00ce9a3-72f1-4961-bb87-589f2d4432dd.webp",
+        "map-hd": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/55c05cd8-c1b3-4e7c-a110-4c466bd1e364.webp"
     },
     {
         "campus": "屏峰校区",
-        "map": "https://bu.dusays.com/2024/04/01/660a1a20c15e8.webp",
-        "map-hd": "https://bu.dusays.com/2024/03/31/660852597902e.webp"
+        "map": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/2384fb3c-7174-440c-b673-2ae448f1529a.webp",
+        "map-hd": "https://api-lonesome.oss-cn-hangzhou.aliyuncs.com/E-Start/62042b54-16fd-4cb7-bab5-c2723b48366a.webp"
     }
 ]
 
